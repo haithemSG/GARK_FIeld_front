@@ -1,0 +1,444 @@
+<div class="row">
+    <div class="col-12">
+        <app-heading></app-heading>
+        <app-breadcrumb></app-breadcrumb>
+        <div class="separator mb-5"></div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="lang col-sm-2">
+        Langue Fr <img src="../../../../assets/img/lang/fr-fr.png" class="lang-img">
+    </div>
+    <div class="col-sm"> <button type="button" class="btn btn-primary default btn-xs mb-1"
+            (click)="openModalLang(lang)">Ajouter une
+            langue</button></div>
+
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="mb-4">Ajouter une Catégorie</h5>
+        <div class="input-group input-group-sm">
+            <div class="form-group"><label>Catégorie :</label>
+
+            </div>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+
+            <input type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" class="form-control"
+                wtx-context="35198C8B-3076-4F2D-8DDF-2451C416302C" [(ngModel)]="categorie"
+                [ngClass]="{'errorInput':error == true}">
+
+        </div>
+        <div class="ereur mb-3" *ngIf="error == true">Veuillez renseigner la catégorie </div>
+        <button type="button" class="btn btn-primary default mb-1" (click)="addCategories()">Ajouter</button>
+    </div>
+</div>
+
+
+
+
+<div class="card mb-4" *ngIf="categorieList.length>0">
+    <div class="card-body">
+        <ul class="sortable list-unstyled rounded" [sortablejs]="categorieList" [sortablejsOptions]="optionsUpdates">
+            
+            <li *ngFor="let category of categorieList; let i = index">
+                <div class="card d-flex flex-row mb-3 ng-star-inserted" style="background: #2862923d;">
+                    <div class="d-flex flex-grow-1 min-width-zero">
+                        <div
+                            class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                            <span class="badge badge-pill badge-secondary handle">
+                                <i class="simple-icon-cursor-move"></i></span>
+                            <a class="list-item-heading mb-0 truncate w-80 w-xs-100">
+                                <span *ngIf="category.editThis== false" (click)="toggleSub(i)">{{category.name}}</span>
+
+                                <span *ngIf="category.editThis == true">
+                                    <input value="{{category.name}}" [(ngModel)]="category.name"
+                                        style="padding: 0 10px; height: 28px;">
+                                    <button type="button" class="btn btn-primary default mb-1">
+                                        <div class="glyph-icon simple-icon-check" (click)="saveCatModif(i)"></div>
+                                    </button></span></a>
+                            <div class="glyph-icon simple-icon-options-vertical" (click)="openContextMenu(i,null,null)">
+                            </div>
+                            <div class="contexMn" *ngIf="openCtx == i && openCtxSub == null && openCtxProd == null">
+                                <div class="glyph-icon iconsminds-close" (click)="closeCtx()"></div>
+                                <ul>
+                                    <li (click)="func2(i)">Modifier {{category.name}}</li>
+                                    <li (click)="showAddNewModal(i)">Ajouter un produit dans {{category.name}}</li>
+                                    <li (click)="showAddSubCategorieNewModal(i)">Ajouter une sous catégorie dans
+                                        {{category.name}}</li>
+                                    <li (click)="openModalDel(template,i,'categorie')">Supprimer {{category.name}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="subCategory " #toggle
+                    style="transition: all 0.7s ease-out;width: 95%;margin-left:5%;">
+                    <ul class="sortable list-unstyled rounded" [sortablejs]="subCategoryList"
+                        [sortablejsOptions]="optionsUpdatesSub">
+                        <li *ngFor="let subCategory of category.subCategoryName; let k = index">
+                            <div *ngIf="subCategory.name" class="card d-flex flex-row mb-3 ng-star-inserted" style="background: #2862923d;">
+                                <div class="d-flex flex-grow-1 min-width-zero">
+                                    <div
+                                        class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                        <span class="badge badge-pill badge-secondary handle">
+                                            <i class="simple-icon-cursor-move"></i></span>
+                                        <a href="javascript:;" class="list-item-heading mb-0 truncate w-90 w-xs-100">
+                                            <div class="row">
+                                                <div class="col-sm-6"><span>{{subCategory.name}}</span></div>
+                                                <div class="col-sm"
+                                                    *ngFor="let dosesUnit of subCategory.dose; let h = index">
+                                                    {{dosesUnit.value}} {{dosesUnit.dose}}
+
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <div class="glyph-icon simple-icon-options-vertical"
+                                            (click)="openContextMenu(i,k,null)"></div>
+                                        <div class="contexMn"
+                                            *ngIf="(openCtx == i) && (openCtxSub == k) && (openCtxProd == null)">
+                                            <div class="glyph-icon iconsminds-close" (click)="closeCtx()"></div>
+                                            <ul>
+                                                <li (click)="showAddNewModal(i, k)">Ajouter un produit dans {{subCategory.name}}</li>
+                                                <li (click)="func2(i,k)">Modifier {{subCategory.name}}</li>
+                                                <li (click)="openModalDel(template,i,'sousCategorie',k)">Supprimer
+                                                    {{subCategory.name}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="product"
+                                style="transition: all 0.7s ease-out;width: 95%;margin-left:5%"
+                                #toggleProd id="{{subCategory.name}}">
+                                <ul class="sortable list-unstyled rounded" [sortablejs]="subCategory.product"
+                                    [sortablejsOptions]="optionsUpdatesSub">
+                                    <li *ngFor="let product of subCategory.product; let j = index">
+                                        <div class="card d-flex flex-row mb-3 ng-star-inserted"
+                                            style="background: #2862923d;">
+                                            <div class="d-flex flex-grow-1 min-width-zero">
+                                                <div
+                                                    class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                                    <span class="badge badge-pill badge-secondary handle">
+                                                        <i class="simple-icon-cursor-move"></i></span>
+                                                    <a href="javascript:;"
+                                                        class="list-item-heading mb-0 truncate w-90 w-xs-100">
+
+                                                        <div class="row" *ngIf="!isString(product.priceList)" >
+                                                            <div class="col-sm-6">{{product.productName}}</div>
+                                                                <div class="col-sm"
+                                                                    *ngFor="let prices of product.priceList; let h index">
+                                                                    <span *ngIf="prices.price == ''">-</span>
+                                                                    <span *ngIf="prices.price != ''">{{prices.price}}
+                                                                        €</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row" *ngIf="isString(product.priceList)" >
+                                                            <div class="col-sm-6">{{product.productName}}</div>
+                                                                <div class="col-sm">
+                                                                    <span>{{product.priceList}}€</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- 
+                                                            <div *ngIf="product.priceList.length == 0" >
+                                                                <pre>{{ product.priceList | json }}</pre>
+                                                                <div class="col-sm" >
+                                                                    <span *ngIf="product.priceList == ''">-</span>
+                                                                    <span *ngIf="product.priceList != ''">{{product.priceList}}
+                                                                        €</span>
+                                                                </div>
+                                                            </div>
+                                                        -->
+                                                    </a>
+                                                    <div class="glyph-icon simple-icon-options-vertical"
+                                                        (click)="openContextMenu(i,k,j)"></div>
+                                                    <div class="contexMn"
+                                                        *ngIf="openCtx == i && openCtxSub == k && openCtxProd == j">
+                                                        <div class="glyph-icon iconsminds-close" (click)="closeCtx()">
+                                                        </div>
+                                                        <ul>
+                                                            <li (click)="func2(i,k,j)">Modifier {{product.productName}}
+                                                            </li>
+                                                            <li (click)="openModalDel(templateProd,i,'produit',k,j)">
+                                                                Supprimer
+                                                                {{product.productName}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div>
+            <button type="submit" class="btn btn-primary float-right"
+                    (click)="submitMenu()">{{ 'pages.validate' | translate}}</button>
+        </div>
+    </div>
+</div>
+<bs-modal-backdrop class="modal-backdrop fade in show"
+    *ngIf="showModalAdd == true || showModalAddSub == true || showModalEditCat == true">
+</bs-modal-backdrop>
+<modal-container role="dialog" tabindex="-1" class="modal fade show" style="display: block;" aria-modal="true"
+    *ngIf="showModalAdd == true">
+    <div class="modal-dialog modal-right" style="overflow: auto;pointer-events:all">
+        <form #fform="ngForm"  ></form>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left" *ngIf='!type'>Ajouter un nouveau produit dans
+                    {{addProductCategories.name}}</h4>
+                <h4 class="modal-title pull-left" *ngIf='type'>Modifier
+                    {{productName}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="closeAddCategorie()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-4">
+                    <label>Sous catégorie</label>
+                    <select name="pets" id="pet-select" class="custom-select" (change)="changeSub($event)">
+                        <option value="">--Choisissez une sous-catégorie--</option>
+                        <option *ngFor="let subCategory of addProductCategories.subCategoryName; let k =index"
+                            [value]="subCategory.id" [selected]="subCategory.id == sousCatSelected">
+                            {{subCategory.name}}</option>
+                    </select>
+                    <p> test {{ sousCatSelected }} </p>
+                </div>
+                <div class="mt-1">
+                    <label>Nom du produits</label>
+                    <input type="produits" required #prodName="ngModel" class="form-control" placeholder="" [(ngModel)]="productName">
+                    <div class="ereur mb-3" *ngIf="prodName.touched && prodName.invalid">Veuillez renseigner le nom du produit </div>
+                </div>
+                <div class="mt-1">
+                    <label>Descriptif du produit (optionnel)
+                    </label>
+                    <input type="text" class="form-control" rows="3" [(ngModel)]="productDescription">
+                </div>
+                <div class="mt-1">
+                    <label>Prix</label>
+                    <br>
+                    <table style="width: 350px;" *ngIf="doses.length>0">
+                        <tbody>
+                            <tr>
+                                <td *ngFor="let dose of doses; let i index">{{dose.value}} {{dose.dose}}</td>
+                            </tr>
+                            <tr>
+                                <td *ngFor="let dose of doses; let i index">
+                                    <input type="text" name="doses" class="form-control ng-pristine ng-valid ng-touched"
+                                        [(ngModel)]="dose.price" style="width: 50%;display: inline-flex;padding: 0.5rem 0;
+                                        "> €</td>
+                                <!-- <td><input type="text" name="doses" *ngIf='type'
+                                        class="form-control ng-pristine ng-valid ng-touched" [(ngModel)]="dose.value"
+                                        style="width: 50%;display: inline-flex;padding: 0.5rem 0;
+                                    "></td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="doses.length == 0">
+                        <input type="text" name="doses" [(ngModel)]="singleDose" style="width: 80%;"> €
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="errorAdding"> Le nom du produit et le(s) prix sont obligatoires </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary"
+                    (click)="closeAddCategorie()">{{'pages.cancel' | translate }}</button>
+                <button type="submit" [disabled]="fform.invalid" class="btn btn-primary float-right"
+                    (click)="submitAddProduct(type)">{{ 'pages.submit' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</modal-container>
+
+<modal-container role="dialog" tabindex="-1" class="modal fade show" style="display: block;" aria-modal="true"
+    *ngIf="showModalAddSub == true">
+    <div class="modal-dialog modal-right" style="overflow: auto;pointer-events:all">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left" *ngIf="!type">Ajouter une sous catégorie dans {{catName}}</h4>
+                <h4 class="modal-title pull-left" *ngIf="type">Modifier {{catName}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="closeAddSubCategorie()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form #fform="ngForm" >
+                <div class="modal-body">
+                    
+                    <div>
+                        <label>Nom de la sous catégorie</label>
+                        <input type="text" class="form-control" placeholder="" required name="subName" [(ngModel)]="addSubCategorie.name">
+                    </div>
+                    <div class="mt-2">
+                        <label>Descriptif de la sous catégorie (optionnel)
+                        </label>
+                        <input type="text" class="form-control" placeholder="" name="subDescrtiption" [(ngModel)]="addSubCategorie.description">
+                    </div>
+                    <div class="mt-2">
+                        <b>Besoin de de dosage ?</b>
+                        <p>Exemple 25cl, 50cl pour les bières ou 16cl, 75cl pour les vins.
+                        </p>
+                        <div class="input-group input-group-sm">
+                            <div class="col-sm"><label>Oui 
+                                <input class="" (change)="checkSelection($event)" type="radio" [value]="true" name="radio" [(ngModel)]="addDoses">
+                                    </label></div>
+                            <div class="col-sm"><label>Non Merci 
+                                <input class="" type="radio" (change)="checkSelection($event)" [value]="false" name="radio" [(ngModel)]="addDoses"></label>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div [ngClass]="{'active':addDoses == true}" class="col-sm-12 disabled">
+                        
+                        <div>
+                            <div class="col-sm mt-1" *ngFor="let dose of doses; let i = index">
+                                <div class="row">
+                                    <div class="col-sm">Dose {{dose.id}} <input type="text" [name]="'doses'+ dose.id "
+                                            formcontrolname="doses" required class="form-control ng-pristine ng-invalid ng-touched"
+                                            [(ngModel)]="dose.value">
+                                    </div>
+                                    <div class="col-sm">Unité<br>
+                                        <select class="custom-select" required (change)="changeDose($event,'unite')"
+                                            style="height: 35px;" [name]="'unite'+ dose.id " [(ngModel)]="dose.dose">
+                                            <option  value="">Choisir</option>
+                                            <option value="cl">cl</option>
+                                            <option value="L">L</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i (click)="delDosage(i)" style="margin-top: 25px;display: block;"
+                                            class="simple-icon-trash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3" (click)="addDose()"
+                            [disabled]="doses.length == 4">+ Ajouter une dose 
+                        </button>
+                    
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" 
+                        (click)="closeAddSubCategorie()">{{'pages.cancel' | translate }}</button>
+                    <button type="submit" class="btn btn-primary float-right" [disabled]="fform.invalid"
+                        (click)="submitAddCategorie(type)">{{ 'pages.submit' | translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</modal-container>
+<modal-container role="dialog" tabindex="-1" class="modal fade show" style="display: block;" aria-modal="true"
+    *ngIf="showModalEditCat == true">
+    <div class="modal-dialog modal-right" style="overflow: auto;pointer-events:all">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Modifier {{catName}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="closeModalEditCat()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>Nom de la catégorie</label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="categorieList[indexCat].name">
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary"
+                    (click)="closeModalEditCat()">{{'pages.cancel' | translate }}</button>
+                <button type="submit" class="btn btn-primary float-right"
+                    (click)="saveCatModif(indexCat)">{{ 'pages.submit' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</modal-container>
+
+<div class="modal-backdrop fade in show" *ngIf="showModal == true"></div>
+<div class="my-modal" *ngIf="showModal == true">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Modal Title</h4><button type="button" aria-label="Close"
+                    (click)="modalHide()" class="close pull-right"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">{{modalData.name}}</div>
+        </div>
+    </div>
+</div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <h6 class="modal-title mb-4">Vous êtes sur le point de supprimer la catégorie <b>{{itemDel}}</b>.<br>
+            Si la catégorie <b>{{itemDel}}</b> contient des produits, ces derniers seront tous supprimés.<br>
+            Cette action est irréversible.<br>Etes vous sure de vouloir supprimer la catégorie <b>{{itemDel}}</b>?
+
+        </h6>
+        <button type="button" class="btn btn-outline-primary" (click)="confirm()">Oui</button>
+        {{" "}}
+        <button type="button" class="btn btn-primary" (click)="decline()">Non</button>
+    </div>
+</ng-template>
+<ng-template #templateProd>
+    <div class="modal-body text-center">
+        <h6 class="modal-title mb-4">Vous êtes sur le point de supprimer le produit <b>{{itemDel}}</b>.<br>
+            Etes vous sure de vouloir supprimer le produit <b>{{itemDel}}</b>?
+
+        </h6>
+        <button type="button" class="btn btn-outline-primary" (click)="confirm()">Oui</button>
+        {{" "}}
+        <button type="button" class="btn btn-primary" (click)="decline()">Non</button>
+    </div>
+</ng-template>
+
+<ng-template #lang>
+    <div class="modal-body langModal">
+        <h6 class="modal-title mb-4">Choisissez votre langue</h6>
+        <ul>
+            <li (click)="openModalLangDupli(templateNested)">
+                Anglais <img src="../../../../assets/img/lang/en-en.png" class="lang-img">
+            </li>
+            <li>
+                Italien <img src="../../../../assets/img/lang/it-it.png" class="lang-img">
+            </li>
+            <li>
+                Espagnol <img src="../../../../assets/img/lang/es-es.png" class="lang-img">
+            </li>
+            <li>
+                Allemand <img src="../../../../assets/img/lang/de-de.png" class="lang-img">
+            </li>
+        </ul>
+        <button type="button" class="btn btn-primary" (click)="decline()">Fermer</button>
+    </div>
+</ng-template>
+<ng-template #templateNested>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Ajouter une lange</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Est ce que vous voulez dupliquer le menu existant ?
+        <button type="button" class="btn btn-outline-primary" (click)="confirmNested()">Oui</button>
+        {{" "}}
+        <button type="button" class="btn btn-primary" (click)="declineNested()">Non</button>
+    </div>
+</ng-template>

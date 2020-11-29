@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading [title]="'Comptabilité'"></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row mb-3">
+  <div *ngFor="let item of stats" class="col-md-4 col-sm-12 mb-3">
+    <div class="icon-row-item" style="width: inherit;">
+      <div class="card" [ngStyle]="{ 'color' : item.color }">
+        <div class="card-body text-center">
+          <i [class]="item.icon"></i>
+          <p class="card-text font-weight-bold mb-0">
+            {{ item.name }}
+          </p>
+          <p class="lead text-center"> {{ item.amount }} DT</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row" style="margin-bottom: 100px;">
+  <div class="col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="mb-2" style="display: flex;">
+          <h1 class="card-title" style="font-size: 1.75rem;"> <i class="flaticon-clipboard"></i> Détails </h1>
+          <div style="margin: 0 auto;"></div>
+          <div class="mr-md-3" *ngIf="!isMobile">
+            <button class="btn btn-gradiant btn-shadow" (click)="clickCreateIncome()"> Ajouter revenue
+            </button>
+          </div>
+          <div *ngIf="!isMobile">
+            <button class="btn btn-danger btn-shadow" (click)="clickCreateSpent()"> Ajouter dépense
+            </button>
+          </div>
+        </div>
+        <div *ngIf="isMobile" style="display: flex">
+          <div>
+            <button class="btn btn-gradiant btn-shadow" (click)="clickCreateIncome()"> Ajouter revenue
+            </button>
+          </div>
+          <div style="margin: 0 auto;"></div>
+          <div>
+            <button class="btn btn-danger btn-shadow" (click)="clickCreateSpent()"> Ajouter dépense
+            </button>
+          </div>
+        </div>
+        <div>
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" #search id="search" placeholder="Chercher ..." aria-label="Chercher"
+              aria-describedby="search-addon">
+            <div class="input-group-append">
+              <span class="input-group-text" id="search-addon">
+                <button type="button" class="btn btn-search" [popover]="popTemplate" popoverTitle="Appliquer des filtres"
+                  placement="auto" triggers='click'>
+                  <i class="flaticon-setting-lines"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div>
+            <ng-template #popTemplate style="width: calc(100vw - 50%);">
+              <button class="btn btn-block btn-danger btn-sm mb-2" (click)="filter('spent')"> Dépenses </button>
+              <button class="btn btn-block btn-gradiant btn-sm mb-2" (click)="filter('income')"> Revenus </button>
+            </ng-template>
+          </div>
+          <div *ngIf="filterType != ''">
+            <span>Filtre:  </span>
+            <!-- <button type="button" class="btn btn-info">
+              <span id="group"> 
+                <button type="button" class="btn btn-info btn-sm">  
+                  <span *ngIf="filterType == 'income'"> Revenus </span>
+                  <span *ngIf="filterType == 'spent'"> Dépenses </span>
+                </button> 
+                <span (click)="dismissFilter()" class="badge badge-light">&times;</span> 
+              </span> 
+              
+               <span (click)="dismissFilter()" class="badge badge-light">&times;</span>
+            </button> -->
+
+            <button class="btn-filter btn-filter-success" style="vertical-align: revert;">
+              <span (click)="dismissFilter()" class="badge-filter badge-filter-dark badge-filter-corner radius-filter-0">&times;</span>
+              <span *ngIf="filterType == 'income'"> Revenus </span>
+              <span *ngIf="filterType == 'spent'"> Dépenses </span>
+              </button>
+          </div>
+
+         
+        </div>
+
+        <div class="dashboard-best-sellers">
+          <ngx-datatable class="material mt-2" [rows]="finances" [loadingIndicator]="loadingIndicator"
+            [columns]="columns" [columnMode]="ColumnMode.force" [headerHeight]="75" [footerHeight]="100"
+            rowHeight="auto" [limit]="5" [reorderable]="reorderable">
+
+            <ngx-datatable-column prop="label" name="Désignation" [flexGrow]="3">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ value  }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Date" prop="date" [flexGrow]="2">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ value | date  }}
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- <ngx-datatable-column name="Type" prop="isSpent" [flexGrow]="1">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngIf="value == true"> Dépense </span>
+                <span *ngIf="value != true"> Revenu </span>
+              </ng-template>
+            </ngx-datatable-column> -->
+            <ngx-datatable-column name="Montant" prop="amount" [flexGrow]="1">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span [ngStyle]="{ 'color' : (value < 0) ? 'red' : 'green' }"> {{ value  }} </span>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

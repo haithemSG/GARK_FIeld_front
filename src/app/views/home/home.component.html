@@ -1,0 +1,231 @@
+<div [ngClass]="{'landing-page': true,'show-mobile-menu': showMobileMenu}">
+    <div class="mobile-menu" (click)="$event.stopPropagation()">
+        <a (click)="scrollTo('#home')" href="javascript:;" class="logo-mobile">
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a (click)="scrollTo('#features')" href="javascript:;">A propos</a></li>
+            <li class="nav-item"><a (click)="scrollTo('#layouts')" href="javascript:;">Contactez-nous</a></li>
+            <li >
+                <a *ngIf="!auth.isAuthenticated" class="btn btn-gradiant" [routerLink]="'/user/login'"> Se connecter </a>
+                <a *ngIf="auth.isAuthenticated" class="btn btn-gradiant" [routerLink]="adminRoot"> Mon compte </a>
+            </li>
+            <li class="nav-item">
+                <div class="separator"></div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="main-container" style="background-color: white !important">
+        <div class="landing-page-nav">
+            <nav>
+                <div class="container d-flex align-items-center justify-content-between">
+                    <a class="navbar-logo pull-left" (click)="scrollTo('#home')" href="javascript:;">
+                        <span style="display: flex;">
+                            <!-- <img width="60px" src="/assets/imgs/GARK-LOGO.png" alt=""> -->
+                            <img height="40px" style="margin-left: 10px;" src="/assets/imgs/Gark-Label.png" alt="">
+                        </span>
+                    </a>
+                    <ul class="navbar-nav d-none d-lg-flex flex-row">
+                        <li class="nav-item"><a (click)="scrollTo('#features')" href="javascript:;">A propos</a></li>
+                        <li class="nav-item"><a (click)="scrollTo('#layouts')" href="javascript:;">Contactez-nous</a>
+                        </li>
+                        <li class=" pl-4">
+                            <app-state-button [btnClass]="'btn btn-gradiant btn-lg btn-shadow'" [currentState]="buttonState"
+                                [isDisabled]="buttonDisabled" click="goLogin()">
+                                <span  *ngIf="!auth.isAuthenticated"> Se connecter </span>
+                                <span  *ngIf="auth.isAuthenticated"> Mon Compte </span>
+                            </app-state-button>
+                            <!-- <a *ngIf="!auth.isAuthenticated" class="btn btn-gradiant btn-sm pr-4 pl-4"
+                                [routerLink]="'/user/login'"> Se connecter </a>
+                            <a *ngIf="auth.isAuthenticated" class="btn btn-gradiant btn-sm pr-4 pl-4"
+                                [routerLink]="adminRoot"> Mon compte </a> -->
+                        </li>
+                    </ul>
+                    <span class="mobile-menu-button" (click)="showMobileMenu=!showMobileMenu; $event.stopPropagation()">
+                        <i class="simple-icon-menu"></i>
+                    </span>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="content-container" id="home">
+
+            <div class="section home" style="padding-bottom: 0;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 d-block d-md-none">
+                            <a [href]="adminRoot" target="_blank">
+                                <img alt="mobile hero" class="mobile-hero" style="width: calc(100%);"
+                                    src="/assets/imgs/home/Gark-Entry-1.png" />
+                            </a>
+                        </div>
+ 
+                        <div class="col-12 col-xl-5 col-lg-5 col-md-6 texting">
+                            <div style="margin: auto 0;"></div>
+                            <div class="home-text">
+                                <p class="black mb-2">
+                                    Gérez vos terrains efficacement et simplement n'importe où vous soyez
+                                </p>
+                            </div>
+                            <div class="home-subtext">
+                                <p class="black mb-4" style="text-align: justify;">
+                                    Gark vous offre tout un tableau de bord pour une meilleure gestion de vos
+                                    réservations,
+                                    de vos événements et de vos finances.
+                                </p>
+
+                                <a (click)="scrollTo('#features')" class="btn btn-danger btn-lg"
+                                    href="javascript:;">Savoir plus</a>
+                            </div>
+                            <div style="margin: auto 0;"></div>
+                        </div>
+                        <div class="col-12 col-xl-7 col-lg-7 col-md-6 d-none d-md-block">
+                            <a>
+                                <img alt="hero" style="width: calc(100%); display: block; margin: auto;" alt="gérer vos réservations" src="/assets/imgs/home/Gark-Entry-1.png" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="section home" style="padding-top: 0; padding-bottom: 0;">
+                <div class="container" id="features">
+                    <div class="row" >
+                        <!-- <div class="col-lg-1 col-xl-1"></div> -->
+                        <div class="col-12" *ngIf="isMobile">
+                            <a>
+                                <img alt="hero" style="width: calc(70%); display: block; margin: auto;" alt="ganger votre temps"  src="/assets/imgs/home/gark-page-2.png" />
+                            </a>
+                        </div>
+                        <div class="col-12 col-xl-7 col-lg-7 col-md-6  d-none d-md-block">
+                            <a>
+                                <img alt="hero" style="width: calc(70%); display: block; margin: auto;" alt="ganger votre temps"  src="/assets/imgs/home/gark-page-2.png" />
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-xl-5 col-lg-5 col-md-6" style="display: flex; flex-direction: column;">
+                            <div style="margin: auto 0;"></div>
+                            <div class="home-text">
+                                <p class="black mb-2">
+                                    Regagnez votre temps
+                                </p>
+                            </div>
+                            <div class="home-subtext">
+                                <p class="black mb-4" style="text-align: justify;">
+                                    GARK vous offre les outils nécessaires pour vous permettre de mieux organiser vos
+                                    réservations et planning grâce à nos calendriers.
+                                </p>
+
+                                <a (click)="scrollTo('#features')" class="btn btn-danger btn-lg"
+                                    href="javascript:;">Devenir partenaire</a>
+                            </div>
+                            <div style="margin: auto 0;"></div>
+                        </div>
+                       
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="section home" style="padding-bottom: 0;">
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-12" *ngIf="isMobile">
+                            <a>
+                                <img alt="hero" style="width: calc(70%); display: block; margin: auto;" alt="augmenter vos bénifices" src="/assets/imgs/home/gark-page-4.png" />
+                            </a>
+                        </div>
+                        <div class="col-12 col-xl-5 col-lg-5 col-md-6 texting">
+                            <div style="margin: auto 0;"></div>
+                            <div class="home-text">
+                                <p class="black mb-2">
+                                    Boostez vos revenus
+                                </p>
+                            </div>
+                            <div class="home-subtext">
+                                <p class="black mb-4" style="text-align: justify;">
+                                    Suivez vos performances en temps réel à travers les statistiques pour mieux 
+                                    analyser vos données.
+                                </p>
+
+                                <a (click)="scrollTo('#features')" class="btn btn-danger btn-lg"
+                                    href="javascript:;">Rejoignez-nous</a>
+                            </div>
+                            <div style="margin: auto 0;"></div>
+                        </div>
+                        <div class="col-12 col-xl-7 col-lg-7 col-md-6  d-none d-md-block">
+                            <a>
+                                <img alt="hero" style="width: calc(70%); display: block; margin: auto;" alt="augmenter vos bénifices" src="/assets/imgs/home/gark-page-4.png" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- <div class="section">
+                <div class="container" id="features">
+                    <div class="row">
+                        <div class="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
+                            <h1>A propos</h1>
+                            <p>
+
+
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="section background">
+                <div class="container" id="layouts">
+                    <div class="row">
+                        <div class="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
+                            <h1>Contactez-nous</h1>
+                            <p>
+                                We did our best to create layouts for various needs that developers might have and best
+                                experience
+                                for users.
+                                <br>
+                                They are clean and slick. They function well and look good at the same time.
+
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div> -->
+
+            <div class="section footer mb-0" style="padding-bottom: 20px !important;">
+                <div class="container">
+                    <div class="row footer-row">
+                        <!-- <div class="col-12" style="height: 200px;"></div> -->
+                        <div class="col-12 text-center footer-content">
+                            <a (click)="scrollTo('#home')" href="javascript:;">
+                                <img class="footer-logo" alt="footer logo" src="/assets/imgs/garkLOGO.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright pb-2">
+                    <div class="row">
+                        <div class="col-12"></div>
+                        <div class="col-12 text-center">
+                            <p class="mb-0 black"> Tous droits réservés © GARK-{{ year }} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
