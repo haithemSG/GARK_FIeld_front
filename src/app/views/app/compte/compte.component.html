@@ -190,7 +190,7 @@
                                     </div>
                                     <ul class="about" id="show-terrain">
                                         <li class="about-items">
-                                            <span class="fw-700">Nom du terrain</span> <br>
+                                            <span class="fw-700">Nom du Complexe</span> <br>
                                             <span class=""> {{ complexe?.name }}
                                             </span>
                                         </li>
@@ -220,7 +220,7 @@
                                                 <input class="form-control" style="padding: .8rem; font-size: 1.1rem"
                                                     required #name="ngModel" name="text" name="nme"
                                                     [(ngModel)]="complexe.name" />
-                                                <span style="font-size: 100% !important;">Nom du complexe</span>
+                                                <span style="font-size: 100% !important;">Nom du complexe ou raison sociale </span>
                                                 <div *ngIf="!name.valid && update.submitted" class="invalid-tooltip">
                                                     Champ
                                                     requis!</div>

@@ -8,9 +8,9 @@
 <div class="row mb-3">
   <div *ngFor="let item of stats" class="col-md-4 col-sm-12 mb-3">
     <div class="icon-row-item" style="width: inherit;">
-      <div class="card" [ngStyle]="{ 'color' : item.color }">
+      <div class="card" >
         <div class="card-body text-center">
-          <i [class]="item.icon"></i>
+          <i [class]="item.icon" [ngStyle]="{ 'color' : item.color }"></i>
           <p class="card-text font-weight-bold mb-0">
             {{ item.name }}
           </p>
