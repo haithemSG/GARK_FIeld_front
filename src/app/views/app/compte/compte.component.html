@@ -300,13 +300,23 @@
                                         </label>
                                         <label class="form-group has-float-label">
                                             <input class="form-control" style="padding: .8rem; font-size: 1.1rem"
-                                                required #newPwd="ngModel" name="new" type="password"
+                                                required #newPwd="ngModel" (keyup)="newChanged()" name="new" type="password"
                                                 [(ngModel)]="newPassword" />
                                             <span style="font-size: 100% !important;">Nouveau Mot de passe</span>
                                             <div *ngIf="!pwd.valid && createForm.submitted" class="invalid-tooltip">
                                                 Champ
                                                 requis!</div>
                                         </label>
+                                        <label class="form-group has-float-label">
+                                            <input class="form-control" style="padding: .8rem; font-size: 1.1rem"
+                                                required #conf="ngModel" (keyup)="confirmChanged()" name="co" type="password"
+                                                [(ngModel)]="confirmPassword" />
+                                            <span style="font-size: 100% !important;">Confirmer Mot de passe</span>
+                                            <div *ngIf="!conf.valid && createForm.submitted" class="invalid-tooltip">
+                                                Champ
+                                                requis!</div>
+                                        </label>
+                                        <div class="text-danger" *ngIf="confirmIncorrect"> Les deux mots de passe ne se correpondent pas </div>
 
 
                                         <div style="display: flex;">

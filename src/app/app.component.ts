@@ -1,7 +1,8 @@
 import { Component, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { LangService } from './shared/lang.service';
-import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,12 @@ import { Injectable } from '@angular/core';
 })
 @Injectable()
 export class AppComponent implements OnInit, AfterViewInit {
-  isMultiColorActive = environment.isMultiColorActive;
-  constructor(private langService: LangService, private renderer: Renderer2) {}
+  constructor(
+    private langService: LangService, 
+    private renderer: Renderer2,
+    private router : Router,
+    private loaderService : NgxUiLoaderService
+    ) {}
 
   ngOnInit() {
     this.langService.init();
@@ -22,6 +27,15 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (!defaultLang) {
       localStorage.setItem('defaultLang', 'fr');
     }
+
+    this.router.events.subscribe(val => {
+      if(val instanceof NavigationStart){
+        this.loaderService.start();
+      }
+      if(val instanceof NavigationEnd){
+        this.loaderService.stop();
+      }
+    })
   }
 
   ngAfterViewInit() {

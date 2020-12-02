@@ -3,7 +3,7 @@
         <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true}">
             <ul class="list-unstyled">
                 <li *ngFor="let item of menuItems"
-                    [ngClass]="{'active': (selectedParentMenu === item.to && viewingParentMenu === '') || viewingParentMenu === item.to}">
+                    [ngClass]="{'active': (selectedParentMenu === item.to && viewingParentMenu === '') || viewingParentMenu === item.to, 'none' : item.onlyDesktop && isMobile}">
                     <a *ngIf="item.newWindow" [href]="item.to" rel="noopener noreferrer" target="_blank">
                         <i [ngClass]="item.icon"></i>{{item.label | translate}}</a>
                     <a *ngIf="!item.newWindow && item.subs &&  item.subs.length>0"
@@ -21,7 +21,7 @@
     <div class="sub-menu">
         <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true}">
             <ul class="list-unstyled" *ngFor="let item of menuItems" [attr.data-parent]="item.to"
-                [ngClass]="{'d-block': (selectedParentMenu === item.to && viewingParentMenu==='') || viewingParentMenu === item.to}">
+                [ngClass]="{'d-block': (selectedParentMenu === item.to && viewingParentMenu==='') || viewingParentMenu === item.to, 'none' : item?.onlyDesktop && isMobile}">
                 <li *ngFor="let sub of item.subs"
                     [ngClass]="{'active': currentUrl === sub.to ,'has-sub-item' : sub.subs&& sub.subs.length>0 }">
                     <a *ngIf="sub.newWindow" [href]="sub.to" rel="noopener noreferrer" target="_blank">

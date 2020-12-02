@@ -31,6 +31,7 @@ export class CreateSpentIncomeDialog implements OnInit {
         this.update = !this.data["create"];
         this.isSpent = this.data["isSpent"];
         console.log(this.isSpent);
+        this.finance.date = new Date();
         
     }
 

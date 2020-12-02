@@ -50,6 +50,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Title } from '@angular/platform-browser';
 import { isNumeric } from 'rxjs/util/isNumeric';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -62,6 +63,7 @@ export class ShowTerrainComponent implements OnInit {
 
   @ViewChild('calendar') public calendar: CalendarComponent;
   @ViewChild('scheduleObj') public scheduleObj: ScheduleComponent;
+  colors = ['#d50103', '#e77b73', '#f6bf25', '#32b679', '#098043', '#059be5', '#4050b5', '#7986cb', '#8e24aa', '#616161'];
 
   constructor(
     private route: ActivatedRoute,
@@ -69,7 +71,6 @@ export class ShowTerrainComponent implements OnInit {
     private terrainService: TerrainService,
     private reservationService: ReservationService,
     private notifications: NotificationsService,
-    private modalService: BsModalService,
     private titleService: Title
   ) { }
 
@@ -241,27 +242,14 @@ export class ShowTerrainComponent implements OnInit {
     });
   }
 
-
-  public StatusData: Object[] = [
-    { StatusText: 'New', Id: 1 },
-    { StatusText: 'Requested', Id: 2 },
-    { StatusText: 'Confirmed', Id: 3 }
-  ];
-
   public timeScale: TimeScaleModel = { enable: true, interval: 60, slotCount: 1 };
 
   public dateParser(data: string) {
     return new Date(data);
   }
-  // colorsIndex = 0;
-  // colors = ['#05BB99','#00F75D', '#01B89A', '#243FDA' ,'#7F38F7', '#F85F73', '#E6E6E6']
-  // colorateTerrains = []
+
   public onEventRendered(args: EventRenderedArgs): void {
     (args.element as HTMLElement).style.backgroundColor = this.terrain.color;
-    
-    // (args.element as HTMLElement).style.backgroundColor = this.terrainsColors.find((el) => {
-    //   return el["nomTerrain"] == (args.data["terrain"]["name"] || args.data["terrain"])
-    // })["color"] 
   }
 
   public onActionBegin(args: { [key: string]: Object }): void {
@@ -375,14 +363,21 @@ export class ShowTerrainComponent implements OnInit {
   }
 
   openEdit(){
-    const dialogRef = this.dialog.open(CreateTerrainComponent, {
-      width: '500px',
-      data: {terrain: this.terrain, update : true}
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      
-    });
+    if(this.isMobile){
+      document.getElementById('normal-view').style.display = 'none';
+      document.getElementById('create-terrain-mobile').style.display = 'block';
+    }else{
+      const dialogRef = this.dialog.open(CreateTerrainComponent, {
+        width: '500px',
+        data: {terrain: this.terrain, update : true}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        
+      });
+    }
+   
   }
 
   buttonDisabled = false;
@@ -417,5 +412,46 @@ export class ShowTerrainComponent implements OnInit {
     })
   }
 
-  minDate = new Date(new Date().setHours(new Date().getHours() +1))
+
+  @ViewChild('createForm') createForm: NgForm;
+  onNoClick(){
+    document.getElementById('normal-view').style.display = 'block';
+      document.getElementById('create-terrain-mobile').style.display = 'none';
+  }
+
+  choose(color) {
+    this.terrain.color = color;
+  }
+  updateTerrain() {
+    if (!this.createForm.valid || this.buttonDisabled) {
+      return;
+    }
+    this.buttonDisabled = true;
+    this.buttonState = 'show-spinner';
+
+      this.terrainService.update(this.terrain, this.terrain._id).subscribe((res) => {
+        this.buttonDisabled = false;
+        this.buttonState = '';
+        this.notifications.create('Succès', "Terrain mis à jour", NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
+
+        this.onNoClick();
+      },
+        (err) => {
+          this.buttonDisabled = false;
+          this.buttonState = '';
+          this.notifications.create('Erreur', "Une erreur a survenue veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false })
+        })
+  }
+
+  addMin(){
+    this.terrain.duration += 30;
+  }
+
+  minusMin(){
+    if(this.terrain.duration >= 90){
+      this.terrain.duration -= 30;
+    }
+  }
+
+
 }

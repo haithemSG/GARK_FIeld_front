@@ -39,9 +39,23 @@
   height: 50px !important;
 }
 
+
+.user-image {
+  position: absolute;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
 @media (max-width: 700px) {
   .profile-card .profile-content {
-    padding: 100px 20px 30px 20px !important;
+    padding: 60px 20px 10px 20px !important;
+  }
+  .user-image{
+    transform: translate(16%, -100%);
   }
 }
 .d {
@@ -61,18 +75,6 @@
   overflow: hidden;
 }
 
-.user-image {
-  position: absolute;
-  height: 120px;
-  width: 120px;
-  border-radius: 50%;
-  // bottom: -50%;
-  left: 25%;
-  /* top: 50%; */
-  transform: translate(-50%, -50%);
-  z-index: 5;
-}
-
 .user-image img {
   height: 120px;
   width: 120px;
@@ -88,7 +90,8 @@
 
 .profile-card .profile-name {
   font-size: 1.2rem;
-  color: #72de79;
+  // color: #72de79;
+  color: #000000;
   font-weight: 600;
   text-align: center;
 }

@@ -32,7 +32,7 @@
                         </li>
                         <li class=" pl-4">
                             <app-state-button [btnClass]="'btn btn-gradiant btn-lg btn-shadow'" [currentState]="buttonState"
-                                [isDisabled]="buttonDisabled" click="goLogin()">
+                                [isDisabled]="buttonDisabled" (click)="goLogin()">
                                 <span  *ngIf="!auth.isAuthenticated"> Se connecter </span>
                                 <span  *ngIf="auth.isAuthenticated"> Mon Compte </span>
                             </app-state-button>

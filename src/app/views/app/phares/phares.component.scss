@@ -72,7 +72,7 @@
 
 #fixedbutton {
     position: fixed;
-    bottom: 100px; 
+    bottom: 10px; 
     right: 10px; 
     z-index: 1;
     button{
@@ -81,3 +81,14 @@
         }
     }
 }
+
+
+@media(max-width : 600px){
+    #fixedbutton {
+        bottom: 100px;
+    }
+    #add-new-reservation{
+        margin-bottom: 100px;
+    }
+}
+

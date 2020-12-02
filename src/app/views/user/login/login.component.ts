@@ -12,8 +12,8 @@ import { ICredentails } from 'src/app/shared/models/user.model';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm: NgForm;
-  emailModel = 'stayassine3@gmail.com';
-  passwordModel = 'azertysta';
+  emailModel = '' //'stayassine3@gmail.com';
+  passwordModel =  '' //'azertysta';
 
   buttonDisabled = false;
   buttonState = '';

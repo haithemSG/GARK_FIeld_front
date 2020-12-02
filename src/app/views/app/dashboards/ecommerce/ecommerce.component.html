@@ -24,8 +24,8 @@
 <div class="row" style="margin-bottom: 100px;">
   <div class="col-12">
     <div class="card h-100">
-      <div class="card-body">
-        <div class="mb-2" style="display: flex;">
+      <div class="card-body" id="data-table">
+        <div class="mb-2" style="display: flex; padding-left: 1.5rem; padding-right: 1.5rem">
           <h1 class="card-title" style="font-size: 1.75rem;"> <i class="flaticon-clipboard"></i> Détails </h1>
           <div style="margin: 0 auto;"></div>
           <div class="mr-md-3" *ngIf="!isMobile">
@@ -37,7 +37,7 @@
             </button>
           </div>
         </div>
-        <div *ngIf="isMobile" style="display: flex">
+        <div *ngIf="isMobile" style="display: flex; margin-bottom: 10px; padding-left: 1.5rem; padding-right: 1.5rem">
           <div>
             <button class="btn btn-gradiant btn-shadow" (click)="clickCreateIncome()"> Ajouter revenue
             </button>
@@ -50,7 +50,7 @@
         </div>
         <div>
 
-          <div class="input-group mb-3">
+          <div class="input-group mb-3" style="padding-left: 1.5rem; padding-right: 1.5rem">
             <input type="text" class="form-control" #search id="search" placeholder="Chercher ..." aria-label="Chercher"
               aria-describedby="search-addon">
             <div class="input-group-append">
@@ -98,24 +98,24 @@
             rowHeight="auto" [limit]="5" [reorderable]="reorderable">
 
             <ngx-datatable-column prop="label" name="Désignation" [flexGrow]="3">
-              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                {{ value  }}
+              <ng-template let-row="row" class="fs-8"  let-value="value" ngx-datatable-cell-template>
+                <span class="fs-8">{{ value  }}</span>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Date" prop="date" [flexGrow]="2">
-              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                {{ value | date  }}
+              <ng-template let-row="row" class="fs-8" let-value="value" ngx-datatable-cell-template>
+               <span class="fs-8"> {{ value | date  }}</span>
               </ng-template>
             </ngx-datatable-column>
-            <!-- <ngx-datatable-column name="Type" prop="isSpent" [flexGrow]="1">
-              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                <span *ngIf="value == true"> Dépense </span>
-                <span *ngIf="value != true"> Revenu </span>
+            <ngx-datatable-column name="Type" prop="isSpent" [flexGrow]="1">
+              <ng-template let-row="row" class="fs-8" let-value="value" ngx-datatable-cell-template>
+                <span class="fs-8" *ngIf="value == true"> Dépense </span>
+                <span class="fs-8" *ngIf="value != true"> Revenu </span>
               </ng-template>
-            </ngx-datatable-column> -->
+            </ngx-datatable-column>
             <ngx-datatable-column name="Montant" prop="amount" [flexGrow]="1">
-              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                <span [ngStyle]="{ 'color' : (value < 0) ? 'red' : 'green' }"> {{ value  }} </span>
+              <ng-template let-row="row" class="fs-8" let-value="value" ngx-datatable-cell-template>
+                <span class="fs-8" [ngStyle]="{ 'color' : (value < 0) ? 'red' : 'green' }"> {{ value  }}DT </span>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>

@@ -141,6 +141,7 @@ export class CompteComponent implements OnInit {
 
   oldPassword: string = "";
   newPassword: string = "";
+  confirmPassword: string = "";
   buttonPasswordDisabled : boolean = false;
   buttonPasswordState: string = '';
 
@@ -162,6 +163,7 @@ export class CompteComponent implements OnInit {
         }
         this.oldPassword ='';
         this.newPassword ='';
+        this.confirmPassword ='';
         this.buttonPasswordDisabled = false;
         this.buttonPasswordState = '';
       },
@@ -233,6 +235,27 @@ export class CompteComponent implements OnInit {
 
     return hours+'H'+minutes;
 
+  }
+
+  confirmIncorrect : boolean = false;
+  newChanged(){
+    if(this.newPassword !== this.confirmPassword){
+      this.confirmIncorrect = true;
+      this.buttonPasswordDisabled = true;
+    }else{
+      this.confirmIncorrect = false;
+      this.buttonPasswordDisabled = false;
+    }
+  }
+
+  confirmChanged(){
+    if(this.newPassword !== this.confirmPassword){
+      this.confirmIncorrect = true;
+      this.buttonPasswordDisabled = false;
+    }else{
+      this.confirmIncorrect = false;
+      this.buttonPasswordDisabled = false;
+    }
   }
 
 

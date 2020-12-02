@@ -167,8 +167,7 @@ body.show {
 }
 
 .fixed-background {
-  background: url("../../img/login/balloon-lg.png") no-repeat center center
-    fixed;
+  background: url("../../img/login/balloon.png") no-repeat center center fixed;
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -1884,40 +1883,17 @@ a.btn-secondary:not([href]):not([tabindex]) {
       flex-basis: 23%;
     }
   }
-  @media (max-width: 639px) {
+  @media (max-width: 600px) {
     .navbar-left {
-      flex-basis: 22%;
+      flex-basis: 0%;
     }
   }
-  @media (max-width: 623px) {
-    .navbar-left {
-      flex-basis: 20%;
-    }
-  }
-  @media (max-width: 595px) {
-    .navbar-left {
-      flex-basis: 10%;
-    }
-  }
-  @media (max-width: 573px) {
-    .navbar-left {
-      flex-basis: 9%;
-    }
-  }
+
   @media (max-width: 419px) {
-    .navbar-left {
-      flex-basis: 9%;
-    }
     #logo-nav {
       max-height: 17px;
       margin-top: 8px;
       margin-left: 10px;
-    }
-  }
-
-  @media (max-width: 373px) {
-    .navbar-left {
-      flex-basis: 27%;
     }
   }
 
@@ -1926,7 +1902,7 @@ a.btn-secondary:not([href]):not([tabindex]) {
     text-align: right;
 
     @include respond-below(sm) {
-      flex-basis: 0%;
+      // flex-basis: 0%;
     }
     .user {
       margin-right: $main-margin;
@@ -3371,7 +3347,7 @@ body.default-transition main {
 }
 .dashboard-search {
   height: 650px;
-  background: url("../../img/login/balloon.jpg");
+  background: url("../../img/login/balloon.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-color: $foreground-color;
@@ -6549,7 +6525,7 @@ rating span {
         rgba(91, 188, 154, 0.2) 0%,
         rgba(0, 248, 92, 0.3) 90%
       ),
-      url("../../img/login/balloon.jpg");
+      url("../../img/login/balloon.png");
     background-size: cover;
     padding: 80px 40px;
 
@@ -6560,7 +6536,7 @@ rating span {
 
   .form-side {
     width: 60%;
-    padding: 20px 60px 20px 60px;
+    padding: 20px 60px 80px 60px;
   }
 
   @include respond-below(md) {
@@ -6573,7 +6549,7 @@ rating span {
 
     .form-side {
       width: 100%;
-      padding: 20px 60px 20px 60px;
+      padding: 20px 60px 80px 60px;
     }
   }
 
@@ -6591,7 +6567,7 @@ rating span {
     }
 
     .form-side {
-      padding: 15px 30px 15px 30px;
+      padding: 15px 30px 30px 30px;
     }
 
     .logo-single {
@@ -11126,6 +11102,7 @@ footer.page-footer {
     rgba(0, 248, 92, 1) 100%
   );
   border-color: #5bbc9a;
+  border: 0.1px;
   color: #fff;
 }
 .btn-gradiant:hover {
@@ -11170,4 +11147,43 @@ footer.page-footer {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.form-control {
+  background: transparent !important;
+}
+
+.duration-button{
+    border: 1px solid #cccccc;
+    padding: 15px;
+    color: #000000;
+    font-size: 1.2rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.color-palette{
+  width: 31px;
+  height: 31px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.active-color{
+  border: 2px solid black;
+  padding-top: 1px;
+}
+
+.inner-color{
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  display: block;
+  margin: auto;
+}
+
+.color-palette:hover{
+  border: 2px solid #cccccc;
+  padding-top: 1px;
 }

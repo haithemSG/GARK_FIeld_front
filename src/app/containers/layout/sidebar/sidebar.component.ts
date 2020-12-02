@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   sidebar: ISidebar;
   subscription: Subscription;
   closedCollapseList = [];
-
+  isMobile: boolean = false;
   constructor(
     private router: Router,
     private sidebarService: SidebarService,
@@ -69,6 +69,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.isMobile = window.screen.width < 600 ? true: false;
     setTimeout(() => {
       this.selectMenu();
       const { containerClassnames } = this.sidebar;
@@ -269,6 +271,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   handleWindowResize(event) {
+
+    this.isMobile = event.target.innerWidth < 600 ? true : false;
+
     if (event && !event.isTrusted) {
       return;
     }

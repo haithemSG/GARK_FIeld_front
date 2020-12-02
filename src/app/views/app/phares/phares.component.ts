@@ -1,22 +1,24 @@
-import { Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { cellDoubleClick, DayService, EventRenderedArgs, EventSettingsModel, MonthService, ScheduleComponent, TimeScaleModel, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
+import { ActivatedRoute } from '@angular/router';
+import { EventRenderedArgs, EventSettingsModel, ScheduleComponent, TimeScaleModel} from '@syncfusion/ej2-angular-schedule';
 import { Terrain } from 'src/app/shared/models/terrain.model';
 import { Reservation } from 'src/app/shared/models/reservation.model';
 import { TerrainService } from 'src/app/shared/services/terrain.service';
 import { ReservationService } from 'src/app/shared/services/reservation.service';
-
 import { extend } from '@syncfusion/ej2-base';
 import { CalendarComponent } from '@syncfusion/ej2-angular-calendars';
 import { NotificationsService, NotificationType } from 'angular2-notifications';
-
 import { loadCldr, L10n } from '@syncfusion/ej2-base';
 import * as numberingSystems from 'cldr-data/supplemental/numberingSystems.json';
 import * as gregorian from 'cldr-data/main/fr-CH/ca-gregorian.json';
 import * as numbers from 'cldr-data/main/fr-CH/numbers.json';
 import * as timeZoneNames from 'cldr-data/main/fr-CH/timeZoneNames.json';
 import { environment } from 'src/environments/environment';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CreateTerrainComponent } from '../boutique/create-terrain-dialog/create-terrain.component';
+import { ImageDialogComponent } from '../boutique/show-terrain/image-dialog/image-dialog.component';
+import { Title } from '@angular/platform-browser';
 
 // Angular CLI 8.0 and above versions
 loadCldr(numberingSystems['default'], gregorian['default'], numbers['default'], timeZoneNames['default']);
@@ -45,12 +47,7 @@ L10n.load({
   }
 });
 
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { CreateTerrainComponent } from '../boutique/create-terrain-dialog/create-terrain.component';
-import { ImageDialogComponent } from '../boutique/show-terrain/image-dialog/image-dialog.component';
-import { Title } from '@angular/platform-browser';
-import { AddReservationComponent } from '../terrain/add-reservation/add-reservation.component';
+
 
 
 @Component({
@@ -58,7 +55,7 @@ import { AddReservationComponent } from '../terrain/add-reservation/add-reservat
   templateUrl: './phares.component.html',
   styleUrls: ['./phares.component.scss']
 })
-export class PharesComponent implements OnInit, OnDestroy {
+export class PharesComponent implements OnInit {
   @ViewChild('calendar') public calendar: CalendarComponent;
   @ViewChild('scheduleObj') public scheduleObj: ScheduleComponent;
 
@@ -68,12 +65,9 @@ export class PharesComponent implements OnInit, OnDestroy {
     private terrainService: TerrainService,
     private reservationService: ReservationService,
     private notifications: NotificationsService,
-    private modalService: BsModalService,
     private titleService: Title,
     public AddReservationDialog: MatDialog
   ) { }
-  ngOnDestroy(): void {
-  }
 
   isMobile: boolean = false;
   reservataionModal: BsModalRef;
@@ -85,7 +79,16 @@ export class PharesComponent implements OnInit, OnDestroy {
   nomTerrain: Array<String>;
   terrainSelected;
   reservationList: Array<Reservation> = new Array<Reservation>();
-
+  buttonDisabled = false;
+  buttonState = "";
+  resMobile = {
+    Name: "",
+    num: "",
+    terrain: "",
+    frais: "",
+    StartTime: new Date(),
+    EndTime: new Date().addMinutes(60)
+  }
 
   public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], null, null, true) };
   public showQuickInfo: boolean = false;
@@ -95,17 +98,20 @@ export class PharesComponent implements OnInit, OnDestroy {
   startTime: Date;
   terrainsColors: Array<any> = new Array<any>();
   ngOnInit(): void {
-    this.titleService.setTitle("Mon Agenda");
+    this.titleService.setTitle("Mon Agenda | GARK");
     this.route.params.subscribe((params) => {
       if (this.terrainService.openedTerrain._id !== params['id']) {
         this.terrainId = params['id'];
         this.fetchData();
       } else {
         this.terrain = this.terrainService.openedTerrain;
+        this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
       }
       this.terrainService.getAll().subscribe(
         (res) => {
           this.ListTerrain = res["terrain"] as Terrain[];
+          
+          // this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
           this.nomTerrain = this.ListTerrain.map((el: Terrain) => {
             return el.name;
           })
@@ -116,6 +122,7 @@ export class PharesComponent implements OnInit, OnDestroy {
         }
       )
     })
+    
   }
 
   currentViewMode = "Week"
@@ -126,26 +133,8 @@ export class PharesComponent implements OnInit, OnDestroy {
         el.Subject = el["name"] + "<br/>" + el["num"] || "";
         return el;
       })
-      let i = 0;
-      // this.reservationList.forEach((el: Reservation) => {
-
-      //   if (this.terrainsColors.length == 0) {
-      //     this.terrainsColors.push({ nomTerrain: el.terrain["name"], color: this.colors[0] })
-      //   } else {
-      //     let terrainExist = this.terrainsColors.find((terrainCouleur) => {
-      //       return terrainCouleur["nomTerrain"] == el.terrain["name"];
-      //     })
-      //     if (!terrainExist) {
-      //       i++;
-      //       this.terrainsColors.push({ nomTerrain: el.terrain["name"], color: this.colors[i] })
-      //     }
-      //   }
-
-      //   this.isLoading = false;
-      // })
-
+      
       this.isLoading = false
-
 
       if (window.screen.width < 815) {
         this.isMobile = true;
@@ -161,8 +150,12 @@ export class PharesComponent implements OnInit, OnDestroy {
             }, 200)
           }catch(e){
             setTimeout(()=>{
+             try{
               (<HTMLElement>document.getElementById('_nav')).style.display = "none";
-              (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
+             }catch(ec){}
+              try{
+                (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
+              }catch(ee){}
             }, 200)
           }
         }
@@ -186,22 +179,7 @@ export class PharesComponent implements OnInit, OnDestroy {
   }
 
   openAddReservationMobile(template?: TemplateRef<any>) {
-    // this.reservataionModal = this.modalService.show(template,
-    //   {
-    //     class: 'modal-dialog-centered'
-    //   });
-    // const dialog = this.AddReservationDialog.open(AddReservationComponent, {
-    //   width: '500px',s
-    //   data: {listTerrain: this.nomTerrain, multiple: true}
-    // })
-
-    // dialog.afterClosed().subscribe((result)=>{
-    //   if(result){
-    //     this.fetchData();
-    //   }
-    // })
-
-
+   
     (<HTMLElement>document.querySelector('#main')).style.display = "none";
     (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "none";
     (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "block";
@@ -248,28 +226,15 @@ export class PharesComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  public StatusData: Object[] = [
-    { StatusText: 'New', Id: 1 },
-    { StatusText: 'Requested', Id: 2 },
-    { StatusText: 'Confirmed', Id: 3 }
-  ];
-
   public timeScale: TimeScaleModel = { enable: true, interval: 60, slotCount: 1 };
   public dateParser(data: string) {
     return new Date(data);
   }
-  // colorsIndex = 0;
-  // colors = ['#05BB99', '#00F75D', '#E6E6E6', '#000', '#01B89A', '#F85F73']
-  // colorateTerrains = []
-  public onEventRendered(args: EventRenderedArgs): void {
 
+  public onEventRendered(args: EventRenderedArgs): void {
      (args.element as HTMLElement).style.backgroundColor = this.ListTerrain.find((el)=>{
       return el["name"] == (args.data["terrain"]["name"] || args.data["terrain"])
      }).color;
-     //this.terrainsColors.find((el) => {
-    //   return el["nomTerrain"] == (args.data["terrain"]["name"] || args.data["terrain"])
-    // })["color"]
   }
 
   public onActionBegin(args: { [key: string]: Object }): void {
@@ -393,16 +358,18 @@ export class PharesComponent implements OnInit, OnDestroy {
     });
   }
 
-  buttonDisabled = false;
-  buttonState = "";
-  resMobile = {
-    Name: "",
-    num: "",
-    terrain: "",
-    frais: "",
-    StartTime: new Date(new Date().setHours(new Date().getHours() + 1)),
-    EndTime: new Date(new Date().setHours(new Date().getHours() + 2))
+  TerrainChanged(event){
+    let name = event["itemData"]["value"];
+    this.terrain = this.ListTerrain.find((t : Terrain)=>{
+      return t.name === name;
+    });
+    console.log(this.terrain.duration);
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration)
+    console.log(this.resMobile.EndTime);
+    
   }
+
+  
 
   onSubmit() {
 
@@ -413,7 +380,6 @@ export class PharesComponent implements OnInit, OnDestroy {
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
     this.reservationService.create(this.resMobile).subscribe((res) => {
-      console.log(res);
 
       this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
       this.fetchData();
@@ -423,10 +389,39 @@ export class PharesComponent implements OnInit, OnDestroy {
       (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
       (<HTMLElement>document.querySelector('#main')).style.display = "block";
       (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
-        //this.closeModal(null);
     })
   }
 
-  minDate = new Date(new Date().setHours(new Date().getHours() + 1))
+  getStartTime(event){
+    const d = event["value"] as Date;
+    if(this.terrain){
+      this.resMobile.EndTime = d.addMinutes(this.terrain.duration);
+    }else{
+      this.resMobile.EndTime = d.addMinutes(60);
+    }
+  }
+
+
+}
+
+declare global{
+  interface Date {
+      addHours(hours : number) : Date;
+      addMinutes(minutes : number) : Date;
+  }
+}
+
+Date.prototype.addHours = function (hours : number) : Date{
+  if(!hours) return this;
+  let date = this;
+  date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+  return date;
+}
+
+Date.prototype.addMinutes = function (minutes : number) : Date{
+  if(!minutes) return this;
+  let date = this;
+  date.setTime(date.getTime() + (minutes * 60 * 1000));
+  return date;
 }
 

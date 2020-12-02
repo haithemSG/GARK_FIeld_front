@@ -5,6 +5,7 @@ export class Terrain {
     image: string;
     address: string;
     color: string;
+    duration: number;
     geoloacation: {
         lang: number,
         lat: number

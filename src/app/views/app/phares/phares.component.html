@@ -143,14 +143,14 @@
         <input class="e-field e-input mb-3" required [(ngModel)]="resMobile.frais" placeholder="Prix de réservation"
             type="number" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
         <br>
-        <label class="e-textlabel fw-700 mt-3">Prix de réservation</label>
+        <label class="e-textlabel fw-700 mt-3">Terrain</label>
         <ejs-dropdownlist class="e-field" data-name="terrain" placeholder='Choisir un terrain'
-            [ngModelOptions]="{standalone: true}" [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
+            [ngModelOptions]="{standalone: true}" (change)="TerrainChanged($event)" [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
         </ejs-dropdownlist>
 
         <br>
         <label class="e-textlabel fw-700 mt-3">A partir de</label>
-        <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" [ngModelOptions]="{standalone: true}"
+        <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" id="time-start" (change)="getStartTime($event)" [ngModelOptions]="{standalone: true}"
             locale='fr-CH' class="e-field mb-3" data-name="StartTime">
         </ejs-datetimepicker>
 

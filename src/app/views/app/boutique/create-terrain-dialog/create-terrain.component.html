@@ -13,6 +13,15 @@
         <div *ngIf="!addres.valid && createForm.submitted" class="invalid-tooltip">Champ requis!</div>
     </label>
 
+    <div class="pb-1 pt-2">
+      <p class="text-black mb-2">Durée d'un match</p>
+      <div class="d-flex flex-row justify-content-between mb-3">
+          <a (click)="minusMin()" class="duration-button"> - </a>
+          <span style="margin-top: auto; margin-bottom: auto;"> {{ terrain.duration }} min </span>
+          <a (click)="addMin()" class="duration-button"> + </a>
+      </div>
+  </div>
+
     <div class="pb-4 pt-2">
       <p class="text-black mb-2">Choisir un couleur pour ce terrain</p>
       <div class="d-flex flex-row justify-content-between mb-3">
