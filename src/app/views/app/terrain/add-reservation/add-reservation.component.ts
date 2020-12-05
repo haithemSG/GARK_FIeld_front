@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { Terrain } from 'src/app/shared/models/terrain.model';
 import { ReservationService } from 'src/app/shared/services/reservation.service';
 import { TerrainService } from 'src/app/shared/services/terrain.service';
 
@@ -20,13 +21,15 @@ export class AddReservationComponent implements OnInit {
 
   uniqueTerrain: boolean = false;
   nomTerrain : Array<any> = new Array<any>();
-
+  listTerrain : Array<Terrain> = new Array<Terrain>();
   buttonDisabled = false;
   buttonState = "";
+
   resMobile = {
     Name: "",
     num: "",
     terrain: "",
+    frais: "",
     StartTime: new Date(new Date().setHours(new Date().getHours() + 1)),
     EndTime: new Date(new Date().setHours(new Date().getHours() + 2))
   }
@@ -36,6 +39,7 @@ export class AddReservationComponent implements OnInit {
       this.uniqueTerrain = true;
     }else{
       this.nomTerrain = this.data["listTerrain"] as Array<any>;
+      this.listTerrain = this.data["list"] as Array<Terrain>;
     }
   }
 
@@ -63,5 +67,23 @@ export class AddReservationComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  selectedTerrain : Terrain;
+  terrainHasChanged(event){
+    const selectedStaduim = event["value"];
+    this.selectedTerrain = this.listTerrain.find((t : Terrain)=>{
+      return selectedStaduim == t.name;
+    })
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.selectedTerrain.duration);
+    this.resMobile.frais = "90";
+  }
+
+  startTimeHasChanged(event){
+    if(this.selectedTerrain){
+      console.log(this.selectedTerrain.duration);
+      
+      this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.selectedTerrain.duration);
+    }
   }
 }

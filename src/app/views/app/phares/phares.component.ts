@@ -19,6 +19,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CreateTerrainComponent } from '../boutique/create-terrain-dialog/create-terrain.component';
 import { ImageDialogComponent } from '../boutique/show-terrain/image-dialog/image-dialog.component';
 import { Title } from '@angular/platform-browser';
+import { AddReservationComponent } from '../terrain/add-reservation/add-reservation.component';
 
 // Angular CLI 8.0 and above versions
 loadCldr(numberingSystems['default'], gregorian['default'], numbers['default'], timeZoneNames['default']);
@@ -224,6 +225,19 @@ export class PharesComponent implements OnInit {
         }
       }
     });
+  }
+
+  addReservationDialog(){
+    const dialog = this.dialog.open(AddReservationComponent, {
+      width : '500px',
+      data: { multiple : true, listTerrain : this.nomTerrain, list : this.ListTerrain}
+    });
+
+    dialog.afterClosed().subscribe((res)=>{
+      if(res){
+        this.fetchData();
+      }
+    })
   }
 
   public timeScale: TimeScaleModel = { enable: true, interval: 60, slotCount: 1 };

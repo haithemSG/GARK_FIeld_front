@@ -9,7 +9,7 @@
       </button>
 </div>
 <div class="container">
-  <div class="row" style="margin-bottom: 100px;">
+  <div class="row"  style="margin-bottom: 100px;" [ngStyle]="{'margin-bottom' : isMobile ? '150px' : '100px'}">
     <div class="col-md-12" *ngIf="loading" >
       <p> Chargement ... </p>
     </div>

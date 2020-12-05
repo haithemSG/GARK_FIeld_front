@@ -6,13 +6,16 @@
 .data-overlay{
     position: absolute;
     padding: 30px;
-    color: black;
+    color: white;
 
     h1{
         font-size: 2rem;
         font-weight: 700;
     }
 
+    .flaticon-setting-lines::before{
+        margin-left: 0 !important;
+    }
 }
 
 .e-calendar .e-content td.e-selected span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected span.e-day {
@@ -113,7 +116,7 @@
 .e-btn.e-flat.e-primary, .e-css.e-btn.e-flat.e-primary {
     background-color: transparent;
     border-color: transparent;
-    color: #5bbc9a;
+    color: #21f56d;
 }
 
 .e-calendar .e-content td.e-today.e-selected:hover span.e-day, 

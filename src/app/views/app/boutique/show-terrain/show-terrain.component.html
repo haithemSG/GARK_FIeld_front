@@ -25,12 +25,25 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8" *ngIf="!isLoading && !isMobile">
+            <div class="col-md-8" *ngIf="!isLoading && !isMobile" [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }" 
+            style="background-size: 100%; background-position: center; background-repeat: no-repeat;">
                 <div class="overlay">
 
-                    <div class="data-overlay">
-
-
+                    <div class="data-overlay" >
+                        <div style="display: flex; margin-top: 10px;">
+                            <div>
+                                <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
+                                <h2> {{ terrain.address }} </h2>
+                            </div>
+                            <div style="margin: 0 auto;"></div>
+                            <div>
+                                <button mat-mini-fab class="ml-5" (click)="openEdit()"
+                                    style="background-color: white !important; color: black;padding-top: 0; ">
+                                    <i class="flaticon-setting-lines"></i>
+                                </button>
+    
+                            </div>
+                        </div>
                     </div>
                     <div class="overlay-upload">
                         <div style="display: flex">
@@ -42,9 +55,9 @@
                             </div>
                         </div>
                     </div>
-                    <img class="banner" [src]="image" alt="terrain banner">
+                    <!-- <img class="banner" [src]="image" alt="terrain banner"> -->
                 </div>
-                <div>
+                <!-- <div>
                     <div style="display: flex; margin-top: 10px;">
                         <div>
                             <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
@@ -60,21 +73,14 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
             </div>
             <div class="col-md-8 mb-3" *ngIf="!isLoading && isMobile">
                 <div class="overlay">
                     <div class="data-overlay">
-                        <!-- <div style="display: flex">
-                        <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
-                        <mat-icon class="ml-2" style="cursor: pointer;" (click)="openEdit()"> edit </mat-icon>
+                       
                     </div>
-                    <h2> {{ terrain.address | titlecase }} </h2> -->
-                    </div>
-                    <!-- <div class="overlay-upload">
-                    <a (click)="openDialog('select')"> Sélectionner une image </a>
-                    <a (click)="openDialog('import')"> Importer une image </a>
-                </div> -->
+                   
                     <div class="overlay-upload">
                         <div style="display: flex">
                             <div style="margin: 0 auto;"></div>

@@ -235,4 +235,7 @@
     <button mat-fab *ngIf="isMobile" (click)="openAddReservationMobile()" class="btn btn-gradiant">
         <mat-icon>add</mat-icon>
     </button>
+    <button mat-fab *ngIf="!isMobile" (click)="addReservationDialog()" class="btn btn-gradiant">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

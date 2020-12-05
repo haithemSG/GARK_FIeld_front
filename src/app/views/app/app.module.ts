@@ -64,7 +64,6 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     CompteComponent, 
     DeleteDialogComponent, 
     AddReservationComponent,
-    
   ],
   imports: [
     CommonModule,

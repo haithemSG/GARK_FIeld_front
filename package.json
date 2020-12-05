@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:prod": "ng build --prod=true --aot --build-optimizer",
+    "build:prod": "ng build --prod=true --aot --build-optimizer --outputHashing=all",
     "imageoptim": "imageoptim --imagealpha 'src/assets/**/*.png'"
   },
   "private": true,

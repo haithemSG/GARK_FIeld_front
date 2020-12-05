@@ -90,7 +90,7 @@ $theme-color-blue-navy: #00365a;
 $theme-color-blue-yale: #145388;
 $theme-color-blue-olympic: #008ecc;
 $theme-color-green-moss: #576a3d;
-$theme-color-green-lime: linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%);
+$theme-color-green-lime: linear-gradient(90deg, #21f56d 0%, #00f85c 100%);
 $theme-color-orange-carrot: #ed7117;
 $theme-color-red-ruby: #900604;
 $theme-color-yellow-granola: #c0a145;
@@ -3035,7 +3035,7 @@ body.default-transition main {
   }
 
   .card-title {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-size: 1rem;
     font-weight: 600;
   }
@@ -10740,7 +10740,7 @@ footer.page-footer {
 }
 
 .greenlime-light-1 {
-  background-color: linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%);
+  background-color: linear-gradient(90deg, #21f56d 0%, #00f85c 100%);
 }
 
 .greenlime-light-2 {
@@ -11012,7 +11012,7 @@ footer.page-footer {
 }
 .e-calendar .e-content td.e-today.e-selected span.e-day,
 .e-bigger.e-small .e-calendar .e-content td.e-today.e-selected span.e-day {
-  border: 1px solid linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%) !important;
+  border: 1px solid linear-gradient(90deg, #21f56d 0%, #00f85c 100%) !important;
   color: #fff !important;
 }
 .e-schedule .e-vertical-view .e-header-cells.e-current-day {
@@ -11048,7 +11048,7 @@ footer.page-footer {
 .e-css.e-btn.e-flat.e-primary {
   background-color: transparent;
   border-color: transparent;
-  color: linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%) !important;
+  color: linear-gradient(90deg, #21f56d 0%, #00f85c 100%) !important;
 }
 
 .e-input:focus:not(.e-success):not(.e-warning):not(.e-error),
@@ -11064,7 +11064,7 @@ footer.page-footer {
   input,
 .e-float-input.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-input-group).e-input-focus
   input {
-  border-color: linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%) !important;
+  border-color: linear-gradient(90deg, #21f56d 0%, #00f85c 100%) !important;
 }
 
 .e-input-group:not(.e-float-icon-left):not(.e-float-input)::before,
@@ -11080,7 +11080,7 @@ footer.page-footer {
   background: #5bbb9c !important;
 }
 .e-datetime-wrapper .e-input-group-icon.e-icons.e-active {
-  color: linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%) !important;
+  color: linear-gradient(90deg, #21f56d 0%, #00f85c 100%) !important;
 }
 .e-input-group
   .e-control-wrapper
@@ -11088,7 +11088,7 @@ footer.page-footer {
   .e-datetime-wrapper
   .e-lib
   .e-keyboard {
-  color: linear-gradient(90deg, #5bbc9a 0%, #00f85c 100%) !important;
+  color: linear-gradient(90deg, #21f56d 0%, #00f85c 100%) !important;
 }
 
 .e-dropdownbase .e-list-item.e-active.e-hover {
@@ -11101,7 +11101,7 @@ footer.page-footer {
     rgba(91, 188, 154, 1) 0%,
     rgba(0, 248, 92, 1) 100%
   );
-  border-color: #5bbc9a;
+  border-color: #21f56d;
   border: 0.1px;
   color: #fff;
 }

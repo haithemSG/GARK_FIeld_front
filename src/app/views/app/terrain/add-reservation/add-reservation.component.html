@@ -21,17 +21,24 @@
                 </td>
             </tr>
             <tr>
+                <td class="e-textlabel">Prix de réservation</td>
+                <td colspan="4">
+                    <input class="e-field e-input" required [(ngModel)]="resMobile.frais" placeholder="Prix de réservation"
+                        type="number" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
+                </td>
+            </tr>
+            <tr>
                 <td class="e-textlabel">Terrain</td>
                 <td colspan="4">
                     <ejs-dropdownlist class="e-field" data-name="terrain" placeholder='Choisir un terrain'
-                        [ngModelOptions]="{standalone: true}" [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
+                        [ngModelOptions]="{standalone: true}" (change)="terrainHasChanged($event)" [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
                     </ejs-dropdownlist>
                 </td>
             </tr>
             <tr>
                 <td class="e-textlabel">A partir de</td>
                 <td colspan="4">
-                    <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" [ngModelOptions]="{standalone: true}"
+                    <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" (change)="startTimeHasChanged($event)" [ngModelOptions]="{standalone: true}"
                         locale='fr-CH' class="e-field" data-name="StartTime">
                     </ejs-datetimepicker>
                 </td>
@@ -39,7 +46,7 @@
             <tr>
                 <td class="e-textlabel">Jusqu'à</td>
                 <td colspan="4">
-                    <ejs-datetimepicker required [(ngModel)]="resMobile.EndTime" [ngModelOptions]="{standalone: true}"
+                    <ejs-datetimepicker required [(ngModel)]="resMobile.EndTime" name="endd"
                         locale='fr-CH' class="e-field" data-name="EndTime"></ejs-datetimepicker>
                 </td>
             </tr>

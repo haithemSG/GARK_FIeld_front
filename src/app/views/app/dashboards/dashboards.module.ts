@@ -15,7 +15,7 @@ import { CreateSpentIncomeDialog } from './ecommerce/create-spent-income-dialog/
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsStateButtonModule } from 'src/app/components/state-button/components.state-button.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-
+import { CustomDataTablePagerComponent } from './ecommerce/pager.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -29,7 +29,8 @@ registerLocaleData(localeFr);
     DefaultComponent, 
     EcommerceComponent, 
     DashboardsComponent,
-    CreateSpentIncomeDialog
+    CreateSpentIncomeDialog,
+    CustomDataTablePagerComponent
   ],
   imports: [
     SharedModule,

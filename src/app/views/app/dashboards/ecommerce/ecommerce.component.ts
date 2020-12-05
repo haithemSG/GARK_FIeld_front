@@ -1,7 +1,7 @@
 import { Component, HostListener, AfterViewInit,Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { ColumnMode } from '@swimlane/ngx-datatable';
+import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import productItems from 'src/app/data/products';
 import { Finance } from 'src/app/shared/models/finance.model';
 import { FinanceService } from 'src/app/shared/services/finance.service';
@@ -25,11 +25,13 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
   ) { }
   
 
+  public currentPageLimit: number = 10;
+  public currentVisible: number = 3;
   loadingIndicator = true;
   reorderable = true;
   @Input() title = 'dashboards.best-sellers';
   @ViewChild('search', { static: false }) search: any;
-
+  @ViewChild(DatatableComponent) public table: DatatableComponent;
   class = 'icon-cards-row';
   rows = productItems.slice(0, 8);
   // columns = [
@@ -48,8 +50,8 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
 
   ColumnMode = ColumnMode;
   stats = [
-    { prop: 'income', name: 'Revenues', amount: 0, icon: 'flaticon-money-1', color: "black" },
-    { prop: 'isSpent', name: 'Dépenses', amount: 0, icon: 'flaticon-money-1', color: "black" },
+    { prop: 'income', name: 'Revenues', amount: 0, icon: 'flaticon-money-1', color: "#77e773" },
+    { prop: 'isSpent', name: 'Dépenses', amount: 0, icon: 'flaticon-money-1', color: "#77e773" },
     { prop: 'benifits', name: 'Bénifices', amount: 0, icon: 'flaticon-money-1', color : "#77e773" },
   ]
 
