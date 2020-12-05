@@ -6,7 +6,7 @@
             <li class="nav-item"><a (click)="scrollTo('#features')" href="javascript:;">A propos</a></li>
             <li class="nav-item"><a (click)="scrollTo('#layouts')" href="javascript:;">Contactez-nous</a></li>
             <li >
-                <a *ngIf="!auth.isAuthenticated" class="btn btn-gradiant" [routerLink]="'/user/login'"> Se connecter </a>
+                <a *ngIf="!auth.isAuthenticated" class="btn btn-gradiant" [routerLink]="'/football/user/login'"> Se connecter </a>
                 <a *ngIf="auth.isAuthenticated" class="btn btn-gradiant" [routerLink]="adminRoot"> Mon compte </a>
             </li>
             <li class="nav-item">
@@ -16,7 +16,7 @@
         </ul>
     </div>
 
-    <div class="main-container" style="background-color: white !important">
+    <div class="main-container">
         <div class="landing-page-nav">
             <nav>
                 <div class="container d-flex align-items-center justify-content-between">
@@ -36,10 +36,6 @@
                                 <span  *ngIf="!auth.isAuthenticated"> Se connecter </span>
                                 <span  *ngIf="auth.isAuthenticated"> Mon Compte </span>
                             </app-state-button>
-                            <!-- <a *ngIf="!auth.isAuthenticated" class="btn btn-gradiant btn-sm pr-4 pl-4"
-                                [routerLink]="'/user/login'"> Se connecter </a>
-                            <a *ngIf="auth.isAuthenticated" class="btn btn-gradiant btn-sm pr-4 pl-4"
-                                [routerLink]="adminRoot"> Mon compte </a> -->
                         </li>
                     </ul>
                     <span class="mobile-menu-button" (click)="showMobileMenu=!showMobileMenu; $event.stopPropagation()">
@@ -56,10 +52,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 d-block d-md-none">
-                            <a [href]="adminRoot" target="_blank">
+                            
                                 <img alt="mobile hero" class="mobile-hero" style="width: calc(100%);"
                                     src="/assets/imgs/home/Gark-Entry-1.png" />
-                            </a>
+                            
                         </div>
  
                         <div class="col-12 col-xl-5 col-lg-5 col-md-6 texting">
@@ -167,43 +163,6 @@
 
                 </div>
             </div>
-
-            <!-- <div class="section">
-                <div class="container" id="features">
-                    <div class="row">
-                        <div class="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                            <h1>A propos</h1>
-                            <p>
-
-
-                            </p>
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-            <div class="section background">
-                <div class="container" id="layouts">
-                    <div class="row">
-                        <div class="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                            <h1>Contactez-nous</h1>
-                            <p>
-                                We did our best to create layouts for various needs that developers might have and best
-                                experience
-                                for users.
-                                <br>
-                                They are clean and slick. They function well and look good at the same time.
-
-                            </p>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div> -->
 
             <div class="section footer mb-0" style="padding-bottom: 20px !important;">
                 <div class="container">

@@ -1,6 +1,6 @@
 <div class="card">
   <tabset class="card-tabs">
-    <tab heading="{{'pages.details-title' | translate}}" class="card-body">
+    <tab heading="{{'pages.details-title'}}" class="card-body">
       <p class="font-weight-bold">Augue Vitae Commodo</p>
       <p>
         Vivamus ultricies augue vitae commodo condimentum. Nullam
@@ -80,7 +80,7 @@
       </table>
     </tab>
 
-    <tab heading="{{'pages.comments-title' | translate}} (19)" class="card-body">
+    <tab heading="{{'pages.comments-title'}} (19)" class="card-body">
       <div [class]="i===comments.length-1 ? 'd-flex flex-row mb-3 pb-3 justify-content-between': 'd-flex flex-row mb-3 pb-3 border-bottom justify-content-between'" *ngFor="let comment of comments; let i = index;">
         <a href="javascript:;">
           <img [src]="comment.thumb" [alt]="comment.title"
@@ -112,10 +112,10 @@
       </div>
     </tab>
 
-    <tab heading="{{'pages.questions-title' | translate}}" class="card-body">
+    <tab heading="{{'pages.questions-title'}}" class="card-body">
       <div>
         <accordion class="detail-tabs"  [closeOthers]="true" [isAnimated]="true">
-          <accordion-group heading="{{question.question | translate}}" [isOpen]="i === 0 ? true : false" *ngFor="let question of questions; let i = index;">
+          <accordion-group heading="{{question.question}}" [isOpen]="i === 0 ? true : false" *ngFor="let question of questions; let i = index;">
             <p class="mb-0">
               {{question.answer}}
             </p>

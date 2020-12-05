@@ -1,53 +1,44 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { DataTablePagerComponent as SuperDataTablePagerComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-datatable-pager',
   template: `
-    <ul class="pager">
-      <li [class.disabled]="!canPrevious()">
-        <a
-          href="javascript:void(0)"
-          (click)="selectPage(1)">
-          <mat-icon>{{pagerPreviousIcon}}</mat-icon>
-        </a>
-      </li>
-      <li [class.disabled]="!canPrevious()">
-        <a
+    <ul class="pagination">
+      <li [class.disabled]="!canPrevious()" class="pagination-prev page-item">
+        <a class="page-link"
           href="javascript:void(0)"
           (click)="prevPage()">
           <mat-icon>{{pagerLeftArrowIcon}}</mat-icon>
         </a>
       </li>
       <li
-        class="pages"
+        class="pagination-page page-item"
         *ngFor="let pg of pages"
         [class.active]="pg.number === page">
         <a
           href="javascript:void(0)"
+          class="page-link"
           (click)="selectPage(pg.number)">
           {{pg.text}}
         </a>
       </li>
-      <li [class.disabled]="!canNext()">
+      <li [class.disabled]="!canNext()" class="pagination-next page-item">
         <a
+          class="page-link"
           href="javascript:void(0)"
           (click)="nextPage()">
           <mat-icon>{{pagerRightArrowIcon}}</mat-icon>
         </a>
       </li>
-      <li [class.disabled]="!canNext()">
-        <a
-          href="javascript:void(0)"
-          (click)="selectPage(totalPages)">
-          <mat-icon>{{pagerNextIcon}}</mat-icon>
-        </a>
-      </li>
+    
     </ul>
   `,
   host: {
     class: 'datatable-pager'
   },
+  styleUrls: ['pager.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomDataTablePagerComponent extends SuperDataTablePagerComponent {

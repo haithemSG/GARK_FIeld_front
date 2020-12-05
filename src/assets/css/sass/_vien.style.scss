@@ -5868,7 +5868,7 @@ aw-wizard-navigation-bar.vertical.small
 .page-item.pagination-prev {
   .page-link {
     background: $theme-color-1;
-    color: $foreground-color;
+    color: $foreground-color !important;
     border: 1px solid $theme-color-1;
 
     &:hover {
@@ -9677,6 +9677,7 @@ footer.page-footer {
 
   .main-container {
     overflow: hidden;
+    background-color: $background-color !important;
   }
 
   &.show-mobile-menu {
@@ -9774,9 +9775,7 @@ footer.page-footer {
       transition: transform 0.5s;
     }
 
-    .headroom {
-      transition: top 0.5s, background 0.5s, box-shadow 0.2s, transform 0.5s !important;
-    }
+   
 
     .container {
       height: $navbar-height;
@@ -9928,64 +9927,7 @@ footer.page-footer {
     }
   }
 
-  .landing-page-nav .headroom--pinned {
-    background: $foreground-color;
-    @include depth(1);
-
-    .navbar-logo .white {
-      display: none;
-    }
-
-    .navbar-logo .dark {
-      display: inline-block;
-    }
-
-    .navbar-nav {
-      a {
-        color: $primary-color;
-
-        &:hover,
-        &:active {
-          color: $theme-color-1;
-        }
-      }
-
-      a.dropdown-item {
-        &:focus {
-          color: $button-text-color;
-        }
-      }
-
-      li {
-        &.active::before {
-          content: " ";
-          background-color: $theme-color-1;
-        }
-      }
-
-      .btn-outline-semi-light {
-        border: 1px solid rgba($theme-color-1, 0.3);
-        color: $theme-color-1;
-
-        &:hover,
-        &:active {
-          border: 1px solid $theme-color-1;
-          background: $theme-color-1;
-          color: $button-text-color;
-        }
-      }
-    }
-
-    .headroom--unpinned {
-      background: transparent;
-    }
-  }
-
-  .landing-page-nav .headroom--unfixed {
-    .mobile-menu-button {
-      color: $theme-color-1;
-    }
-  }
+  
 
   .section {
     padding-bottom: 100px;
@@ -10025,6 +9967,7 @@ footer.page-footer {
     transform: translateX(-50%);
     max-width: 135%;
     margin-bottom: 3rem;
+    margin-top: 1rem;
   }
 
   .home-row {

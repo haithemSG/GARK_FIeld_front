@@ -11,10 +11,7 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 
-const color =
-  environment.isMultiColorActive || environment.isDarkSwitchActive
-    ? getThemeColor()
-    : environment.defaultColor;
+const color = "light.greenlime";
 
 import('./assets/css/sass/themes/vien.' + color + '.scss')
   .then((x) => {

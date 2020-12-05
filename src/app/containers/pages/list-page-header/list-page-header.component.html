@@ -3,7 +3,7 @@
     <app-heading></app-heading>
     <div class="top-right-button-container text-zero">
       <button type="button" (click)="onAddNewItem()"
-        class="top-right-button btn btn-primary btn-lg mr-1">{{ 'pages.add-new' | translate}}</button>
+        class="top-right-button btn btn-primary btn-lg mr-1">{{ 'pages.add-new'}}</button>
       <div class="btn-group" dropdown>
         <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
           <label class="custom-control custom-checkbox mb-0 d-inline-block">
@@ -18,8 +18,8 @@
         </button>
         <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
           aria-labelledby="button-split">
-          <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.move' | translate }}</a></li>
-          <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.delete' | translate }}</a></li>
+          <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.move' }}</a></li>
+          <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.delete' }}</a></li>
         </ul>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <a class="btn pt-0 pl-0 d-inline-block d-md-none c-pointer" data-toggle="collapse"
         (click)="displayOptionsCollapsed = !displayOptionsCollapsed" role="button" aria-expanded="true"
         aria-controls="displayOptions">
-        {{ 'pages.display-options' | translate}} {{' '}}
+        {{ 'pages.display-options'}} {{' '}}
         <i class="simple-icon-arrow-down align-middle"></i>
       </a>
       <div id="displayOptions" [collapse]="displayOptionsCollapsed" class="collapse dont-collapse-sm">

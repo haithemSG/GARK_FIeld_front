@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { UserFollowComponent } from './user-follow/user-follow.component';
 import { RecentPostComponent } from './recent-post/recent-post.component';
 import { PostComponent } from './post/post.component';
-import { ComponentsPlayerModule } from './../player/components.player.module';
 
 @NgModule({
   declarations: [
@@ -13,9 +12,8 @@ import { ComponentsPlayerModule } from './../player/components.player.module';
 ],
   imports: [
     CommonModule,
-    ComponentsPlayerModule
   ],
-  providers: [],
+  providers: [], 
   exports: [
     UserFollowComponent,
     RecentPostComponent,

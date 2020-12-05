@@ -55,7 +55,7 @@ export class AuthenticationService {
  
   public signOut(){
     localStorage.removeItem('__SEC-ID');
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/home');
   }
   
   public saveToken(token :string){

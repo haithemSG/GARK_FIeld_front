@@ -76,7 +76,7 @@
 
 <app-application-menu>
     <tabset class="card-tabs h-100" [justified]="true">
-        <tab [heading]="'chat.messages' | translate" class="card-body h-100">
+        <tab [heading]="'chat.messages'" class="card-body h-100">
             <div class="chat-app-tab-pane-messages">
 
                 <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}">
@@ -101,7 +101,7 @@
                 </perfect-scrollbar>
             </div>
         </tab>
-        <tab [heading]="'chat.contacts' | translate" class="card-body h-100">
+        <tab [heading]="'chat.contacts'" class="card-body h-100">
             <div class="form-group">
                 <input type="text" class="form-control rounded-100" placeholder="Search" #searchBoxContact id="search-box"
                     (input)="search(searchBoxContact.value)" />

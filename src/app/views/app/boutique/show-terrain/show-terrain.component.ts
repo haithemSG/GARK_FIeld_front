@@ -89,7 +89,8 @@ export class ShowTerrainComponent implements OnInit {
     return !isNaN(Number(args['value']));
   };
 
-  public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], null, null, true)/*, fields : { 
+  public eventSettings: EventSettingsModel = {
+    dataSource: <Object[]>extend([], null, null, true)/*, fields : { 
     subject: { name: 'Name', validation: { required: true } },
     location: { name: 'num', validation: { required: true } },
     startTime: { name: 'StartTime', validation: { required: true } },
@@ -124,72 +125,75 @@ export class ShowTerrainComponent implements OnInit {
         this.isLoading = false;
         this.fetchReservationData();
       }
-      this.terrainService.getAll().subscribe((res)=>{
-       
+      this.terrainService.getAll().subscribe((res) => {
+
         this.ListTerrain = new Array<Terrain>();
         this.ListTerrain = res["terrain"] as Array<Terrain>;
         console.log(this.ListTerrain);
-        
+
       })
     })
   }
 
   currentViewMode = "Week"
 
-  adjustImage(){    
-    if(!this.terrain.image){
+  adjustImage() {
+    if (!this.terrain.image) {
       this.image = "assets/imgs/GarkBanner1.png";
-    }else if(this.terrain.image.indexOf("assets") == -1 && this.terrain.image.indexOf(this.backend) == -1){
-      this.image  = `${this.backend}/images/terrains/${this.terrain.image}`;
-    }else{
-      this.image  = `${this.terrain.image}`;
-    } 
+    } else if (this.terrain.image.indexOf("assets") == -1 && this.terrain.image.indexOf(this.backend) == -1) {
+      this.image = `${this.backend}/images/terrains/${this.terrain.image}`;
+    } else {
+      this.image = `${this.terrain.image}`;
+    }
+    
   }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    
-    if(window.screen.width < 815){
+
+    if (window.screen.width < 815) {
       this.isMobile = true;
-    this.currentViewMode = "Day";
-    setTimeout(()=>{
-      (<HTMLElement> document.getElementById('_nav')).style.display = "none";
-      (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
-    }, 20)
+      this.currentViewMode = "Day";
+
+
+      setTimeout(() => {
+        (<HTMLElement>document.getElementById('_nav')).style.display = "none";
+        (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
+      }, 20)
     }
   }
 
-  fetchReservationData(){
-    this.reservationService.getTerrainReservations(this.terrain._id).subscribe((res)=>{
+  fetchReservationData() {
+    this.reservationService.getTerrainReservations(this.terrain._id).subscribe((res) => {
       this.reservationList = res["reservations"] as Reservation[];
-         
-          if(window.screen.width < 815){
-            this.currentViewMode = "Day";
-            this.isMobile = true;
-            // (<HTMLButtonElement> document.getElementById('e-tbr-btn_16')).click();
 
-            try{
-              (<HTMLElement> document.getElementById('_nav')).style.display = "none";
-              (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
-            }catch(e){
-              setTimeout(()=>{
-                (<HTMLElement> document.getElementById('_nav')).style.display = "none";
-                (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
-              }, 20)
-            }
-            
-            this.reservationList = this.reservationList.map((el: Reservation) => {
-              el.Subject = el["name"] + " : " + el["num"] || "";
-              return el;
-            })
-            this.timeScale.slotCount = 2;
-          }else{
-            this.reservationList = this.reservationList.map((el: Reservation) => {
-              el.Subject = el["name"] + "<br/>" + el["num"] || "";
-              return el;
-            })
-          }
-          this.eventSettings = { dataSource: <Object[]>extend([], this.reservationList, null, true) }; 
+      if (window.screen.width < 815) {
+        this.currentViewMode = "Day";
+        this.isMobile = true;
+        // (<HTMLButtonElement> document.getElementById('e-tbr-btn_16')).click();
+
+        try {
+          (<HTMLElement>document.getElementById('_nav')).style.display = "none";
+          (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
+        } catch (e) {
+          setTimeout(() => {
+            (<HTMLElement>document.getElementById('_nav')).style.display = "none";
+            (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
+          }, 20)
+        }
+        this.reservationList = this.reservationList.map((el: Reservation) => {
+          el.Subject = el["name"] + " : " + el["num"] || "";
+          return el;
+        })
+        this.timeScale.slotCount = 2;
+      } else {
+        this.reservationList = this.reservationList.map((el: Reservation) => {
+          el.Subject = el["name"] + "<br/>" + el["num"] || "";
+          return el;
+        })
+      }
+      this.eventSettings = { dataSource: <Object[]>extend([], this.reservationList, null, true) };
     })
   }
 
@@ -209,13 +213,13 @@ export class ShowTerrainComponent implements OnInit {
     });
   }
 
-  closeModal(template?: TemplateRef<any>){
+  closeModal(template?: TemplateRef<any>) {
     // this.reservataionModal.hide()
     (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
     (<HTMLElement>document.querySelector('#main')).style.display = "block";
     (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
   }
-  
+
 
   public selectedDate: Object = new Date();
 
@@ -229,13 +233,13 @@ export class ShowTerrainComponent implements OnInit {
       width: '800px',
       data: { data: { type, id: this.terrain._id, image: this.terrain.image || "" } }
     });
-    dialogRef.afterClosed().subscribe((result : Terrain) => {
+    dialogRef.afterClosed().subscribe((result: Terrain) => {
       if (result) {
         //console.log("result", result)
         this.terrain.image = result.image;
-        if(this.terrain.image.indexOf('assets/') == -1){
-          this.image  = `${this.backend}images/terrains/${this.terrain.image}`;
-        }else{
+        if (this.terrain.image.indexOf('assets/') == -1) {
+          this.image = `${this.backend}images/terrains/${this.terrain.image}`;
+        } else {
           this.image = this.terrain.image;
         }
       }
@@ -281,7 +285,7 @@ export class ShowTerrainComponent implements OnInit {
 
             let last = (this.eventSettings.dataSource as Array<any>).length;
             (this.eventSettings.dataSource as Array<any>)[last - 1]["_id"] = myReservation._id;
-            (this.eventSettings.dataSource as Array<any>)[last - 1]["Subject"] = (this.eventSettings.dataSource as Array<any>)[last - 1]["Name"] || (this.eventSettings.dataSource as Array<any>)[last - 1]["name"] + "<br/>" +(this.eventSettings.dataSource as Array<any>)[last - 1]["num"];
+            (this.eventSettings.dataSource as Array<any>)[last - 1]["Subject"] = (this.eventSettings.dataSource as Array<any>)[last - 1]["Name"] || (this.eventSettings.dataSource as Array<any>)[last - 1]["name"] + "<br/>" + (this.eventSettings.dataSource as Array<any>)[last - 1]["num"];
             (this.eventSettings.dataSource as Array<any>)[last - 1]["terrain"] = null;
             (this.eventSettings.dataSource as Array<any>)[last - 1]["terrain"] = myReservation.terrain
 
@@ -322,12 +326,12 @@ export class ShowTerrainComponent implements OnInit {
               el["frais"] = updatedRecord.frais;
               el["StartTime"] = updatedRecord.StartTime;
               el["Subject"] = updatedRecord["name"] + "<br/>" + updatedRecord["num"] || "";
-              if(el["terrain"] instanceof Object){
+              if (el["terrain"] instanceof Object) {
                 el["terrain"]["name"] = updatedRecord.terrain["name"];
-              }else{
+              } else {
                 el["terrain"] = updatedRecord.terrain["name"];
               }
-              
+
             }
             return el;
           })
@@ -362,51 +366,51 @@ export class ShowTerrainComponent implements OnInit {
     }
   }
 
-  openEdit(){
+  openEdit() {
 
-    if(this.isMobile){
+    if (this.isMobile) {
       document.getElementById('normal-view').style.display = 'none';
       document.getElementById('create-terrain-mobile').style.display = 'block';
-    }else{
+    } else {
       const dialogRef = this.dialog.open(CreateTerrainComponent, {
         width: '500px',
-        data: {terrain: this.terrain, update : true}
+        data: { terrain: this.terrain, update: true }
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
-        
+
       });
     }
-   
+
   }
 
   buttonDisabled = false;
   buttonState = "";
   resMobile = {
     Name: "",
-    num : "",
+    num: "",
     frais: 0,
     terrain: "",
-    StartTime: new Date(new Date().setHours(new Date().getHours() +1)),
-    EndTime: new Date(new Date().setHours(new Date().getHours() +2))
+    StartTime: new Date(new Date().setHours(new Date().getHours() + 1)),
+    EndTime: new Date(new Date().setHours(new Date().getHours() + 2))
   }
 
-  onSubmit(){
-    
-    if( this.buttonDisabled || this.resMobile.Name == "" || this.resMobile.num == "" || this.resMobile.StartTime == null || this.resMobile.EndTime ==  null){
-      return ;
+  onSubmit() {
+
+    if (this.buttonDisabled || this.resMobile.Name == "" || this.resMobile.num == "" || this.resMobile.StartTime == null || this.resMobile.EndTime == null) {
+      return;
     }
     this.resMobile.terrain = this.terrain.name;
     // console.log(this.resMobile);
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
-    this.reservationService.create(this.resMobile).subscribe((res)=>{
-      
+    this.reservationService.create(this.resMobile).subscribe((res) => {
+
       this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
       this.fetchReservationData();
       this.buttonDisabled = true;
       this.buttonState = "",
-      (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
+        (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
       (<HTMLElement>document.querySelector('#main')).style.display = "block";
       (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
     })
@@ -414,9 +418,9 @@ export class ShowTerrainComponent implements OnInit {
 
 
   @ViewChild('createForm') createForm: NgForm;
-  onNoClick(){
+  onNoClick() {
     document.getElementById('normal-view').style.display = 'block';
-      document.getElementById('create-terrain-mobile').style.display = 'none';
+    document.getElementById('create-terrain-mobile').style.display = 'none';
   }
 
   choose(color) {
@@ -429,26 +433,26 @@ export class ShowTerrainComponent implements OnInit {
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
 
-      this.terrainService.update(this.terrain, this.terrain._id).subscribe((res) => {
+    this.terrainService.update(this.terrain, this.terrain._id).subscribe((res) => {
+      this.buttonDisabled = false;
+      this.buttonState = '';
+      this.notifications.create('Succès', "Terrain mis à jour", NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
+
+      this.onNoClick();
+    },
+      (err) => {
         this.buttonDisabled = false;
         this.buttonState = '';
-        this.notifications.create('Succès', "Terrain mis à jour", NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
-
-        this.onNoClick();
-      },
-        (err) => {
-          this.buttonDisabled = false;
-          this.buttonState = '';
-          this.notifications.create('Erreur', "Une erreur a survenue veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false })
-        })
+        this.notifications.create('Erreur', "Une erreur a survenue veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false })
+      })
   }
 
-  addMin(){
+  addMin() {
     this.terrain.duration += 30;
   }
 
-  minusMin(){
-    if(this.terrain.duration >= 90){
+  minusMin() {
+    if (this.terrain.duration >= 90) {
       this.terrain.duration -= 30;
     }
   }

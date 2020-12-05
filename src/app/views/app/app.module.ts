@@ -51,6 +51,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 
+import { DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModule, ListBoxModule, DropDownTreeModule } from '@syncfusion/ej2-angular-dropdowns';
+
 @NgModule({
   declarations: [
     BlankPageComponent, 
@@ -81,6 +83,12 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     MatCardModule,
     CalendarModule,
     ScheduleModule,
+    DropDownListModule,
+    ComboBoxModule,
+    AutoCompleteModule,
+    MultiSelectModule,
+    ListBoxModule,
+    DropDownTreeModule,
     RecurrenceEditorModule,
     ModalModule.forRoot(),
     TabsModule.forRoot(),

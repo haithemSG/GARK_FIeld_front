@@ -238,10 +238,17 @@ a.about-item-edit {
   color: white;
   font-size: 20px;
   position: absolute;
-  top: 75%;
+  top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+
+.mat-fab .mat-button-wrapper {
+  /* padding: 16px 0; */
+  display: inline-block;
+  line-height: 24px;
 }

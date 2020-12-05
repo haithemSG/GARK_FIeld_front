@@ -5,7 +5,7 @@
       <div class="top-right-button-container mb-2">
         <div dropdown>
           <button dropdownToggle type="button" class="btn btn-outline-primary btn-lg flex-grow-1 dropdown-toggle">
-            {{ 'pages.actions' | translate }} <span class="caret"></span>
+            {{ 'pages.actions' }} <span class="caret"></span>
           </button>
           <ul *dropdownMenu class="dropdown-menu">
             <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
@@ -16,13 +16,13 @@
       <app-breadcrumb></app-breadcrumb>
     </div>
     <tabset class="separator-tabs ml-0">
-      <tab [heading]="('pages.details' | translate)" class="tab-content">
+      <tab [heading]="('pages.details')" class="tab-content">
         <div class="row">
           <div class="col-12 col-lg-4 mb-4">
             <app-product-detail-info-alt></app-product-detail-info-alt>
-            <app-radial-process-card [title]="('pages.order-status' | translate)" [percent]="85" [isSortable]="false"
+            <app-radial-process-card [title]="('pages.order-status')" [percent]="85" [isSortable]="false"
               [class]="'mb-4'"></app-radial-process-card>
-            <app-radial-process-card [title]="('pages.bake-progress' | translate)" [percent]="40" [isSortable]="false"
+            <app-radial-process-card [title]="('pages.bake-progress')" [percent]="40" [isSortable]="false"
               [class]="'mb-4'"></app-radial-process-card>
           </div>
           <div class="col-12 col-lg-8">
@@ -66,7 +66,7 @@
             </div>
             <div class="card mb-4">
               <div class="card-body">
-                <h5 class="card-title">{{ 'pages.popularity' | translate }}</h5>
+                <h5 class="card-title">{{ 'pages.popularity' }}</h5>
                 <div class="chart-container">
                   <app-area-chart [data]="areaChartData" [options]="chartDataConfig.areaChartOptions"></app-area-chart>
                 </div>
@@ -76,7 +76,7 @@
           </div>
         </div>
       </tab>
-      <tab [heading]="('pages.orders' | translate)" class="tab-content">
+      <tab [heading]="('pages.orders')" class="tab-content">
         <div class="row">
           <div class="col-12">
             <app-product-detail-orders></app-product-detail-orders>

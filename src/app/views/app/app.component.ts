@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SidebarService, ISidebar } from 'src/app/containers/layout/sidebar/sidebar.service';
-import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -11,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent implements OnInit, OnDestroy {
   sidebar: ISidebar;
   subscription: Subscription;
-  isMultiColorActive = environment.isMultiColorActive;
+
   constructor(
     private sidebarService: SidebarService,
     private titleService: Title

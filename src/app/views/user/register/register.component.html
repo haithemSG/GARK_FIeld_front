@@ -4,7 +4,7 @@
     <p class="white mb-0 fw-700">
       Veuillez utiliser le formulaire pour vous inscrire.
       <br>Si vous êtes membre, veuillez
-      <a routerLink="/user/login" class="white white-underline-link">S'identifier</a>.
+      <a routerLink="/football/user/login" class="white white-underline-link">S'identifier</a>.
     </p>
   </div>
   <div class="form-side">
@@ -43,7 +43,7 @@
       </label>
       <div class="text-danger" *ngIf="duplicated"> E-mail déjà utilisé ! </div>
       <div class="d-flex justify-content-between align-items-center">
-        <a routerLink="/user/forgot-password">Mot de pass oublié?</a>
+        <a routerLink="/football/user/forgot-password">Mot de pass oublié?</a>
         <app-state-button [btnClass]="'btn btn-gradiant btn-lg btn-shadow'" [currentState]="buttonState"
           [isDisabled]="buttonDisabled" click="onLoginClick()">
           S'INSCRIRE

@@ -1,9 +1,4 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
-import en from '../../lang/en-US.json';
-import es from '../../lang/es-ES.json';
-import { Router } from '@angular/router';
 import { getThemeLang, setThemeLang } from 'src/app/utils/util';
 
 const languageKey = '__lang';
@@ -27,23 +22,21 @@ export class LangService {
   ];
 
   constructor(
-    private translate: TranslateService,
     private rendererFactory: RendererFactory2,
-    private router: Router
   ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
   init() {
-    this.translate.setTranslation('en-US', en);
-    this.translate.setTranslation('es-ES', es);
-    this.translate.setTranslation('en-EN', en);
-    this.translate.setDefaultLang(this.defaultLanguage);
-    if (this.isSingleLang) {
-      this.translate.use(this.defaultLanguage);
-    } else {
-      this.language = '';
-    }
+    // this.translate.setTranslation('en-US', en);
+    // this.translate.setTranslation('es-ES', es);
+    // this.translate.setTranslation('en-EN', en);
+    // this.translate.setDefaultLang(this.defaultLanguage);
+    // if (this.isSingleLang) {
+    //   this.translate.use(this.defaultLanguage);
+    // } else {
+    //   this.language = '';
+    // }
   }
 
   checkForDirectionChange() {
@@ -75,32 +68,35 @@ export class LangService {
       setThemeLang(lang);
       window.location.reload();
     } else {
-      this.translate.use(language);
+      // this.translate.use(language);
     }
     this.checkForDirectionChange();
     setThemeLang(language);
   }
 
   get language(): string {
-    return this.translate.currentLang;
+    return 'fr-FR'//this.translate.currentLang;
   }
 
   get languageShorthand(): string {
-    return this.supportedLanguages.find(
-      (item) => item.code === this.translate.currentLang
-    ).shorthand;
+    // return this.supportedLanguages.find(
+    //   (item) => item.code === this.translate.currentLang
+    // ).shorthand;
+    return 'fr'
   }
 
   get direction(): string {
-    return this.supportedLanguages.find(
-      (item) => item.code === this.translate.currentLang
-    ).direction;
+    // return this.supportedLanguages.find(
+    //   (item) => item.code === this.translate.currentLang
+    // ).direction;
+    return 'ltr';
   }
 
   get languageLabel(): string {
-    return this.supportedLanguages.find(
-      (item) => item.code === this.translate.currentLang
-    ).label;
+    // return this.supportedLanguages.find(
+    //   (item) => item.code === this.translate.currentLang
+    // ).label;
+    return 'fr';
   }
 }
 

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule as FormsModuleAngular } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 import { ArchwizardModule } from 'angular-archwizard';
 
 import { WizardEndStepComponent } from './end-step/wizard-end-step.component';
@@ -21,7 +20,6 @@ import { WizardBasicComponent } from './basic/wizard-basic.component';
   imports: [
     CommonModule,
     FormsModuleAngular,
-    TranslateModule,
     ArchwizardModule
   ],
   providers: [],

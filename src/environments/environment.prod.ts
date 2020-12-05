@@ -4,24 +4,17 @@
 
 export const environment = {
   production: true,
-  buyUrl : "https://1.envato.market/6NV1b",
   SCARF_ANALYTICS : false,
-  adminRoot: '/app',
+  adminRoot: '/football/app',
   apiUrl:  'http://51.89.167.87:4070/api',
   backend:  'http://51.89.167.87:4070/',
   defaultMenuType: 'menu-default',
   subHiddenBreakpoint: 1440,
   menuHiddenBreakpoint: 768,
-  themeColorStorageKey: 'vien-themecolor',
-  isMultiColorActive: true,
-  /*
-  Color Options:
-  'light.blueyale', 'light.blueolympic', 'light.bluenavy', 'light.greenmoss', 'light.greenlime', 'light.yellowgranola', 'light.greysteel', 'light.orangecarrot', 'light.redruby', 'light.purplemonster'
-  'dark.blueyale', 'dark.blueolympic', 'dark.bluenavy', 'dark.greenmoss', 'dark.greenlime', 'dark.yellowgranola', 'dark.greysteel', 'dark.orangecarrot', 'dark.redruby', 'dark.purplemonster'
-  */
+  themeColorStorageKey: 'gark-themecolor',  
   defaultColor: 'light.greenlime',
   isDarkSwitchActive: true,
   defaultDirection: 'ltr',
-  themeRadiusStorageKey: 'vien-themeradius',
+  themeRadiusStorageKey: 'gark-themeradius',
   isAuthGuardActive: false,
 };

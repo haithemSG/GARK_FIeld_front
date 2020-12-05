@@ -10,7 +10,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'dropdowns.basic' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.basic'}}</h5>
         <div class="btn-group" dropdown>
           <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-primary dropdown-toggle"
             aria-controls="dropdown-basic">
@@ -30,7 +30,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'dropdowns.split' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.split'}}</h5>
         <div class="btn-group" dropdown>
           <button type="button" class="btn btn-primary">Action</button>
           <button id="button-split" type="button" dropdownToggle
@@ -54,7 +54,7 @@
 
     <div class="card mb-4">
       <div class="card-body z-index-1" id="anchorDropdownContainer">
-        <h5 class="mb-4">{{'dropdowns.anchor' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.anchor'}}</h5>
         <span dropdown container="#anchorDropdownContainer" (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">
           <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">Dropdown</a>
           <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
@@ -68,7 +68,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'dropdowns.manual-triggering' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.manual-triggering'}}</h5>
         <div class="d-inline-block position-relative" dropdown #dropdown="bs-dropdown" [autoClose]="false">
           <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
             Dropdown <span class="caret"></span>
@@ -89,7 +89,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'dropdowns.trigger-isopen' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.trigger-isopen'}}</h5>
         <div class="btn-group" dropdown #dropdown="bs-dropdown" [autoClose]="false" [isOpen]="manualTrigger">
           <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
             Dropdown <span class="caret"></span>
@@ -108,7 +108,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'dropdowns.disabled' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.disabled'}}</h5>
 
         <div class="btn-group" dropdown [isDisabled]="true">
           <button id="button-disabled-menu" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
@@ -133,7 +133,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'dropdowns.alignment' | translate}}</h5>
+        <h5 class="mb-4">{{'dropdowns.alignment'}}</h5>
 
         <div class="btn-group" dropdown placement="bottom right">
           <button id="button-alignment" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"

@@ -6,13 +6,13 @@
         <div dropdown>
           <button id="button-basic" dropdownToggle type="button" placement="bottom right"
             class="btn btn-outline-primary dropdown-toggle btn-lg"
-            aria-controls="dropdown-basic">{{ 'pages.actions' | translate }} <span class="caret"></span>
+            aria-controls="dropdown-basic">{{ 'pages.actions' }} <span class="caret"></span>
           </button>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
             aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.action' | translate }}</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.action' }}</a></li>
             <li role="menuitem"><a class="dropdown-item"
-                href="javascript:;">{{ 'pages.another-action' | translate }}</a></li>
+                href="javascript:;">{{ 'pages.another-action' }}</a></li>
           </ul>
         </div>
       </div>
@@ -21,7 +21,7 @@
 
     <div>
       <tabset class="separator-tabs">
-        <tab heading="{{'pages.profile' | translate | uppercase }}">
+        <tab heading="{{'pages.profile' | uppercase }}">
           <div class="row">
             <div class="col-12 col-lg-5 col-xl-4 col-left">
               <app-profile-user-portfolio></app-profile-user-portfolio>
@@ -34,7 +34,7 @@
             </div>
           </div>
         </tab>
-        <tab heading="{{'pages.followers' | translate | uppercase }}">
+        <tab heading="{{'pages.followers' | uppercase }}">
           <app-profile-friends></app-profile-friends>
         </tab>
       </tabset>

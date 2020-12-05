@@ -1,12 +1,12 @@
-<button type="button" class="btn btn-primary" (click)="openModal(template)">{{'modal.open-modal' | translate}}</button>
+<button type="button" class="btn btn-primary" (click)="openModal(template)">{{'modal.open-modal'}}</button>
 <br>
 <br>
-<button type="button" class="btn btn-outline-primary btn-xs" (click)="config.backdrop = !config.backdrop">{{config.backdrop ? ('modal.disable-backdrop' | translate) : ('modal.enable-backdrop' | translate)}}</button> {{" "}}
-<button type="button" class="btn btn-outline-primary btn-xs" (click)="config.ignoreBackdropClick = !config.ignoreBackdropClick">{{!config.ignoreBackdropClick ? ('modal.disable-backdrop-click' | translate) : ('modal.enable-backdrop-click' | translate)}}</button>
+<button type="button" class="btn btn-outline-primary btn-xs" (click)="config.backdrop = !config.backdrop">{{config.backdrop ? ('modal.disable-backdrop') : ('modal.enable-backdrop')}}</button> {{" "}}
+<button type="button" class="btn btn-outline-primary btn-xs" (click)="config.ignoreBackdropClick = !config.ignoreBackdropClick">{{!config.ignoreBackdropClick ? ('modal.disable-backdrop-click') : ('modal.enable-backdrop-click')}}</button>
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{'modal.modal-title' | translate}}</h4>
+    <h4 class="modal-title pull-left">{{'modal.modal-title'}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>

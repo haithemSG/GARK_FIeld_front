@@ -1,6 +1,6 @@
 <div class="card h-100">
   <div class="card-body">
-    <h5 class="card-title">{{ title | translate}}</h5>
+    <h5 class="card-title">{{ title}}</h5>
     <div class="dashboard-best-sellers">
       <ngx-datatable [rows]="rows" [columns]="columns" [columnMode]="columnMode.flex"
       [sorts]="[{ prop: 'title', dir: 'asc' }]">

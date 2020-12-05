@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalInnerComponent } from './modal-inner-component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-modal-component',
@@ -9,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ModalComponentComponent implements OnInit {
   bsModalRef: BsModalRef;
-  constructor(private modalService: BsModalService, private translateService: TranslateService) { }
+  constructor(private modalService: BsModalService,) { }
 
   openModalWithComponent() {
     const initialState = {
@@ -17,10 +16,8 @@ export class ModalComponentComponent implements OnInit {
         '...',
         '..'
       ],
-      title: this.translateService.instant('modal.modal-title')
     };
     this.bsModalRef = this.modalService.show(ModalInnerComponent, { initialState });
-    this.bsModalRef.content.closeBtnName = this.translateService.instant('modal.close');
   }
 
   ngOnInit() {

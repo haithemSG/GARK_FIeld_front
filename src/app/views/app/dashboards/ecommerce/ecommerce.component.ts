@@ -25,7 +25,7 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
   ) { }
   
 
-  public currentPageLimit: number = 10;
+  public currentPageLimit: number = 5;
   public currentVisible: number = 3;
   loadingIndicator = true;
   reorderable = true;

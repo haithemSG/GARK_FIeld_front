@@ -23,7 +23,6 @@ import { BlogSideVideoComponent } from './blog-side-video/blog-side-video.compon
 import { BlogCategoriesComponent } from './blog-categories/blog-categories.component';
 import { BlogContentComponent } from './blog-content/blog-content.component';
 import { FeatureComparisonComponent } from './feature-comparison/feature-comparison.component';
-import { ComponentsPlayerModule } from 'src/app/components/player/components.player.module';
 import { LayoutContainersModule } from '../layout/layout.containers.module';
 import { ProductDetailInfoAltComponent } from './product-detail-info-alt/product-detail-info-alt.component';
 import { ProductDetailOrdersComponent } from './product-detail-orders/product-detail-orders.component';
@@ -72,7 +71,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     LightboxModule,
     ComponentsPagesModule,
     ComponentsCardsModule,
-    ComponentsPlayerModule,
     RatingModule.forRoot(),
     TabsModule.forRoot(),
     AccordionModule.forRoot(),

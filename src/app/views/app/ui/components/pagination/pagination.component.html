@@ -9,7 +9,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.basic' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.basic'}}</h5>
         <pagination [totalItems]="30" [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
         </pagination>
       </div>
@@ -21,7 +21,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.manual-switch' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.manual-switch'}}</h5>
         <pagination [(ngModel)]="currentPage" [totalItems]="totalItems" [customNextTemplate]="nextTemplate"
           [customPreviousTemplate]="prevTemplate">
         </pagination>
@@ -35,7 +35,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.change-event' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.change-event'}}</h5>
         <pagination [totalItems]="66" [(ngModel)]="currentPageEvent" (pageChanged)="pageChanged($event)"
           [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
         </pagination>
@@ -49,7 +49,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.boundary-links' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.boundary-links'}}</h5>
         <pagination [boundaryLinks]="true" [totalItems]="55" [customFirstTemplate]="firstTemplate"
           [customLastTemplate]="lastTemplate" [customPreviousTemplate]="prevTemplate"
           [customNextTemplate]="nextTemplate"></pagination>
@@ -62,7 +62,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.direction-links' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.direction-links'}}</h5>
         <pagination [directionLinks]="true" [boundaryLinks]="false" [totalItems]="55"
           [customFirstTemplate]="firstTemplate" [customLastTemplate]="lastTemplate"
           [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate">
@@ -76,7 +76,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.disabled' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.disabled'}}</h5>
         <pagination [disabled]="true" [totalItems]="66" [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate"></pagination>
       </div>
     </div>
@@ -87,7 +87,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.limits' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.limits'}}</h5>
         <pagination [totalItems]="limitsTotalItems" [(ngModel)]="limitsCurrentPage" [maxSize]="limitsMaxSize"
         [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
         </pagination>
@@ -100,7 +100,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.centering' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.centering'}}</h5>
         <pagination [totalItems]="155" [rotate]="true" [maxSize]="5" class="justify-content-center"
         [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
         </pagination>
@@ -113,7 +113,7 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'pagination.small' | translate}}</h5>
+        <h5 class="mb-4">{{'pagination.small'}}</h5>
         <pagination class="pagination-sm" [totalItems]="155" [rotate]="true" [maxSize]="5"
         [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
         </pagination>

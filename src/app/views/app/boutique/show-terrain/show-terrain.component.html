@@ -25,90 +25,71 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8" *ngIf="!isLoading && !isMobile" [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }" 
-            style="background-size: 100%; background-position: center; background-repeat: no-repeat;">
+            <div class="col-md-8" *ngIf="!isLoading && !isMobile"
+                [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }"
+                style="background-size: 100%; background-position: center; background-repeat: no-repeat;">
                 <div class="overlay">
 
-                    <div class="data-overlay" >
+                    <div class="data-overlay">
                         <div style="display: flex; margin-top: 10px;">
                             <div>
                                 <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
                                 <h2> {{ terrain.address }} </h2>
                             </div>
                             <div style="margin: 0 auto;"></div>
-                            <div>
-                                <button mat-mini-fab class="ml-5" (click)="openEdit()"
-                                    style="background-color: white !important; color: black;padding-top: 0; ">
+                            <div style="margin-right: 25px;">
+                                <button mat-fab (click)="openEdit()" class="edit-web">
                                     <i class="flaticon-setting-lines"></i>
                                 </button>
-    
+
                             </div>
                         </div>
+                        <div style="margin: auto 0" ></div>
+                        <div class="marged-top">
+                            <button mat-fab class="edit-web" (click)="openDialog('select')">
+                                <mat-icon>photo_camera</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                    <div class="overlay-upload">
+                    <!-- <div class="overlay-upload">
                         <div style="display: flex">
                             <div style="margin: 0 auto;"></div>
                             <div>
                                 <button mat-fab (click)="openDialog('select')">
                                     <mat-icon>photo_camera</mat-icon>
                                 </button>
+
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <img class="banner" [src]="image" alt="terrain banner"> -->
                 </div>
-                <!-- <div>
-                    <div style="display: flex; margin-top: 10px;">
-                        <div>
-                            <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
-                            <h2> {{ terrain.address }} </h2>
-                        </div>
-                        <div style="margin: 0 auto;"></div>
-                        <div>
-                            <button mat-mini-fab class="mr-5" (click)="openEdit()"
-                                style="background-color: white !important; color: black;padding-top: 0; ">
-                                <mat-icon class=""> edit </mat-icon>
-                            </button>
-
-                        </div>
-                    </div>
-
-                </div> -->
             </div>
-            <div class="col-md-8 mb-3" *ngIf="!isLoading && isMobile">
+            <div class="col-md-8 mb-3" *ngIf="!isLoading && isMobile" id="background-image-mobile-view"
+                [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }"
+                style="background-size: 100%; background-position: center; background-repeat: no-repeat; height: 180px;">
                 <div class="overlay">
                     <div class="data-overlay">
-                       
-                    </div>
-                   
-                    <div class="overlay-upload">
-                        <div style="display: flex">
-                            <div style="margin: 0 auto;"></div>
+                        <div style="display: flex;">
                             <div>
-                                <button mat-fab (click)="openDialog('select')">
-                                    <mat-icon class="camera">photo_camera</mat-icon>
+                                <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
+                                <h2> {{ terrain.address }} </h2>
+                            </div>
+                            <div style="margin: 0 auto;"></div>
+                            <div style="margin-right: 13px;">
+                                <button mat-mini-fab class="edit-mobile" (click)="openEdit()">
+                                    <i class="flaticon-setting-lines"></i>
                                 </button>
+    
                             </div>
                         </div>
-                    </div>
-                    <img class="banner" [src]="image" alt="terrain banner">
-                </div>
-                <div>
-                    <div style="display: flex">
-                        <div>
-                            <h1 style="margin :0 !important;"> {{ terrain.name | titlecase }} </h1>
-                            <h2> {{ terrain.address }} </h2>
-                        </div>
-                        <div style="margin: 0 auto;"></div>
-                        <div>
-                            <button mat-mini-fab (click)="openEdit()"
-                                style="background-color: white !important; cursor: pointer;color: black;padding-top: 0;">
-                                <mat-icon class="ml-2" style="cursor: pointer;"> edit </mat-icon>
+                        <div style="margin: auto 0" ></div>
+                        <div class="marged-top">
+                            <button mat-mini-fab class="edit-mobile" (click)="openDialog('select')">
+                                <mat-icon>photo_camera</mat-icon>
                             </button>
-
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -326,7 +307,7 @@
             <button type="button" class="btn btn-lg btn-shadow btn-danger" (click)="onNoClick()"> Annuler </button>
             <app-state-button [btnClass]="'btn btn-gradiant btn-lg btn-shadow'" [currentState]="buttonState"
                 [isDisabled]="buttonDisabled || createForm.invalid" click="updateTerrain()">
-                <span >Modifier</span>
+                <span>Modifier</span>
             </app-state-button>
         </div>
     </form>

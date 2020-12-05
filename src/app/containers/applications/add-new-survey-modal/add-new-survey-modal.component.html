@@ -1,17 +1,17 @@
 <ng-template #template>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'survey.add-new-title' | translate}}</h4>
+        <h4 class="modal-title pull-left">{{'survey.add-new-title'}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <div>
-            <label>{{ 'survey.title' | translate }}</label>
+            <label>{{ 'survey.title' }}</label>
             <input type="email" class="form-control" placeholder="">
         </div>
         <div class="mt-4">
-            <label>{{ 'survey.label' | translate }}</label>
+            <label>{{ 'survey.label' }}</label>
             <label class="w-100">
                 <ng-select appearance="outline" [searchable]="false">
                     <ng-option *ngFor="let item of labels" [value]="item.value">{{item.label}}
@@ -19,7 +19,7 @@
                 </ng-select>
             </label>        </div>
         <div class="mt-4">
-            <label>{{ 'survey.category' | translate }}</label>
+            <label>{{ 'survey.category' }}</label>
             <label class="w-100">
                 <ng-select appearance="outline" [searchable]="false">
                     <ng-option *ngFor="let item of categories" [value]="item.value">{{item.label}}
@@ -30,7 +30,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-primary"
-            (click)="modalRef.hide()">{{'survey.cancel' | translate }}</button>
-        <button type="submit" class="btn btn-primary float-right">{{ 'survey.submit' | translate}}</button>
+            (click)="modalRef.hide()">{{'survey.cancel' }}</button>
+        <button type="submit" class="btn btn-primary float-right">{{ 'survey.submit'}}</button>
     </div>
 </ng-template>

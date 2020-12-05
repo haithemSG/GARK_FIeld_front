@@ -12,11 +12,10 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
   templateUrl: './topnav.component.html',
 })
 export class TopnavComponent implements OnInit, OnDestroy {
-  buyUrl = environment.buyUrl;
   adminRoot = environment.adminRoot;
   sidebar: ISidebar;
   subscription: Subscription;
-  displayName = 'Sarah Cortney';
+  displayName = 'GARK';
   languages: Language[];
   currentLanguage: string;
   isSingleLang;

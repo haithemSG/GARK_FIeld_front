@@ -5,14 +5,14 @@
       <div class="text-zero top-right-button-container">
         <div dropdown>
           <button id="button-basic" dropdownToggle type="button" placement="bottom right"
-            class="btn btn-outline-primary dropdown-toggle btn-lg" aria-controls="dropdown-basic">{{ 'pages.actions' | translate }} <span
+            class="btn btn-outline-primary dropdown-toggle btn-lg" aria-controls="dropdown-basic">{{ 'pages.actions' }} <span
               class="caret"></span>
           </button>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
             aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.action' | translate }}</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.action' }}</a></li>
             <li role="menuitem"><a class="dropdown-item"
-                href="javascript:;">{{ 'pages.another-action' | translate }}</a></li>
+                href="javascript:;">{{ 'pages.another-action' }}</a></li>
           </ul>
         </div>
       </div>
@@ -22,7 +22,7 @@
     <div>
       <tabset class="separator-tabs">
 
-        <tab heading="{{'pages.profile' | translate | uppercase }}">
+        <tab heading="{{'pages.profile' | uppercase }}">
           <div class="row">
             <div class="col-12 mb-5">
               <img class="social-header card-img" src="/assets/img/social/header.jpg" />
@@ -39,10 +39,10 @@
           </div>
         </tab>
 
-        <tab heading="{{'pages.images' | translate | uppercase }}">
+        <tab heading="{{'pages.images' | uppercase }}">
           <app-profile-gallery></app-profile-gallery>
         </tab>
-        <tab heading="{{'pages.friends' | translate | uppercase }}">
+        <tab heading="{{'pages.friends' | uppercase }}">
           <app-profile-friends></app-profile-friends>
         </tab>
       </tabset>

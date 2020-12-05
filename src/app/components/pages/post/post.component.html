@@ -16,13 +16,13 @@
       {{data.detail}}
     </p>
     <div class="position-relative">
-      <app-player *ngIf="data.type === 'video'" class="video-js card-img video-content mb-3" [options]="{
+      <!-- <app-player *ngIf="data.type === 'video'" class="video-js card-img video-content mb-3" [options]="{
           preload: 'auto',
           controls: true,
           poster: '/assets/img/video/poster.jpg',
           sources: [{src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
           type: 'video/mp4'}]}">
-      </app-player>
+      </app-player> -->
       <img *ngIf="data.type === 'image'" class="img-fluid border-0 border-radius mb-3 c-pointer" [src]="data.image"
         (click)="openLightbox(data.image)" />
     </div>

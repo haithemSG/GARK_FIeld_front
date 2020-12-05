@@ -10,9 +10,9 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'collapse.basic' | translate}}</h5>
+        <h5 class="mb-4">{{'collapse.basic'}}</h5>
         <button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">{{'collapse.toggle' | translate}}
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">{{'collapse.toggle'}}
         </button>
         <div id="collapseBasic" [collapse]="isCollapsed">
           <div class="p-4 border mt-4">
@@ -31,9 +31,9 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'collapse.animation' | translate}}</h5>
+        <h5 class="mb-4">{{'collapse.animation'}}</h5>
         <button type="button" class="btn btn-primary" (click)="isCollapsedAnimated = !isCollapsedAnimated"
-          [attr.aria-expanded]="!isCollapsedAnimated" aria-controls="collapseAnimated">{{'collapse.toggle' | translate}}
+          [attr.aria-expanded]="!isCollapsedAnimated" aria-controls="collapseAnimated">{{'collapse.toggle'}}
         </button>
         <div id="collapseAnimated" [collapse]="isCollapsedAnimated" [isAnimated]="true">
           <div class="p-4 border mt-4">
@@ -52,12 +52,12 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'collapse.manual-toggle' | translate}}</h5>
+        <h5 class="mb-4">{{'collapse.manual-toggle'}}</h5>
         <button type="button" class="btn btn-outline-primary" (click)="isOpen=true"
-          aria-controls="collapseManual">{{'collapse.show' | translate}}
+          aria-controls="collapseManual">{{'collapse.show'}}
         </button>
         {{" "}}
-        <button type="button" class="btn btn-primary" (click)="isOpen=false" aria-controls="collapseManual">{{'collapse.hide' | translate}}
+        <button type="button" class="btn btn-primary" (click)="isOpen=false" aria-controls="collapseManual">{{'collapse.hide'}}
         </button>
 
         <div id="collapseManual" [collapse]="!isOpen" [isAnimated]="true">
@@ -77,7 +77,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="mb-4">{{'collapse.inline' | translate}}</h5>
+        <h5 class="mb-4">{{'collapse.inline'}}</h5>
         <button type="button" class="btn btn-outline-primary" (click)="collapseInline.display='inline-block'"
           aria-controls="collapseInlineBlock">Inline-block
         </button>

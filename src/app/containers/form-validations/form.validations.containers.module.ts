@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule as FormsModuleAngular, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 import { TemplateBasicComponent } from './template-basic/template-basic.component';
 import { TemplateCommonComponent } from './template-common/template-common.component';
 import { ReactiveBasicComponent } from './reactive-basic/reactive-basic.component';
@@ -27,7 +26,6 @@ import { TooltipPositionsComponent } from './tooltip-positions/tooltip-positions
     CommonModule,
     FormsModuleAngular,
     ReactiveFormsModule,
-    TranslateModule,
     NgSelectModule,
     BsDatepickerModule,
     TimepickerModule

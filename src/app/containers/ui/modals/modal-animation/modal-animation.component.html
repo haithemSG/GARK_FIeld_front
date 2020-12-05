@@ -1,11 +1,11 @@
-<button type="button" class="btn btn-primary" (click)="openModal(template)">{{'modal.open-modal' | translate}}</button>
+<button type="button" class="btn btn-primary" (click)="openModal(template)">{{'modal.open-modal'}}</button>
 <br>
 <br>
-<button type="button" class="btn btn-outline-primary btn-xs" (click)="config.animated = !config.animated">{{config.animated ? ('modal.disable-animation' | translate) : ('modal.enable-animation' | translate)}}</button>
+<button type="button" class="btn btn-outline-primary btn-xs" (click)="config.animated = !config.animated">{{config.animated ? ('modal.disable-animation') : ('modal.enable-animation')}}</button>
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{'modal.modal-title' | translate}}</h4>
+    <h4 class="modal-title pull-left">{{'modal.modal-title'}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>

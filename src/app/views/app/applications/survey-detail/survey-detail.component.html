@@ -15,14 +15,14 @@
         <div class="top-right-button-container">
           <div class="btn-group" dropdown>
             <button type="button"
-              class="btn btn-outline-primary btn-lg flex-grow-1">{{ 'survey.save' | translate }}</button>
+              class="btn btn-outline-primary btn-lg flex-grow-1">{{ 'survey.save' }}</button>
             <button id="button-split" type="button" dropdownToggle
               class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
               <span class="caret"></span>
             </button>
             <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
-              <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'survey.edit' | translate }}</a></li>
-              <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'survey.delete' | translate }}</a>
+              <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'survey.edit' }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'survey.delete' }}</a>
               </li>
             </ul>
           </div>
@@ -30,19 +30,19 @@
         <app-breadcrumb></app-breadcrumb>
 
         <tabset class="separator-tabs ml-0">
-          <tab [heading]="('survey.details' | translate)" class="tab-content">
+          <tab [heading]="('survey.details')" class="tab-content">
             <div class="row">
               <div class="col-12 col-lg-4 mb-4">
                 <div class="card mb-4">
                   <div class="card-body">
-                    <p class="list-item-heading mb-4">{{ 'survey.summary' | translate }}</p>
-                    <p class="text-muted text-small mb-2">{{ 'survey.title' | translate }}</p>
+                    <p class="list-item-heading mb-4">{{ 'survey.summary' }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.title' }}</p>
                     <p class="mb-3">{{ currentSurvey.title }}</p>
-                    <p class="text-muted text-small mb-2">{{ 'survey.details-lowercase' | translate }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.details-lowercase' }}</p>
                     <p class="mb-3" [innerHTML]="currentSurvey.detail"></p>
-                    <p class="text-muted text-small mb-2">{{ 'survey.category' | translate }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.category' }}</p>
                     <p class="mb-3">{{ currentSurvey.category }}</p>
-                    <p class="text-muted text-small mb-2">{{ 'survey.label' | translate }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.label' }}</p>
                     <div>
                       <p class="d-sm-inline-block mb-1">
                         <span
@@ -61,17 +61,17 @@
                 <div class="text-center">
                   <button class="btn btn-outline-primary mt-3" (click)="addNewQuestion()"><i
                       class="simple-icon-plus btn-group-icon"></i>
-                    {{ 'survey.add-question' | translate }}</button>
+                    {{ 'survey.add-question' }}</button>
                 </div>
               </div>
             </div>
           </tab>
-          <tab [heading]="('survey.results' | translate)" class="tab-content">
+          <tab [heading]="('survey.results')" class="tab-content">
             <div class="row">
               <div class="col-12 col-lg-4">
                 <div class="card mb-4">
                   <div class="card-body">
-                    <p class="list-item-heading mb-4">{{ 'survey.quota' | translate }}</p>
+                    <p class="list-item-heading mb-4">{{ 'survey.quota' }}</p>
                     <div class="mb-4">
                       <p class="mb-2">Gender</p>
                       <progressbar class="mb-3"
@@ -226,29 +226,29 @@
   <app-application-menu>
     <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}">
       <div class="p-4 h-100">
-        <p class="text-muted text-small mb-3">{{ 'survey.status' | translate }}</p>
+        <p class="text-muted text-small mb-3">{{ 'survey.status' }}</p>
         <ul class="list-unstyled mb-4">
           <li class="nav-item">
             <a href="#">
-              <i class="simple-icon-reload"></i>{{ 'survey.all-surveys' | translate }}
+              <i class="simple-icon-reload"></i>{{ 'survey.all-surveys' }}
               <span class="float-right">24</span>
             </a>
           </li>
           <li class="nav-item">
             <a href="#">
-              <i class="simple-icon-refresh"></i>{{ 'survey.active-surveys' | translate }}
+              <i class="simple-icon-refresh"></i>{{ 'survey.active-surveys' }}
               <span class="float-right">20</span>
             </a>
           </li>
           <li class="nav-item">
             <a href="#">
-              <i class="simple-icon-check"></i>{{ 'survey.completed-surveys' | translate }}
+              <i class="simple-icon-check"></i>{{ 'survey.completed-surveys' }}
               <span class="float-right">4</span>
             </a>
           </li>
         </ul>
         <p class="text-muted text-small mb-4">
-          {{ 'survey.categories' | translate }}
+          {{ 'survey.categories' }}
         </p>
         <ul class="list-unstyled mb-5">
           <li>
@@ -270,7 +270,7 @@
             </div>
           </li>
         </ul>
-        <p class="text-muted text-small mb-3">{{ 'survey.labels' | translate }}</p>
+        <p class="text-muted text-small mb-3">{{ 'survey.labels' }}</p>
         <div>
           <p class="d-sm-inline-block mb-1">
             <a href="javascript:;">

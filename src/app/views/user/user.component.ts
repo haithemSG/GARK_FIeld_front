@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-  isMultiColorActive = environment.isMultiColorActive; 
   adminRoot = environment.adminRoot;
 
   constructor(
@@ -36,6 +35,6 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   backHome(){
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/home');
   }
 }
