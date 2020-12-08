@@ -9,11 +9,11 @@
       </button>
 </div>
 <div class="container">
-  <div class="row"  style="margin-bottom: 100px;" [ngStyle]="{'margin-bottom' : isMobile ? '150px' : '100px'}">
+  <div class="row" [ngStyle]="{'padding-bottom' : isMobile ? '120px' : '100px'}">
     <div class="col-md-12" *ngIf="loading" >
       <p> Chargement ... </p>
     </div>
-    <div class="col-md-4 col-sm-6 mb-3" *ngFor="let terrain of mesTerrains; let i = index">
+    <div class="col-lg-4 col-md-6 col-sm-6 mb-3" *ngFor="let terrain of mesTerrains; let i = index">
       <div class="my-card" >
           <div (click)=open(terrain)  [ngStyle]="{ 'background-image' : 'url(' + terrain.image + ')'}" [id]="'img-'+i" class="image-card"  >
           </div>
@@ -55,7 +55,7 @@
 
 
 
-<div *ngIf="isMobile" id="create-terrain-mobile"  style="display: none;" >
+<div *ngIf="isMobile" id="create-terrain-mobile"  style="display: none; padding-bottom: 120px;"  >
   <h1 class="text-center" *ngIf="!isUpdating" > Créer un nouveau terrain </h1>
   <h1 class="text-center" *ngIf="isUpdating" > Modifier terrain </h1>
   

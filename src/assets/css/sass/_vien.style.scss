@@ -76,7 +76,7 @@ $main-margin-xs: 15px;
 
 $app-menu-width: 280px;
 
-$main-menu-item-height-mobile: 90px;
+$main-menu-item-height-mobile: 70px;
 
 $menu-collapse-time: 300ms;
 $animation-time-long: 1000ms;
@@ -6583,7 +6583,7 @@ rating span {
 @media (max-width: 575px) {
   .auth-card {
     flex-direction: column;
-    height: 80vh !important;
+    // height: 80vh !important;
   }
 }
 
@@ -11092,6 +11092,23 @@ footer.page-footer {
   border-radius: 50%;
 }
 
+@media(max-width : 370px){
+  #fixedTop{
+    top : 5px;
+    left : 5px;
+    width: 20px;
+    height: 20px;
+    font-size: .8rem;
+    span {
+      padding: 5px 0 !important;
+    }
+    mat-icon{
+      font-size: .8rem;
+      vertical-align: super;
+    }
+  }
+}
+
 .form-control {
   background: transparent !important;
 }
@@ -11129,4 +11146,76 @@ footer.page-footer {
 .color-palette:hover{
   border: 2px solid #cccccc;
   padding-top: 1px;
+}
+
+#footer{
+    // background: $primary-color;
+    padding: 0 0 25px 0;
+    color: #eee;
+    font-size: 14px;
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 400;
+        margin: 0 0 20px 0;
+        padding: 0;
+        color: #0e1b4d;
+    }
+    p {
+        padding: 0;
+        margin: 10px 0 30px 0;
+    }
+    .footer-top {
+        background: $dark-btn-background;
+        padding: 60px 0 30px 0;
+        .footer-contact p {
+            line-height: 26px;
+        }
+        .social-links a {
+            font-size: 1rem;
+            display: inline-block;
+            background: #222636;
+            color: $foreground-color;
+            line-height: 1;
+            margin-right: 4px;
+            border-radius: 50%;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            transition: 0.3s;
+        }
+        .social-links a:hover {
+          background: $theme-color-4;
+          color: $foreground-color;
+      }
+        h4 {
+            font-size: 14px;
+            font-weight: bold;
+            color: $foreground-color;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 12px;
+            border-bottom: 2px solid $theme-color-4;
+        }
+    }
+    .footer-contact {
+        margin-bottom: 30px;
+    }
+    .footer-links {
+        margin-bottom: 30px;
+    }
+    .copyright {
+        text-align: center;
+        padding-top: 30px;
+    }
+    .footer-info {
+        margin-bottom: 30px;
+    }
+    .credits {
+        text-align: center;
+        font-size: .9rem;
+        color: $foreground-color;
+    }
+    .perspective{
+        font-size: 2rem; 
+    }
 }

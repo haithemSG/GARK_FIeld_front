@@ -51,6 +51,7 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Title } from '@angular/platform-browser';
 import { isNumeric } from 'rxjs/util/isNumeric';
 import { NgForm } from '@angular/forms';
+import { AddReservationComponent } from '../../terrain/add-reservation/add-reservation.component';
 
 
 @Component({
@@ -129,7 +130,6 @@ export class ShowTerrainComponent implements OnInit {
 
         this.ListTerrain = new Array<Terrain>();
         this.ListTerrain = res["terrain"] as Array<Terrain>;
-        console.log(this.ListTerrain);
 
       })
     })
@@ -235,7 +235,6 @@ export class ShowTerrainComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result: Terrain) => {
       if (result) {
-        //console.log("result", result)
         this.terrain.image = result.image;
         if (this.terrain.image.indexOf('assets/') == -1) {
           this.image = `${this.backend}images/terrains/${this.terrain.image}`;
@@ -401,7 +400,7 @@ export class ShowTerrainComponent implements OnInit {
       return;
     }
     this.resMobile.terrain = this.terrain.name;
-    // console.log(this.resMobile);
+
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
     this.reservationService.create(this.resMobile).subscribe((res) => {
@@ -423,6 +422,15 @@ export class ShowTerrainComponent implements OnInit {
     document.getElementById('create-terrain-mobile').style.display = 'none';
   }
 
+
+  validateNumber(){
+    const regex = /\s/gi;
+    let a = this.resMobile.num;
+    a = a.replace(regex, '');
+    
+    return !isNaN(+a) && a.length == 8;
+  }
+  
   choose(color) {
     this.terrain.color = color;
   }
@@ -455,6 +463,19 @@ export class ShowTerrainComponent implements OnInit {
     if (this.terrain.duration >= 90) {
       this.terrain.duration -= 30;
     }
+  }
+
+  addReservationDialog(){
+    const dialog = this.dialog.open(AddReservationComponent, {
+      width : '500px',
+      data: { multiple : false, terrain : this.terrainSelected}
+    });
+
+    dialog.afterClosed().subscribe((res)=>{
+      if(res){
+        this.fetchReservationData();
+      }
+    })
   }
 
 

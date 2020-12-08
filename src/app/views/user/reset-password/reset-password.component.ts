@@ -67,13 +67,13 @@ export class ResetPasswordComponent implements OnInit {
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
 
-    console.log(this.newPassword);
+    // console.log(this.newPassword);
     
 
     this.authenticationService.resetPassword(this.userId, this.newPassword).subscribe(
       (res)=>{
         this.notifications.create('Succès', "Mot de passe mis à jour avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
-        console.log("res", res);
+        // console.log("res", res);
         this.buttonState = '';
         setTimeout(()=>{
           this.router.navigateByUrl('/user/login');

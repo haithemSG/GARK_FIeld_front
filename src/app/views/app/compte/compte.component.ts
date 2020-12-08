@@ -105,6 +105,11 @@ export class CompteComponent implements OnInit {
       document.querySelector('#update-complexe-btn').classList.add('flaticon-setting-lines');
       (<HTMLElement>document.querySelector('#show-terrain')).style.display = "block";
       (<HTMLElement>document.querySelector('#show-complexe-form')).style.display = "none";
+
+      if((<any>this.complexe.opening) instanceof Date){
+        this.complexe.opening = this.formatDate(new Date(this.complexe.opening));
+        this.complexe.closing = this.formatDate(new Date(this.complexe.closing));
+      }
     }
     
   }
@@ -131,9 +136,7 @@ export class CompteComponent implements OnInit {
       (err)=>{
 
         this.buttonDisabled = false;
-        this.buttonState = '';
-        // console.log(err["error"]["Message"]);
-        
+        this.buttonState = '';        
         this.notificationsService.create('Erreur', err["error"]["Message"] || "Une erreur a survenue, veuillez réessayer",NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
       }
     )
@@ -170,24 +173,24 @@ export class CompteComponent implements OnInit {
       (err)=>{
         this.notificationsService.create('Erreur', "Une erreur s'est produite lors de la mise à jour de votre mot de passe", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
         this.buttonPasswordDisabled = false;
-        this.buttonPasswordState = '';
-        console.log(err);
-        
+        this.buttonPasswordState = '';        
       }
     )
 
   }
 
 
+  defaultImage(){
+    this.imageSrc = "/assets/imgs/GarkBanner1.png";
+  }
   buttonComplexeDisabled : boolean = false;
   buttonComplexeState: string = '';
 
   UpdateComplexe(){
 
-    console.log(this.complexe.opening);
     let opening = this.formatDate(this.complexe.opening)
     let closing = this.formatDate(this.complexe.closing)
-    console.log(opening, closing);
+
     this.complexe.opening = opening;
     this.complexe.closing = closing;
     this.buttonComplexeDisabled = true;
@@ -209,12 +212,10 @@ export class CompteComponent implements OnInit {
         },1000)
       },
       (err)=>{
-        console.log(err);
+
         
         this.buttonComplexeDisabled = false;
         this.buttonComplexeState = '';
-        // console.log(err["error"]["Message"]);
-        
         this.notificationsService.create('Erreur', err["error"]["Message"] || "Une erreur a survenue, veuillez réessayer",NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
       }
     )

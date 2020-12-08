@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { environment } from 'src/environments/environment';
@@ -7,25 +8,26 @@ import { AuthenticationService } from '../shared/services/authentication.service
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
   constructor(
-    private renderer: Renderer2,  
-    private elRef: ElementRef,
+    private renderer: Renderer2,
+    private titleService: Title,
     private scrollToService: ScrollToService,
     public auth: AuthenticationService,
     private router: Router
-    ) {}
+  ) { }
 
   showMobileMenu = false;
-  year : number = 2020;
+  year: number = 2020;
   userRoot = '/football/user/login';
   adminRoot = environment.adminRoot;
-  
+
   ngOnInit() {
-    // this.renderer.addClass(document.body, "no-footer");
+    this.titleService.setTitle('GARK')
     this.year = new Date().getFullYear();
-   this.isMobile= window.screen.width < 527 ? true : false;
+    this.isMobile = window.screen.width < 527 ? true : false;
   }
   ngOnDestroy() {
     this.renderer.removeClass(document.body, "no-footer");
@@ -34,7 +36,7 @@ export class HomePageComponent implements OnInit {
   isMobile: boolean = false;
   @HostListener("window:resize", ["$event"])
   onResize(event) {
-    this.isMobile= window.screen.width < 527 ? true : false;
+    this.isMobile = window.screen.width < 527 ? true : false;
   }
 
   @HostListener("window:click", ["$event"])
@@ -50,15 +52,15 @@ export class HomePageComponent implements OnInit {
   buttonDisabled = false;
   buttonState = '';
 
-  goLogin(){
+  goLogin() {
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
-    if(this.auth.isAuthenticated){
+    if (this.auth.isAuthenticated) {
       this.router.navigateByUrl(this.adminRoot)
-    }else{
+    } else {
       this.router.navigateByUrl('/football/user/login')
     }
-    
+
   }
 
   scrollTo(target) {
@@ -66,7 +68,6 @@ export class HomePageComponent implements OnInit {
       target,
       offset: -150
     };
-
     this.scrollToService.scrollTo(config);
   }
 

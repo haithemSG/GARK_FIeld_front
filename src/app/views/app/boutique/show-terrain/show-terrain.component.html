@@ -51,18 +51,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- <div class="overlay-upload">
-                        <div style="display: flex">
-                            <div style="margin: 0 auto;"></div>
-                            <div>
-                                <button mat-fab (click)="openDialog('select')">
-                                    <mat-icon>photo_camera</mat-icon>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <img class="banner" [src]="image" alt="terrain banner"> -->
                 </div>
             </div>
             <div class="col-md-8 mb-3" *ngIf="!isLoading && isMobile" id="background-image-mobile-view"
@@ -202,11 +190,14 @@
         <button mat-fab *ngIf="isMobile" (click)="openAddReservationMobile()" class="btn btn-gradiant">
             <mat-icon>add</mat-icon>
         </button>
+        <button mat-fab *ngIf="!isMobile" (click)="addReservationDialog()" class="btn btn-gradiant">
+            <mat-icon>add</mat-icon>
+        </button>
     </div>
 
 </div>
 <simple-notifications></simple-notifications>
-<div id="add-new-reservation" *ngIf="!isLoading" style="display: none;">
+<div id="add-new-reservation" *ngIf="!isLoading" style="display: none; padding-bottom: 100px;">
     <form #reservForm="ngForm">
         <div class="container">
             <div class="row">
@@ -218,20 +209,31 @@
 
         <label class="e-textlabel fw-700">Réservation Pour</label>
         <input class="e-field e-input mb-3" required placeholder="Nom du réservant"
-            [ngModelOptions]="{standalone: true}" type="text" id="Name-Mob" name="Name" [(ngModel)]="resMobile.Name"
+            [ngModelOptions]="{standalone: true}" #nomres="ngModel" type="text" id="Name-Mob" name="Name" [(ngModel)]="resMobile.Name"
             style="width: 100%" />
+            <div class="text-danger" *ngIf="(nomres.touched || reservForm.submitted ) && nomres.invalid" > Veuillez saisir le nom du réservant </div>
 
-        <br>
         <label class="e-textlabel fw-700 mt-3">Numéro de téléphone</label>
         <input class="e-field e-input mb-3" required [(ngModel)]="resMobile.num" [ngModelOptions]="{standalone: true}"
-            required placeholder="Numéro de téléphone" type="text" id="num-mobile" name="num" style="width: 100%" />
+            required placeholder="Numéro de téléphone" #tele="ngModel"  type="text" id="num-mobile" name="num" style="width: 100%" />
+            <div class="text-danger" *ngIf="tele.touched || reservForm.submitted" > 
+                <div *ngIf="tele.invalid">
+                    Veuillez saisir un numéro de téléphone
+                </div>
+                <div *ngIf="!validateNumber() && tele.valid" >
+                    Veuillez saisir un numéro de téléphone valide
+                </div>
+            </div>
 
         <br>
         <label class="e-textlabel fw-700 mt-3">Prix de réservation</label>
         <input class="e-field e-input mb-3" required [(ngModel)]="resMobile.frais" placeholder="Prix de réservation"
-            type="number" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
-
-        <br>
+            type="number" #pri="ngModel" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
+            <div class="text-danger" *ngIf="pri.touched || reservForm.submitted" > 
+                <div *ngIf="pri.invalid">
+                    Veuillez saisir un frais
+                </div>
+            </div>
         <label class="e-textlabel fw-700 mt-3">A partir de</label>
         <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" [ngModelOptions]="{standalone: true}"
             locale='fr-CH' class="e-field mb-3" data-name="StartTime">

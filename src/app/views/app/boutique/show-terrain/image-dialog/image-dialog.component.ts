@@ -99,7 +99,7 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
       )
     } else {
       this.route.parent.params.subscribe((params) => {
-        //console.log("prams", params)
+
       })
     }
   }
@@ -107,7 +107,7 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
 
   // Image Upload
   fileSelectHandler(e) {
-    console.log("here");
+
     
     // Fetch FileList object
     if (!e.target.files) {
@@ -167,13 +167,13 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
         b = tmp % b;
       }
       // //Aspect
-      // console.log("Aspect", w/a, ":", h/a)
+
       // 16:9
       let ratio1 = w / a;
       let ratio2 = h / a;
 
       let ratio = ratio1 / ratio2;
-      // console.log(ratio)
+
       if (ratio < 1.5 || ratio > 1.8) {
         document.getElementById('file-image').classList.add("hidden");
         document.getElementById('cancelBtn').classList.add("hidden");
@@ -207,8 +207,6 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
       // (<HTMLFormElement>document.getElementById("file-upload-form")).reset();
       (<HTMLInputElement>document.getElementById('file-upload')).disabled = false;
     }
-
-
   }
 
   cancelImage() {
@@ -220,6 +218,9 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
     document.getElementById('start').classList.remove("hidden");
     document.getElementById('bad-res').classList.add("hidden");
     // (<HTMLFormElement>document.getElementById("file-upload-form")).reset();
+    this.uploadPercent = 0;
+    this.canSave = false;
+    this.selectedFile = null;
     (<HTMLInputElement>document.getElementById('file-upload')).disabled = false;
   }
 
@@ -290,9 +291,7 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
           this.http.request(req).subscribe(
             (res: any) => {
               if (res.type === HttpEventType.UploadProgress) {
-                this.uploadPercent = Math.round((100 * res.loaded) / res.total);
-                console.log( this.uploadPercent );
-                
+                this.uploadPercent = Math.round((100 * res.loaded) / res.total);                
                 if (this.uploadPercent >= 100) {
                   this.canSave = true;
                   this.selectedFile = null;
@@ -306,7 +305,7 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
                     let imageName = res["body"]["fileName"];
                     this.terrainService.changeImageName(this.data["data"]["id"], { imageName }).subscribe(
                       (results)=>{
-                          this.notificationsService.create('Succès', "Image téléchargé avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 1450, showProgressBar: false });
+                          this.notificationsService.create('Succès', "Image téléchargée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 1450, showProgressBar: false });
                           setTimeout(() => {
                             let updates = { image: results["image"] } as Terrain;
                             this.dialogRef.close(updates)
@@ -321,29 +320,14 @@ export class ImageDialogComponent implements OnInit, AfterViewInit {
                 }
               }
             },
-            err => { },
+            err => { 
+              this.notificationsService.error("Erreur", "Une erreur a survenue lors du téléchargement de l'image")
+            },
             () => {
 
             }
           );
         })
-
-      // this.terrainService.uploadImage(this.data["data"]["id"], uploadData).subscribe(
-      //   (res) => {
-      //     if (res) {
-      //       this.notificationsService.create('Succès', "Image téléchargé avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 1450, showProgressBar: false });
-      //       setTimeout(() => {
-      //         let updates = { image: res["image"] } as Terrain;
-      //         this.dialogRef.close(updates)
-      //       }, 1500)
-
-      //     }
-      //   },
-      //   (err) => {
-      //     this.notificationsService.create('Erreur', "Erreur lors du téléchargement de l'image!, " + err["message"], NotificationType.Bare, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false });
-
-      //   }
-      // )
     }
     else {
       document.getElementById('file-image').classList.add("hidden");

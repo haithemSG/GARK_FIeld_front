@@ -374,23 +374,31 @@ export class PharesComponent implements OnInit {
 
   TerrainChanged(event){
     let name = event["itemData"]["value"];
+    this.notSelected = false;
     this.terrain = this.ListTerrain.find((t : Terrain)=>{
       return t.name === name;
     });
-    console.log(this.terrain.duration);
-    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration)
-    console.log(this.resMobile.EndTime);
-    
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration)    
   }
 
   
+  validateNumber(){
+    const regex = /\s/gi;
+    let a = this.resMobile.num;
+    a = a.replace(regex, '');
+    
+    return !isNaN(+a) && a.length == 8;
+  }
 
+  notSelected: boolean = false;
   onSubmit() {
-
+    if(this.resMobile.terrain == ""){
+      this.notSelected = true;
+    }
     if (this.buttonDisabled || this.resMobile.Name == "" || this.resMobile.num == "" || this.resMobile.StartTime == null || this.resMobile.EndTime == null) {
       return;
     }
-
+    this.notSelected = false;
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
     this.reservationService.create(this.resMobile).subscribe((res) => {

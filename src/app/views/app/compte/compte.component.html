@@ -22,7 +22,7 @@
                             </div>
                             <div class="user-image ">
                                 <div class="image-container">
-                                    <img [src]="imageSrc" class="img ">
+                                    <img [src]="imageSrc" (error)="defaultImage()" class="img ">
                                     <div class="overlay" *ngIf="!isImageUploadLoading" (click)="fileSelect.click()">
                                         <!--  -->
                                         <div class="text">
@@ -190,7 +190,7 @@
                                     </div>
                                     <ul class="about" id="show-terrain">
                                         <li class="about-items">
-                                            <span class="fw-700">Nom du Complexe</span> <br>
+                                            <span class="fw-700">Nom du Complexe ou raison sociale</span> <br>
                                             <span class=""> {{ complexe?.name }}
                                             </span>
                                         </li>

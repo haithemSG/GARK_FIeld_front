@@ -24,6 +24,7 @@ export class AddReservationComponent implements OnInit {
   listTerrain : Array<Terrain> = new Array<Terrain>();
   buttonDisabled = false;
   buttonState = "";
+  monTerrain: string = ""
 
   resMobile = {
     Name: "",
@@ -37,6 +38,7 @@ export class AddReservationComponent implements OnInit {
   ngOnInit(): void {
     if(!this.data["multiple"]){
       this.uniqueTerrain = true;
+      this.monTerrain = this.data["terrain"]
     }else{
       this.nomTerrain = this.data["listTerrain"] as Array<any>;
       this.listTerrain = this.data["list"] as Array<Terrain>;
@@ -67,6 +69,14 @@ export class AddReservationComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  validateNumber(){
+    const regex = /\s/gi;
+    let a = this.resMobile.num;
+    a = a.replace(regex, '');
+    
+    return !isNaN(+a) && a.length == 8;
   }
 
   selectedTerrain : Terrain;

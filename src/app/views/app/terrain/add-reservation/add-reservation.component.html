@@ -1,6 +1,8 @@
 <form #reservForm="ngForm">
-    <h4 class="modal-title text-center" style="margin-bottom: 0 !important;" *ngIf="!uniqueTerrain"> Créer une nouvelle
-        réservation </h4>
+    <h4 class="modal-title text-center" style="margin-bottom: 0 !important;" > 
+        Créer une nouvelle réservation <br>
+        <span *ngIf="uniqueTerrain" >{{monTerrain}}</span>
+    </h4>
     <table class="custom-event-editor" width="100%" cellpadding="5">
         <tbody>
             <tr>
@@ -8,7 +10,8 @@
                 <td colspan="4">
                     <input class="e-field e-input" required placeholder="Nom du réservant"
                         [ngModelOptions]="{standalone: true}" type="text" id="Name-Mob" name="Name"
-                        [(ngModel)]="resMobile.Name" style="width: 100%" />
+                        [(ngModel)]="resMobile.Name" #nm="ngModel" style="width: 100%" />
+                    <div class="text-danger" *ngIf="nm.touched && nm.invalid" > Veuillez saisir le nom du réservant </div>
                 </td>
 
             </tr>
@@ -17,17 +20,30 @@
                 <td colspan="4">
                     <input class="e-field e-input" required [(ngModel)]="resMobile.num"
                         [ngModelOptions]="{standalone: true}" required placeholder="Numéro de téléphone" type="text"
-                        id="num-mobile" name="num" style="width: 100%" />
+                        id="num-mobile" #tlp="ngModel" name="num" style="width: 100%" />
+                        <div class="text-danger" *ngIf="tlp.touched || reservForm.submitted" > 
+                            <div *ngIf="tlp.invalid">
+                                Veuillez saisir un numéro de téléphone
+                            </div>
+                            <div *ngIf="!validateNumber() && tlp.valid" >
+                                Veuillez saisir un numéro de téléphone valide
+                            </div>
+                        </div>
                 </td>
             </tr>
             <tr>
                 <td class="e-textlabel">Prix de réservation</td>
                 <td colspan="4">
                     <input class="e-field e-input" required [(ngModel)]="resMobile.frais" placeholder="Prix de réservation"
-                        type="number" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
+                        type="number"  #pr="ngModel" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
+                        <div class="text-danger" *ngIf="pr.touched || reservForm.submitted" > 
+                            <div *ngIf="pr.invalid">
+                                Veuillez saisir un frais
+                            </div>
+                        </div>
                 </td>
             </tr>
-            <tr>
+            <tr *ngIf="!uniqueTerrain" >
                 <td class="e-textlabel">Terrain</td>
                 <td colspan="4">
                     <ejs-dropdownlist class="e-field" data-name="terrain" placeholder='Choisir un terrain'

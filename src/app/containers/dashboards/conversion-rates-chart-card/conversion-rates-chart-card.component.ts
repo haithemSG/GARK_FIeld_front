@@ -103,18 +103,21 @@ export class ConversionRatesChartCardComponent implements OnInit {
             count: 0
           }
         })
-        this.reservations.forEach((el: Reservation) => {
-          var d = new Date(el.StartTime);
-          var dayName = this.days[d.getDay()];
-
-          this.countPerDay = this.countPerDay.filter((el) => {
-            if (el["day"] == dayName) {
-              el["count"]++;
-            }
-            return el;
+        if(this.reservations.length !== 0){
+          this.reservations.forEach((el: Reservation) => {
+            var d = new Date(el.StartTime);
+            var dayName = this.days[d.getDay()];
+  
+            this.countPerDay = this.countPerDay.filter((el) => {
+              if (el["day"] == dayName) {
+                el["count"]++;
+              }
+              return el;
+            })
+  
           })
-
-        })
+        }     
+        
         this.showStats(this.countPerDay);
       }
     )
@@ -137,17 +140,19 @@ export class ConversionRatesChartCardComponent implements OnInit {
             count: 0
           }
         })
-        this.reservations.forEach((el: Reservation) => {
-          var d = new Date(el.StartTime);
-          var dayName = this.days[d.getDay()];
-
-          this.countPerDay = this.countPerDay.filter((el) => {
-            if (el["day"] == dayName) {
-              el["count"]++;
-            }
-            return el;
+        if(this.reservations.length !== 0){
+          this.reservations.forEach((el: Reservation) => {
+            var d = new Date(el.StartTime);
+            var dayName = this.days[d.getDay()];
+  
+            this.countPerDay = this.countPerDay.filter((el) => {
+              if (el["day"] == dayName) {
+                el["count"]++;
+              }
+              return el;
+            })
           })
-        })
+        }
 
         this.showStats(this.countPerDay);
       }
@@ -162,17 +167,17 @@ export class ConversionRatesChartCardComponent implements OnInit {
 
     const arr = data.map((el) => { return el["count"] })
     let max = arr[0];
-    let min = arr[0];
     arr.forEach((el) => {
       if (el > max) {
         max = el;
       }
-      if (el < min) {
-        min = el;
-      }
     })
 
-    this.maxValue = this.calculateMaxValue(max);
+    if(max == 0){
+      this.maxValue = 10;
+    }else{
+      this.maxValue = this.calculateMaxValue(max);
+    }
 
     const conversionChartData = {
       labels: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
@@ -196,7 +201,7 @@ export class ConversionRatesChartCardComponent implements OnInit {
     };
     this.conversionChartData = conversionChartData;
     this.chartDataConfig = this.chartService;
-    this.chartDataConfig.setMaxAreaChartOptions(min, this.calculateMaxValue(max));
+    this.chartDataConfig.setMaxAreaChartOptions(0, this.maxValue);
     this.loading = false;
   }
 
