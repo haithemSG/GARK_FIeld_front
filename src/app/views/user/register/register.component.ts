@@ -43,9 +43,15 @@ export class RegisterComponent implements OnInit {
     private router: Router
     ) { }
 
-    ready = false;
+  ready = false;
+  
   ngOnInit() {
-    this.titleService.setTitle('Inscription | GARK')  
+    this.titleService.setTitle('Inscription | GARK')  ;
+    this.complexe.name = "";
+    this.complexe.address = "";
+    this.complexe.numero = "";
+    this.complexe.opening = "";
+    this.complexe.closing = "";
   }
 
   
@@ -53,34 +59,35 @@ export class RegisterComponent implements OnInit {
     if (!this.registerForm.valid || this.buttonDisabled) {
       return;
     }
-    // this.buttonDisabled = true;
-    // this.buttonState = 'show-spinner';
+    this.buttonDisabled = true;
+    this.buttonState = 'show-spinner';
 
-    this.notifications.create('Erreur', "Veuillez contacter l'administrateur pour vous créer un compte", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
-    // this.userCredentials.email = this.emailModel;
-    // this.userCredentials.password = this.passwordModel;
-    // this.userCredentials.firstName = this.firstNameModel;
-    // this.userCredentials.lastName = this.lastNameModel;
+    // this.notifications.create('Erreur', "Veuillez contacter l'administrateur pour vous créer un compte", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+    this.userCredentials.email = this.emailModel;
+    this.userCredentials.password = this.passwordModel;
+    this.userCredentials.firstName = this.firstNameModel;
+    this.userCredentials.lastName = this.lastNameModel;
 
-    // this._auth.register(this.userCredentials).subscribe(
-    //   (res) => {        
-    //     if (res["created"] == false) {
-    //       this.duplicated = true;
-    //       this.buttonDisabled = false;
-    //       this.buttonState = '';
-    //       this.passwordModel = '';
-    //     } else {
-    //       this.duplicated = false;
-    //       this.step = 2;
-    //       this.user = res["user"] as User;
-    //       this.titleService.setTitle('Créer votre complexe')
-    //     }
-    //   },
-    //   (err) => {        
-    //       this.notifications.create('Erreur', "Une erreur a survenue, veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
-    //       this.buttonDisabled = false;
-    //       this.buttonState = '';
-    //   })
+    this._auth.register(this.userCredentials).subscribe(
+      (res) => {        
+        if (res["created"] == false) {
+          this.duplicated = true;
+          this.buttonDisabled = false;
+          this.buttonState = '';
+          this.passwordModel = '';
+        } else {
+          this.duplicated = false;
+          this.step = 2;
+          this.ready = true;
+          this.user = res["user"] as User;
+          this.titleService.setTitle('Créer votre complexe')
+        }
+      },
+      (err) => {        
+          this.notifications.create('Erreur', "Une erreur a survenue, veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+          this.buttonDisabled = false;
+          this.buttonState = '';
+      })
   }
 
 

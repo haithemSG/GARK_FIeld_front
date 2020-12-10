@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -16,27 +17,27 @@ export class CreateSpentIncomeDialog implements OnInit {
     buttonDisabled = false;
     buttonState = '';
     update: boolean = false;
-    isSpent: boolean = false; 
-    // true: create spent 
-    // false: create income
-    finance : Finance = new Finance();
+    isSpent: boolean = false;
+    finance: Finance = new Finance();
 
     constructor(
         public dialogRef: MatDialogRef<CreateSpentIncomeDialog>,
         private notificationsService: NotificationsService,
         private financeService: FinanceService,
+        
         @Inject(MAT_DIALOG_DATA) public data: Object) { }
 
-    ngOnInit(): void {   
+        dateToSee;
+    ngOnInit(): void {
         this.update = !this.data["create"];
         this.isSpent = this.data["isSpent"];
-        console.log(this.isSpent);
-        this.finance.date = new Date();
+        // this.finance.date = new Date();
+        this.dateToSee = new Date().toLocaleDateString('fr-FR');
+        // console.log(this.dateToSee);
+        
+        // console.log(this.finance.date);
         
     }
-
-    
-   
 
     onSubmit() {
         if (!this.createForm.valid || this.buttonDisabled) {
@@ -44,49 +45,43 @@ export class CreateSpentIncomeDialog implements OnInit {
         }
         this.buttonDisabled = true;
         this.buttonState = 'show-spinner';
-        
+
         console.log(this.finance);
-        if(!this.isSpent){
+        if (!this.isSpent) {
             this.financeService.createIncome(this.finance).subscribe(
-                (res)=>{
+                (res) => {
                     //console.log( res );
                     this.notificationsService.create('Succès', 'Revenu ajouté avec succès', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.buttonDisabled = false;
                         this.dialogRef.close(res)
-                    },1500)
+                    }, 1500)
                 },
-                (err)=>{
+                (err) => {
                     console.log(err);
                     this.notificationsService.create('Erreur', 'Une erreur a survenue veuillez réessayer', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
                     this.buttonDisabled = false;
-                }
-            )
-        }else{
+                })
+        } else {
             this.financeService.createSpent(this.finance).subscribe(
-                (res)=>{
+                (res) => {
                     //console.log( res );
                     this.notificationsService.create('Succès', 'Dépense ajoutée  avec succès', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.buttonDisabled = false;
                         this.dialogRef.close(res)
-                    },1500)
+                    }, 1500)
                 },
-                (err)=>{
-                    console.log(err);
+                (err) => {
                     this.notificationsService.create('Erreur', 'Une erreur a survenue veuillez réessayer', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
                     this.buttonDisabled = false;
-                }
-            )
+                })
         }
-        
     }
-
-   
 
 
     onNoClick(): void {

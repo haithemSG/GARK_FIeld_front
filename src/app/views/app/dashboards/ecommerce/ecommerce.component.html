@@ -98,7 +98,7 @@
         </div>
 
         <div class="dashboard-best-sellers" >
-          <ngx-datatable #table class="material mt-2" [rows]="finances" [loadingIndicator]="loadingIndicator"
+          <ngx-datatable #table class="material mt-2" [messages]="my_messages" [rows]="finances" [loadingIndicator]="loadingIndicator"
             [columns]="columns" [columnMode]="ColumnMode.force" [headerHeight]="75" [footerHeight]="100"
             rowHeight="auto" [limit]="currentPageLimit" [reorderable]="reorderable">
 

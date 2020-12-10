@@ -25,6 +25,10 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
   ) { }
   
 
+  my_messages = {
+    'emptyMessage': 'Aucune donnée à afficher',
+    'totalMessage': ''
+  };
   public currentPageLimit: number = 5;
   public currentVisible: number = 3;
   loadingIndicator = true;

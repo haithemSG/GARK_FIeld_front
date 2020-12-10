@@ -12,12 +12,18 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ComponentsStateButtonModule } from './components/state-button/components.state-button.module';
 import { CommonModule } from '@angular/common';
+import { ContactComponent } from './contact/contact.component';
+import { FooterAppComponent } from './layout/footer-app/footer-app.component';
+import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
     ViewsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     LayoutContainersModule,
     BrowserAnimationsModule, 
@@ -26,7 +32,13 @@ import { CommonModule } from '@angular/common';
     ScrollToModule.forRoot(),
     ComponentsStateButtonModule
   ],
-  declarations: [AppComponent, HomePageComponent],
+  declarations: [
+    AppComponent, 
+    HomePageComponent, 
+    ContactComponent,
+    FooterAppComponent, 
+    HomeLayoutComponent
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

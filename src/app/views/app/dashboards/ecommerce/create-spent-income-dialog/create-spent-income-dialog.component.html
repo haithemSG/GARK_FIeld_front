@@ -16,7 +16,7 @@
     </label>
     <label class="form-group has-float-label">
         <input class="form-control" style="padding: .8rem; font-size: 1.1rem" type="date" required #dt="ngModel" name="date"
-            [(ngModel)]="finance.date" />
+            [(ngModel)]="finance.date" [value]='dateToSee' />
         <span style="font-size: 100% !important;">Date</span>
         <div *ngIf="!dt.valid && createForm.submitted" class="invalid-tooltip">Champ requis!</div>
     </label>

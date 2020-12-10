@@ -31,7 +31,11 @@ export class CompteComponent implements OnInit {
       (res)=>{
         this.profile = res as User;
         this.profile.password = ""
-        this.imageSrc = `${environment.backend}images/profiles/${this.profile["profile"]["picture"]}` || "/assets/imgs/garkLOGO.png"
+        if(this.profile["profile"]){
+          if(this.profile["profile"]["picture"]){
+            this.imageSrc = `${environment.backend}images/profiles/${this.profile["profile"]["picture"]}` || "/assets/imgs/garkLOGO.png"
+          }
+        }
       }
     );
     this.terrainService.getComplexe().subscribe(
@@ -181,7 +185,7 @@ export class CompteComponent implements OnInit {
 
 
   defaultImage(){
-    this.imageSrc = "/assets/imgs/GarkBanner1.png";
+    this.imageSrc = "/assets/imgs/garkLOGO.png";
   }
   buttonComplexeDisabled : boolean = false;
   buttonComplexeState: string = '';

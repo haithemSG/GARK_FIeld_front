@@ -40,26 +40,16 @@ export class ForgotPasswordComponent implements OnInit {
         this.message = "Un email est envoyé à votre boîte de réception"
       },
       (err) => {
-        // console.log("err", err);
-        this.notifications.create('Error', "Une erreur a survenue, veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+        if (err["status"] == 404) {
+          this.notifications.create('Error', err["error"]["Message"], NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+        } else {
+          this.notifications.create('Error', "Une erreur a survenue, veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+        }
         this.buttonDisabled = false;
         this.buttonState = '';
 
       }
     )
-    // this.authService.sendPasswordEmail(this.passwordForm.value.email).then(() => {
-    //   this.notifications.create('Done', 'Password reset email is sent, you will be redirected to Reset Password page!', NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: true });
-    //   this.buttonDisabled = false;
-    //   this.buttonState = '';
-    //   setTimeout(() => {
-    //     this.router.navigate(['user/reset-password']);
-    //   }, 6000);
-
-    // }).catch((error) => {
-    //   this.notifications.create('Error', error.message, NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
-    //   this.buttonDisabled = false;
-    //   this.buttonState = '';
-    // });
   }
 
 }
