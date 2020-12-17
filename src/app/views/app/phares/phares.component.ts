@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { EventRenderedArgs, EventSettingsModel, ScheduleComponent, TimeScaleModel} from '@syncfusion/ej2-angular-schedule';
@@ -20,7 +20,7 @@ import { CreateTerrainComponent } from '../boutique/create-terrain-dialog/create
 import { ImageDialogComponent } from '../boutique/show-terrain/image-dialog/image-dialog.component';
 import { Title } from '@angular/platform-browser';
 import { AddReservationComponent } from '../terrain/add-reservation/add-reservation.component';
-
+import * as moment from 'moment';
 // Angular CLI 8.0 and above versions
 loadCldr(numberingSystems['default'], gregorian['default'], numbers['default'], timeZoneNames['default']);
 
@@ -56,7 +56,7 @@ L10n.load({
   templateUrl: './phares.component.html',
   styleUrls: ['./phares.component.scss']
 })
-export class PharesComponent implements OnInit {
+export class PharesComponent implements OnInit, OnChanges {
   @ViewChild('calendar') public calendar: CalendarComponent;
   @ViewChild('scheduleObj') public scheduleObj: ScheduleComponent;
 
@@ -69,6 +69,10 @@ export class PharesComponent implements OnInit {
     private titleService: Title,
     public AddReservationDialog: MatDialog
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(this.resMobile);
+    
+  }
 
   isMobile: boolean = false;
   reservataionModal: BsModalRef;
@@ -86,9 +90,9 @@ export class PharesComponent implements OnInit {
     Name: "",
     num: "",
     terrain: "",
-    frais: "",
-    StartTime: new Date(),
-    EndTime: new Date().addMinutes(60)
+    frais: "90",
+    StartTime: new Date(new Date().setMinutes(0)),
+    EndTime: new Date().addMinutes(90)
   }
 
   public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], null, null, true) };
@@ -129,7 +133,7 @@ export class PharesComponent implements OnInit {
   currentViewMode = "Week"
   fetchData() {
     this.reservationService.getAll().subscribe((res) => {
-      this.reservationList = res["reservations"] as Reservation[];
+      this.reservationList = res["reservations"] as Reservation[];      
       this.reservationList = this.reservationList.map((el: Reservation) => {
         el.Subject = el["name"] + "<br/>" + el["num"] || "";
         return el;
@@ -186,8 +190,8 @@ export class PharesComponent implements OnInit {
     (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "block";
     this.resMobile.Name = "";
     this.resMobile.num = "";
-    this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1));
-    this.resMobile.EndTime = new Date(new Date().setHours(new Date().getHours() + 2));
+    this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1 , 0));
+    this.resMobile.EndTime = new Date(new Date().setHours(new Date().getHours() + 2, 0));
     window.scrollTo({
       top: 0,
       left: 0,
@@ -401,11 +405,12 @@ export class PharesComponent implements OnInit {
     this.notSelected = false;
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
+    
     this.reservationService.create(this.resMobile).subscribe((res) => {
 
       this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
       this.fetchData();
-      this.buttonDisabled = true;
+      this.buttonDisabled = false;
       this.buttonState = "",
       
       (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
@@ -414,36 +419,48 @@ export class PharesComponent implements OnInit {
     })
   }
 
+  public format = 'dd/MM/yyyy HH:mm';
+
   getStartTime(event){
-    const d = event["value"] as Date;
-    if(this.terrain){
-      this.resMobile.EndTime = d.addMinutes(this.terrain.duration);
+    // const d = event as Date;
+    this.resMobile.StartTime = event as Date;   
+    if(this.resMobile.terrain){
+      this.resMobile.EndTime = this.resMobile.StartTime .addMinutes(this.terrain.duration);
     }else{
-      this.resMobile.EndTime = d.addMinutes(60);
+      this.resMobile.EndTime = this.resMobile.StartTime .addMinutes(90);
     }
   }
 
+  StartChangedTime(event){
+    // const d = event as Date;   
+    // if(this.resMobile.terrain){
+    //   this.data.StartTime = d.addMinutes(this.terrain.duration);
+    // }else{
+    //   this.resMobile.EndTime = d.addMinutes(90);
+    // }
+  }
 
+ 
 }
 
 declare global{
   interface Date {
-      addHours(hours : number) : Date;
-      addMinutes(minutes : number) : Date;
+      addHours? :(hours : number) => Date;
+      addMinutes? :(minutes : number) => Date;
   }
 }
 
 Date.prototype.addHours = function (hours : number) : Date{
   if(!hours) return this;
   let date = this;
-  date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+  date = moment(date).add(hours, 'hours').toDate();
   return date;
 }
 
 Date.prototype.addMinutes = function (minutes : number) : Date{
   if(!minutes) return this;
   let date = this;
-  date.setTime(date.getTime() + (minutes * 60 * 1000));
+  date = moment(date).add(minutes, 'minutes').toDate();  
   return date;
 }
 

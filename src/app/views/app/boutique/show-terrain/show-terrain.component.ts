@@ -145,7 +145,7 @@ export class ShowTerrainComponent implements OnInit {
     } else {
       this.image = `${this.terrain.image}`;
     }
-    
+
   }
 
 
@@ -203,9 +203,14 @@ export class ShowTerrainComponent implements OnInit {
     (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "none";
     this.resMobile.Name = "";
     this.resMobile.num = "";
-    this.resMobile.frais = 0;
-    this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1));
-    this.resMobile.EndTime = new Date(new Date().setHours(new Date().getHours() + 2));
+    this.resMobile.frais = 90;
+    // console.log("here", this.terrain);
+
+    this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1, 0, 0));
+    console.log(this.resMobile.StartTime);
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
+    console.log(this.resMobile.EndTime);
+
     window.scrollTo({
       top: 0,
       left: 0,
@@ -385,13 +390,14 @@ export class ShowTerrainComponent implements OnInit {
 
   buttonDisabled = false;
   buttonState = "";
+
   resMobile = {
     Name: "",
     num: "",
     frais: 0,
     terrain: "",
-    StartTime: new Date(new Date().setHours(new Date().getHours() + 1)),
-    EndTime: new Date(new Date().setHours(new Date().getHours() + 2))
+    StartTime: new Date(new Date().setHours(new Date().getHours() + 1, 0)),
+    EndTime: new Date(new Date().setHours(new Date().getHours() + 2, 0))
   }
 
   onSubmit() {
@@ -423,14 +429,14 @@ export class ShowTerrainComponent implements OnInit {
   }
 
 
-  validateNumber(){
+  validateNumber() {
     const regex = /\s/gi;
     let a = this.resMobile.num;
     a = a.replace(regex, '');
-    
+
     return !isNaN(+a) && a.length == 8;
   }
-  
+
   choose(color) {
     this.terrain.color = color;
   }
@@ -465,18 +471,25 @@ export class ShowTerrainComponent implements OnInit {
     }
   }
 
-  addReservationDialog(){
+  startTimeHasChanged(event) {
+    this.resMobile.StartTime = event as Date;
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrainSelected.duration);
+  }
+
+  public format = 'dd/MM/yyyy HH:mm';
+  addReservationDialog() {
+    console.log(this.terrainSelected);
+
     const dialog = this.dialog.open(AddReservationComponent, {
-      width : '500px',
-      data: { multiple : false, terrain : this.terrainSelected}
+      width: '500px',
+      data: { multiple: false, terrain: this.terrainSelected }
     });
 
-    dialog.afterClosed().subscribe((res)=>{
-      if(res){
+    dialog.afterClosed().subscribe((res) => {
+      if (res) {
         this.fetchReservationData();
       }
     })
   }
-
-
 }
+

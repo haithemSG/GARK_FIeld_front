@@ -42,7 +42,7 @@ export class BoutiqueComponent implements OnInit {
     this.terrain = new Terrain();
     this.terrain.address = "";
     this.terrain.name = "";
-    this.terrain.duration = 60;
+    this.terrain.duration = 90;
     
     this.isMobile = window.screen.width < 600 ? true : false;
   }
@@ -122,7 +122,7 @@ export class BoutiqueComponent implements OnInit {
 
     if (this.isMobile) {
       this.terrain = new Terrain();
-      this.terrain.duration = 60;
+      this.terrain.duration = 90;
       this.isUpdating = false;
       document.getElementById('normal-view').style.display = 'none';
       document.getElementById('create-terrain-mobile').style.display = 'block';

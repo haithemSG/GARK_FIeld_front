@@ -45,7 +45,7 @@
             </div>
             <div class="wrap-input1 validate-input" data-validate="Message is required">
                 <label for=""> {{'Vous êtes un robot? '+ a + '+' + b +'='}} </label>
-                <input class="input1" type="text" #reslt="ngModel" [(ngModel)]="result" name="result" placeholder="Sujet">
+                <input class="input1" type="text" #reslt="ngModel" [(ngModel)]="result" name="result" placeholder="Résultat">
                 <span class="shadow-input1"></span>
                 <span *ngIf="(contactForm.submitted || reslt.touched)" class="text-danger">
                     <div *ngIf="reslt.invalid">

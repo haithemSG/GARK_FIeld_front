@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Terrain } from "../models/terrain.model"
 import { AuthenticationService } from "./authentication.service";
-
+import { Reservation } from '../models/reservation.model';
+import * as moment from 'moment'; 
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +20,10 @@ export class ReservationService {
   ) { }
 
   create(reservation){
-    return this.http.post(`${this.baseUrl}`,  reservation, { headers: new HttpHeaders({ 'Authorization': this.auth.Token }) } )
+    let reserv = reservation as Reservation;
+    reserv.StartTime = moment(reserv.StartTime).utcOffset(1).toDate();
+    reserv.EndTime = moment(reserv.EndTime).utcOffset(1).toDate();
+    return this.http.post(`${this.baseUrl}`,  reserv, { headers: new HttpHeaders({ 'Authorization': this.auth.Token }) } )
   }
 
   getAll(){

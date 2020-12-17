@@ -24,19 +24,19 @@ export class CreateSpentIncomeDialog implements OnInit {
         public dialogRef: MatDialogRef<CreateSpentIncomeDialog>,
         private notificationsService: NotificationsService,
         private financeService: FinanceService,
-        
+
         @Inject(MAT_DIALOG_DATA) public data: Object) { }
 
-        dateToSee;
+    dateToSee;
     ngOnInit(): void {
         this.update = !this.data["create"];
         this.isSpent = this.data["isSpent"];
         // this.finance.date = new Date();
-        this.dateToSee = new Date().toLocaleDateString('fr-FR');
-        // console.log(this.dateToSee);
-        
-        // console.log(this.finance.date);
-        
+        let date_ob = new Date();
+        let date = ("0" + date_ob.getDate()).slice(-2);
+        let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+        let year = date_ob.getFullYear();
+        this.dateToSee = year + "-" + month + "-" + date;
     }
 
     onSubmit() {

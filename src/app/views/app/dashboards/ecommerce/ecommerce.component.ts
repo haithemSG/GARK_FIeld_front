@@ -151,7 +151,7 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
     this.loadingIndicator = true;
     this.financeService.getAll().subscribe(
       (res) => {
-        this.finances = res["finances"] as Array<Finance>;
+        this.finances = (res["finances"] as Array<Finance>);
         
 
         this.finances.forEach((f : Finance)=>{
@@ -159,11 +159,15 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
             f.amount = -f.amount
           }
         });
+        this.finances = this.finances.sort((el1 : Finance, el2 : Finance)=> {
+          // console.log( new Date(el2.date).getTime());
+          return new Date(el2.date).getTime() - new Date(el1.date).getTime()
+        });
         this.filtred = this.finances;
         this.loadingIndicator = false
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     )
   }

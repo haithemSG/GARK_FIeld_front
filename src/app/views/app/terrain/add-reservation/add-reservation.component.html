@@ -1,7 +1,7 @@
 <form #reservForm="ngForm">
-    <h4 class="modal-title text-center" style="margin-bottom: 0 !important;" > 
+    <h4 class="modal-title text-center" style="margin-bottom: 0 !important;">
         Créer une nouvelle réservation <br>
-        <span *ngIf="uniqueTerrain" >{{monTerrain}}</span>
+        <span *ngIf="uniqueTerrain">{{monTerrain}}</span>
     </h4>
     <table class="custom-event-editor" width="100%" cellpadding="5">
         <tbody>
@@ -11,7 +11,8 @@
                     <input class="e-field e-input" required placeholder="Nom du réservant"
                         [ngModelOptions]="{standalone: true}" type="text" id="Name-Mob" name="Name"
                         [(ngModel)]="resMobile.Name" #nm="ngModel" style="width: 100%" />
-                    <div class="text-danger" *ngIf="nm.touched && nm.invalid" > Veuillez saisir le nom du réservant </div>
+                    <div class="text-danger" *ngIf="nm.touched && nm.invalid"> Veuillez saisir le nom du réservant
+                    </div>
                 </td>
 
             </tr>
@@ -21,49 +22,48 @@
                     <input class="e-field e-input" required [(ngModel)]="resMobile.num"
                         [ngModelOptions]="{standalone: true}" required placeholder="Numéro de téléphone" type="text"
                         id="num-mobile" #tlp="ngModel" name="num" style="width: 100%" />
-                        <div class="text-danger" *ngIf="tlp.touched || reservForm.submitted" > 
-                            <div *ngIf="tlp.invalid">
-                                Veuillez saisir un numéro de téléphone
-                            </div>
-                            <div *ngIf="!validateNumber() && tlp.valid" >
-                                Veuillez saisir un numéro de téléphone valide
-                            </div>
+                    <div class="text-danger" *ngIf="tlp.touched || reservForm.submitted">
+                        <div *ngIf="tlp.invalid">
+                            Veuillez saisir un numéro de téléphone
                         </div>
+                        <div *ngIf="!validateNumber() && tlp.valid">
+                            Veuillez saisir un numéro de téléphone valide
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td class="e-textlabel">Prix de réservation</td>
                 <td colspan="4">
-                    <input class="e-field e-input" required [(ngModel)]="resMobile.frais" placeholder="Prix de réservation"
-                        type="number"  #pr="ngModel" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
-                        <div class="text-danger" *ngIf="pr.touched || reservForm.submitted" > 
-                            <div *ngIf="pr.invalid">
-                                Veuillez saisir un frais
-                            </div>
+                    <input class="e-field e-input" required [(ngModel)]="resMobile.frais"
+                        placeholder="Prix de réservation" type="number" #pr="ngModel"
+                        [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
+                    <div class="text-danger" *ngIf="pr.touched || reservForm.submitted">
+                        <div *ngIf="pr.invalid">
+                            Veuillez saisir un frais
                         </div>
+                    </div>
                 </td>
             </tr>
-            <tr *ngIf="!uniqueTerrain" >
+            <tr *ngIf="!uniqueTerrain">
                 <td class="e-textlabel">Terrain</td>
                 <td colspan="4">
                     <ejs-dropdownlist class="e-field" data-name="terrain" placeholder='Choisir un terrain'
-                        [ngModelOptions]="{standalone: true}" (change)="terrainHasChanged($event)" [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
+                        [ngModelOptions]="{standalone: true}" (change)="terrainHasChanged($event)"
+                        [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
                     </ejs-dropdownlist>
                 </td>
             </tr>
             <tr>
                 <td class="e-textlabel">A partir de</td>
                 <td colspan="4">
-                    <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" (change)="startTimeHasChanged($event)" [ngModelOptions]="{standalone: true}"
-                        locale='fr-CH' class="e-field" data-name="StartTime">
-                    </ejs-datetimepicker>
+                        <app-date-picker (valueChange)="startTimeHasChanged($event)" [timeChoosed]="resMobile.StartTime" ></app-date-picker>
                 </td>
             </tr>
             <tr>
                 <td class="e-textlabel">Jusqu'à</td>
                 <td colspan="4">
-                    <ejs-datetimepicker required [(ngModel)]="resMobile.EndTime" name="endd"
-                        locale='fr-CH' class="e-field" data-name="EndTime"></ejs-datetimepicker>
+                    <app-date-picker [timeChoosed]="resMobile.EndTime" ></app-date-picker>
                 </td>
             </tr>
 

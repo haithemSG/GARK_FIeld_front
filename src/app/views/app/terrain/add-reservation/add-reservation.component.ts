@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { DateTimeAdapter } from 'ng-pick-datetime';
 import { Terrain } from 'src/app/shared/models/terrain.model';
 import { ReservationService } from 'src/app/shared/services/reservation.service';
 import { TerrainService } from 'src/app/shared/services/terrain.service';
@@ -16,8 +17,10 @@ export class AddReservationComponent implements OnInit {
     public dialogRef: MatDialogRef<AddReservationComponent>,
     private notificationsService: NotificationsService,
     private reservationService: ReservationService,
-    @Inject(MAT_DIALOG_DATA) public data: Object,
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: Object
+  ) { 
+    
+  }
 
   uniqueTerrain: boolean = false;
   nomTerrain : Array<any> = new Array<any>();
@@ -25,20 +28,22 @@ export class AddReservationComponent implements OnInit {
   buttonDisabled = false;
   buttonState = "";
   monTerrain: string = ""
-
+  terrain : Terrain;
+  
   resMobile = {
     Name: "",
     num: "",
     terrain: "",
     frais: "",
-    StartTime: new Date(new Date().setHours(new Date().getHours() + 1)),
-    EndTime: new Date(new Date().setHours(new Date().getHours() + 2))
+    StartTime: new Date(new Date().setHours(new Date().getHours() + 1, 0, 0)),
+    EndTime: new Date(new Date().setHours(new Date().getHours() + 2, 0, 0))
   }
-  
+  public format = 'dd/MM/yyyy HH:mm';
   ngOnInit(): void {
     if(!this.data["multiple"]){
       this.uniqueTerrain = true;
       this.monTerrain = this.data["terrain"]
+      this.resMobile.terrain = this.data["terrain"];
     }else{
       this.nomTerrain = this.data["listTerrain"] as Array<any>;
       this.listTerrain = this.data["list"] as Array<Terrain>;
@@ -53,8 +58,7 @@ export class AddReservationComponent implements OnInit {
 
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
-    this.reservationService.create(this.resMobile).subscribe((res) => {
-
+    this.reservationService.create(this.resMobile).subscribe((res) => {      
       this.notificationsService.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
 
       this.buttonDisabled = true;
@@ -90,10 +94,11 @@ export class AddReservationComponent implements OnInit {
   }
 
   startTimeHasChanged(event){
+    this.resMobile.StartTime = event as Date;
     if(this.selectedTerrain){
-      console.log(this.selectedTerrain.duration);
-      
       this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.selectedTerrain.duration);
+    }else{
+      this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(90);
     }
   }
 }

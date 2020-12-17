@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   ready = false;
-  
+
   ngOnInit() {
     this.titleService.setTitle('Inscription | GARK')  ;
     this.complexe.name = "";
@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
         this.buttonComplexeDisabled = false;
         this.buttonComplexeState = '';
         this.notifications.create('Succès', "Inscription effectué avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
-        this.complexe = res["complexe"] as Complexe;
+        // this.complexe = res["complexe"] as Complexe;
         
         setTimeout(()=>{
           this.router.navigateByUrl('/user/login')

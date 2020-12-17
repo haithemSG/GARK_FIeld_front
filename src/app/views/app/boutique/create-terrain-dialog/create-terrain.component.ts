@@ -34,7 +34,7 @@ export class CreateTerrainComponent implements OnInit {
         }else{
             this.selectedColor = this.colors[0];
             this.terrain = new Terrain();
-            this.terrain.duration = 60;
+            this.terrain.duration = 90;
             this.terrain.color = this.selectedColor;
         }
     }

@@ -17,6 +17,7 @@ import { FooterAppComponent } from './layout/footer-app/footer-app.component';
 import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgxUiLoaderModule,
     ScrollToModule.forRoot(),
-    ComponentsStateButtonModule
+    ComponentsStateButtonModule,
   ],
   declarations: [
     AppComponent, 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlankPageComponent } from './blank-page/blank-page.component';
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ComponentsStateButtonModule } from 'src/app/components/state-button/components.state-button.module';
+import { ComponentsDatePickerModule } from 'src/app/components/date-picker/date-picker.module';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -41,17 +42,20 @@ import {
   RecurrenceEditorModule
 } from '@syncfusion/ej2-angular-schedule';
 
-import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { CompteComponent } from './compte/compte.component';
 import { DeleteDialogComponent } from './boutique/delete-dialog/delete-dialog.component';
 import { AddReservationComponent } from './terrain/add-reservation/add-reservation.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 
 import { DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModule, ListBoxModule, DropDownTreeModule } from '@syncfusion/ej2-angular-dropdowns';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
+
+
 
 @NgModule({
   declarations: [
@@ -71,8 +75,10 @@ import { DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModu
     CommonModule,
     AppRoutingModule,
     SharedModule,
+
     LayoutContainersModule,
     ComponentsStateButtonModule,
+    ComponentsDatePickerModule,
     SortablejsModule,
     FormsModule,
     MatButtonModule,
@@ -91,16 +97,13 @@ import { DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModu
     DropDownTreeModule,
     RecurrenceEditorModule,
     ModalModule.forRoot(),
+    TimepickerModule.forRoot(),
     TabsModule.forRoot(),
     PopoverModule.forRoot(),
     MatButtonModule,
     BsDropdownModule.forRoot(),
-    TimepickerModule.forRoot(),
     ProgressbarModule.forRoot(),
     BootstrapModule,
-    DatePickerAllModule, 
-    TimePickerAllModule, 
-    DateTimePickerAllModule,
     DropDownListAllModule,
     PagesContainersModule,
     SimpleNotificationsModule.forRoot(),
@@ -118,8 +121,8 @@ import { DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModu
     MonthService, 
     AgendaService, 
     MonthAgendaService, 
-    TimelineViewsService, 
-    TimelineMonthService
+    TimelineViewsService,  //--> to be removed
+    TimelineMonthService, //--> to be removed
   ]
 })
 export class AppModule { }

@@ -95,16 +95,28 @@
                                 <tr>
                                     <td class="e-textlabel">A partir de</td>
                                     <td colspan="4">
-                                        <ejs-datetimepicker class="e-field" data-name="StartTime"
+                                        <!-- <ejs-datetimepicker class="e-field" data-name="StartTime"
                                             [value]="(data.startTime || data.StartTime)">
-                                        </ejs-datetimepicker>
+                                        </ejs-datetimepicker> -->
+                                        <!-- <kendo-datetimepicker class="form-control"  id="time-start"
+                                        [format]="format" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="data.StartTime">
+                                        <app-timepicker-messages></app-timepicker-messages>
+                                    </kendo-datetimepicker> -->
+                                    <app-date-picker  [timeChoosed]="data.StartTime" ></app-date-picker>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="e-textlabel">Jusqu'à</td>
                                     <td colspan="4">
-                                        <ejs-datetimepicker class="e-field" data-name="EndTime"
-                                            [value]='(data.endTime || data.EndTime)'></ejs-datetimepicker>
+                                        <!-- <ejs-datetimepicker class="e-field" data-name="EndTime"
+                                            [value]='(data.endTime || data.EndTime)'></ejs-datetimepicker> -->
+                                            <!-- <kendo-datetimepicker class="form-control"  id="time-start"
+                                            [format]="format" [ngModelOptions]="{standalone: true}"
+                                            [(ngModel)]="data.EndTime">
+                                            <app-timepicker-messages></app-timepicker-messages>
+                                        </kendo-datetimepicker> -->
+                                        <app-date-picker [timeChoosed]="data.EndTime" ></app-date-picker>
                                     </td>
                                 </tr>
 
@@ -130,47 +142,51 @@
 
         <label class="e-textlabel fw-700">Réservation Pour</label>
         <input class="e-field e-input mb-3" required placeholder="Nom du réservant"
-            [ngModelOptions]="{standalone: true}" #nomres="ngModel" type="text" id="Name-Mob" name="Name" [(ngModel)]="resMobile.Name"
-            style="width: 100%" />
-            <div class="text-danger" *ngIf="(nomres.touched || reservForm.submitted ) && nomres.invalid" > Veuillez saisir le nom du réservant </div>
+            [ngModelOptions]="{standalone: true}" #nomres="ngModel" type="text" id="Name-Mob" name="Name"
+            [(ngModel)]="resMobile.Name" style="width: 100%" />
+        <div class="text-danger" *ngIf="(nomres.touched || reservForm.submitted ) && nomres.invalid"> Veuillez saisir le
+            nom du réservant </div>
 
         <label class="e-textlabel fw-700 mt-3">Numéro de téléphone</label>
         <input class="e-field e-input mb-3" required [(ngModel)]="resMobile.num" [ngModelOptions]="{standalone: true}"
-            required #tele="ngModel" placeholder="Numéro de téléphone" type="text" id="num-mobile" name="num" style="width: 100%" />
-            <div class="text-danger" *ngIf="tele.touched || reservForm.submitted" > 
-                <div *ngIf="tele.invalid">
-                    Veuillez saisir un numéro de téléphone
-                </div>
-                <div *ngIf="!validateNumber() && tele.valid" >
-                    Veuillez saisir un numéro de téléphone valide
-                </div>
+            required #tele="ngModel" placeholder="Numéro de téléphone" type="text" id="num-mobile" name="num"
+            style="width: 100%" />
+        <div class="text-danger" *ngIf="tele.touched || reservForm.submitted">
+            <div *ngIf="tele.invalid">
+                Veuillez saisir un numéro de téléphone
             </div>
+            <div *ngIf="!validateNumber() && tele.valid">
+                Veuillez saisir un numéro de téléphone valide
+            </div>
+        </div>
 
         <label class="e-textlabel fw-700 mt-3">Prix de réservation</label>
         <input class="e-field e-input mb-3" required [(ngModel)]="resMobile.frais" placeholder="Prix de réservation"
-            type="number" #pri="ngModel" [ngModelOptions]="{standalone: true}" required name="frais" style="width: 100%" />
-            <div class="text-danger" *ngIf="pri.touched || reservForm.submitted" > 
-                <div *ngIf="pri.invalid">
-                    Veuillez saisir un frais
-                </div>
+            type="number" #pri="ngModel" [ngModelOptions]="{standalone: true}" required name="frais"
+            style="width: 100%" />
+        <div class="text-danger" *ngIf="pri.touched || reservForm.submitted">
+            <div *ngIf="pri.invalid">
+                Veuillez saisir un frais
             </div>
+        </div>
         <label class="e-textlabel fw-700 mt-3">Terrain</label>
         <ejs-dropdownlist class="e-field" data-name="terrain" placeholder='Choisir un terrain'
-            [ngModelOptions]="{standalone: true}" (change)="TerrainChanged($event)" [dataSource]='nomTerrain' [(ngModel)]='resMobile.terrain'>
+            [ngModelOptions]="{standalone: true}" (change)="TerrainChanged($event)" [dataSource]='nomTerrain'
+            [(ngModel)]='resMobile.terrain'>
         </ejs-dropdownlist>
-        <div class="text-danger" *ngIf="notSelected && reservForm.submitted" > 
+        <div class="text-danger" *ngIf="notSelected && reservForm.submitted">
             Veuillez Sélectionner un terrain
         </div>
 
-        <label class="e-textlabel fw-700 mt-3">A partir de</label>
-        <ejs-datetimepicker required [(ngModel)]="resMobile.StartTime" id="time-start" (change)="getStartTime($event)" [ngModelOptions]="{standalone: true}"
-            locale='fr-CH' class="e-field mb-3" data-name="StartTime">
-        </ejs-datetimepicker>
+        <div class="form-group mb-3">
+            <label class="e-textlabel fw-700 mt-3">A partir de</label>
+            <app-date-picker (valueChange)="getStartTime($event)" [timeChoosed]="resMobile.StartTime" ></app-date-picker>
+        </div>
 
-        <label class="e-textlabel fw-700 mt-3">Jusqu'à</label>
-        <ejs-datetimepicker required [(ngModel)]="resMobile.EndTime" [ngModelOptions]="{standalone: true}"
-            locale='fr-CH' class="e-field mb-3" data-name="EndTime">
-        </ejs-datetimepicker>
+        <div class="form-group mb-3">
+            <label class="e-textlabel fw-700 mt-3">Jusqu'à</label>
+            <app-date-picker [timeChoosed]="resMobile.EndTime" ></app-date-picker>
+        </div>
 
         <div class="mt-3" style="display: flex; width: 100%">
             <div>
@@ -179,6 +195,7 @@
             </div>
             <div style="margin: 0 auto;"></div>
             <div>
+
                 <app-state-button [btnClass]="'btn btn-gradiant btn-lg btn-shadow'" [currentState]="buttonState"
                     [isDisabled]="buttonDisabled || reservForm.invalid" (click)="onSubmit()">
                     Créer

@@ -118,6 +118,9 @@
             ],
             "scripts": [],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
               "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ]
           }

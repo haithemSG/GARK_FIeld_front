@@ -24,12 +24,14 @@ export class CompteComponent implements OnInit {
   profile : User = new User();
   complexe: Complexe = new Complexe();
   imageSrc = "/assets/imgs/garkLOGO.png"
-
+  isMeridian = true;
   ngOnInit(): void {
     this.titleService.setTitle("Mon Compte | GARK");
     this.authenticationService.getProfile().subscribe(
       (res)=>{
         this.profile = res as User;
+        console.log(this.profile);
+        
         this.profile.password = ""
         if(this.profile["profile"]){
           if(this.profile["profile"]["picture"]){

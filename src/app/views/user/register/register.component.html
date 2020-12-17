@@ -82,7 +82,7 @@
 
       <label class="form-group has-float-label">
 
-        <timepicker #opening="ngModel" class="form-control" style="padding: .8rem; font-size: 1.1rem" required
+        <timepicker #opening="ngModel" [showMeridian]="false" class="form-control" style="padding: .8rem; font-size: 1.1rem" required
           name="h-open" [(ngModel)]="complexe.opening" [showSpinners]="false"></timepicker>
         <span style="font-size: 100% !important;">Horraire d'ouverture</span>
         <div *ngIf="!opening.valid && update.submitted" class="invalid-tooltip">
@@ -92,7 +92,7 @@
 
       <label class="form-group has-float-label">
 
-        <timepicker #closing="ngModel" class="form-control" style="padding: .8rem; font-size: 1.1rem" required
+        <timepicker #closing="ngModel" [showMeridian]="false" class="form-control" style="padding: .8rem; font-size: 1.1rem" required
           name="h-close" [(ngModel)]="complexe.closing" [showSpinners]="false"></timepicker>
 
         <span style="font-size: 100% !important;">Horraire de fermeture</span>

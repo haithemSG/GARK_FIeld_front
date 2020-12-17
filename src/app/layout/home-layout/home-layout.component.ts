@@ -52,23 +52,24 @@ export class HomeLayoutComponent implements OnInit {
   buttonDisabled = false;
   buttonState = '';
 
-  goHome(){
+  goHome() {
     this.showMobileMenu = false;
-    this.router.navigateByUrl('/'); 
+    this.router.navigateByUrl('/');
   }
-  goContact(){
+  goContact() {
     this.showMobileMenu = false;
-    this.router.navigateByUrl('/contact'); 
+    this.router.navigateByUrl('/contact');
   }
-  goAbout(){    
-    if(this.showMobileMenu){
+  goAbout() {
+    if (this.showMobileMenu) {
       this.showMobileMenu = false;
-      this.router.navigateByUrl('/');
-      this.scrollTo('#features')
-    }else{
-      this.router.navigateByUrl('/');
-      this.scrollTo('#features')
     }
+    // this.router.navigateByUrl('/');
+    this.scrollTo('#footer')
+    // }else{
+    //   this.router.navigateByUrl('/');
+    //   this.scrollTo('#footer')
+    // }
   }
 
   goLogin() {

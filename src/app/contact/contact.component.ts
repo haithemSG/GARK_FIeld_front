@@ -85,21 +85,17 @@ export class ContactComponent implements OnInit {
         </body>
       </html>`,
     }).then(
-      (message) => {
-        console.log(message);
-        
+      (message) => {        
         this.isLoading = false;
         this.error = false;
         this.generateRandomNumbers();
-        this.result = "";
+        // this.result = "";
         this.sent = true;
       }
-    ).catch((err) => {
-      console.log(err);
-      
+    ).catch((err) => {      
       this.isLoading = false;
       this.generateRandomNumbers();
-      this.result = "";
+      // this.result = "";
       this.error = true;
       this.sent = true; 
     })

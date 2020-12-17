@@ -18,7 +18,7 @@
                         <div class="profile-header">
 
                             <div class="cover-image">
-                                <img src="/assets/imgs/GarkBanner1.png" class="img img-fluid" style="width: 100%;">
+                                <img src="/assets/imgs/cover-profile.png" class="img img-fluid" style="width: 100%;">
                             </div>
                             <div class="user-image ">
                                 <div class="image-container">
@@ -251,7 +251,7 @@
                                                     required #opening="ngModel" name="h-open"
                                                     [(ngModel)]="complexe.opening" /> -->
 
-                                                    <timepicker #opening="ngModel" class="form-control"
+                                                    <timepicker #opening="ngModel" [showMeridian]="false" class="form-control"
                                                     style="padding: .8rem; font-size: 1.1rem" required name="h-open"
                                                     [(ngModel)]="complexe.opening" [showSpinners]="false"></timepicker>
                                                 <span style="font-size: 100% !important;">Horraire d'ouverture</span>
@@ -263,9 +263,9 @@
                                             <label class="form-group has-float-label">
                                                 <!-- <input 
                                                  type="password" [(ngModel)]="" /> -->
-                                                <timepicker #closing="ngModel" class="form-control"
+                                                <timepicker #closing="ngModel" [showMeridian]="false" class="form-control"
                                                     style="padding: .8rem; font-size: 1.1rem" required name="h-close"
-                                                    [(ngModel)]="complexe.closing" [showSpinners]="false"></timepicker>
+                                                    [(ngModel)]="complexe.closing"  [showSpinners]="false"></timepicker>
 
                                                 <span style="font-size: 100% !important;">Horraire de fermeture</span>
                                                 <div *ngIf="!closing.valid && update.submitted" class="invalid-tooltip">
