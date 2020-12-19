@@ -34,13 +34,16 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json" 
             ],
             "styles": [
               "src/assets/css/vendor/bootstrap.min.css",
-              "src/styles.scss",
               "src/assets/fonts/font/flaticon.css",
               "./node_modules/@glidejs/glide/dist/css/glide.core.min.css",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css",
+              "src/styles.scss",
               {
                 "input": "src/assets/css/sass/themes/vien.light.greenlime.scss",
                 "bundleName": "light.green.lime",
@@ -50,8 +53,7 @@
                 "input": "src/assets/css/sass/themes/vien.dark.greenlime.scss",
                 "bundleName": "dark.green.lime",
                 "inject": false
-              },
-              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
+              }
             ],
             "scripts": [
               "src/assets/smtp.js"

@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import jwt_decode from 'jwt-decode';
 import { IPayload, ICredentails, IRegisterCredentails, User } from '../models/user.model';
-
-
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +51,14 @@ export class AuthenticationService {
   }
   public updatePassword( old, newPassword ){
     return this.http.post(`${this.baseUrl}/update-password`, {old, newPassword}, { headers :  new HttpHeaders({ 'Authorization' : this.Token  }) });
+  }
+
+  public assignNotificationToken(token: string){
+    return this.http.put(`${this.baseUrl}/assign-notif`, {token}, { headers :  new HttpHeaders({ 'Authorization' : this.Token  }) });
+  }
+
+  public getNotificationToken() {
+    return this.http.get(`${this.baseUrl}/assign-notif`, { headers :  new HttpHeaders({ 'Authorization' : this.Token  }) });
   }
  
   public signOut(){

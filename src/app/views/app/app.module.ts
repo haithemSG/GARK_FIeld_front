@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { BlankPageComponent } from './blank-page/blank-page.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -29,16 +29,16 @@ import { ImageDialogComponent } from './boutique/show-terrain/image-dialog/image
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
-import { 
-  AgendaService, 
-  DayService, 
-  MonthAgendaService, 
-  MonthService, 
-  ScheduleModule, 
-  TimelineMonthService, 
-  TimelineViewsService, 
-  WeekService, 
-  WorkWeekService ,
+import {
+  AgendaService,
+  DayService,
+  MonthAgendaService,
+  MonthService,
+  ScheduleModule,
+  TimelineMonthService,
+  TimelineViewsService,
+  WeekService,
+  WorkWeekService,
   RecurrenceEditorModule
 } from '@syncfusion/ej2-angular-schedule';
 
@@ -53,22 +53,27 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 
 import { DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModule, ListBoxModule, DropDownTreeModule } from '@syncfusion/ej2-angular-dropdowns';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { environment } from 'src/environments/environment';
 
 
-
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { MessagingService } from 'src/app/shared/services/messaging.service';
 
 @NgModule({
   declarations: [
-    BlankPageComponent, 
-    AppComponent, 
-    AjoutCategorie, 
-    PharesComponent, 
-    BoutiqueComponent, 
-    CreateTerrainComponent, 
-    ShowTerrainComponent, 
-    ImageDialogComponent, 
-    CompteComponent, 
-    DeleteDialogComponent, 
+    BlankPageComponent,
+    AppComponent,
+    AjoutCategorie,
+    PharesComponent,
+    BoutiqueComponent,
+    CreateTerrainComponent,
+    ShowTerrainComponent,
+    ImageDialogComponent,
+    CompteComponent,
+    DeleteDialogComponent,
     AddReservationComponent,
   ],
   imports: [
@@ -107,6 +112,10 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     DropDownListAllModule,
     PagesContainersModule,
     SimpleNotificationsModule.forRoot(),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   entryComponents: [
     CreateTerrainComponent,
@@ -115,14 +124,15 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     AddReservationComponent
   ],
   providers: [
-    DayService, 
-    WeekService, 
-    WorkWeekService, 
-    MonthService, 
-    AgendaService, 
-    MonthAgendaService, 
+    DayService,
+    WeekService,
+    WorkWeekService,
+    MonthService,
+    AgendaService,
+    MonthAgendaService,
     TimelineViewsService,  //--> to be removed
     TimelineMonthService, //--> to be removed
+    MessagingService, AsyncPipe
   ]
 })
 export class AppModule { }

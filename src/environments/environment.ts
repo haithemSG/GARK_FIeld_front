@@ -17,4 +17,14 @@ export const environment = {
   defaultDirection: 'ltr',
   themeRadiusStorageKey: 'gark-themeradius',
   isAuthGuardActive: true,
+  firebase: {
+    apiKey: "AIzaSyAW5XI1xtyDSCwXqgJxKY_bzLTJEHISoxo",
+    authDomain: "gark-b5d29.firebaseapp.com",
+    projectId: "gark-b5d29",
+    storageBucket: "gark-b5d29.appspot.com",
+    messagingSenderId: "482874847853",
+    appId: "1:482874847853:web:047579139ad926d0b78564",
+    measurementId: "G-VQXZB5PNJ6",
+    token: "AAAAcG2Vcm0:APA91bFVv7L8zlDq135rrc4mFdGpa4V-1KeTEIRIAEM7eH1AqK1caCiICRHuZmzve7OjyJILNyPPHCa2QuHPLryXEXH5Ohzt4vgqaZyY6V9MDODeilC-LntehcIvFA1xi-abkE3P74kI"
+  }
 };
