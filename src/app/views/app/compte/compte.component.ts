@@ -4,7 +4,6 @@ import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { Complexe } from 'src/app/shared/models/complexe.model';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
-import { MessagingService } from 'src/app/shared/services/messaging.service';
 import { TerrainService } from 'src/app/shared/services/terrain.service';
 import { environment } from 'src/environments/environment';
 
@@ -20,10 +19,8 @@ export class CompteComponent implements OnInit {
     private titleService: Title,
     private notificationsService: NotificationsService,
     private terrainService: TerrainService,
-    private messagingService: MessagingService
   ) { }
 
-  message;
   profile: User = new User();
   complexe: Complexe = new Complexe();
   imageSrc = "/assets/imgs/garkLOGO.png"
@@ -31,19 +28,10 @@ export class CompteComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle("Mon Compte | GARK");
 
-    this.messagingService.requestPermission()
-    this.messagingService.receiveMessage()
-    this.message = this.messagingService.currentMessage;
-    this.messagingService.currentMessage.subscribe(
-      (res)=>{
-        console.log("message recived !");
-        console.log(res);
-      }
-    )
     this.authenticationService.getProfile().subscribe(
       (res) => {
         this.profile = res as User;
-        console.log(this.profile);
+        ////console.log(this.profile);
 
         this.profile.password = ""
         if (this.profile["profile"]) {

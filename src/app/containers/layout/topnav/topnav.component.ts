@@ -73,7 +73,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
   async ngOnInit() {
 
     this._auth.getProfile().subscribe((res)=>{
-      //console.log("user", res)
+      ////console.log("user", res)
       this.displayName = res["profile"]["firstName"]
     })
     this.subscription = this.sidebarService.getSidebar().subscribe(
@@ -81,7 +81,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
         this.sidebar = res;
       },
       (err) => {
-        console.error(`An error occurred: ${err.message}`);
+        //console.error(`An error occurred: ${err.message}`);
       }
     );
   }

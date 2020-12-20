@@ -21,7 +21,7 @@
   </div>
 
 </div>
-<div class="row" [ngStyle]="{'padding-bottom' : isMobile ? '120px' : '10px'}" >
+<div class="row" [ngStyle]="{'padding-bottom' : isMobile ? '120px' : '10px'}">
   <div class="col-12">
     <div class="card h-100">
       <div class="card-body" id="data-table">
@@ -59,8 +59,8 @@
               aria-describedby="search-addon">
             <div class="input-group-append">
               <span class="input-group-text" id="search-addon">
-                <button type="button" class="btn btn-search" [popover]="popTemplate"
-                  popoverTitle="Appliquer des filtres" placement="auto" triggers='click'>
+                <button type="button" class="btn btn-search" [popover]="popTemplate" [outsideClick]="true"
+                  triggers="click" #pop="bs-popover" popoverTitle="Appliquer des filtres" placement="auto">
                   <i class="flaticon-setting-lines"></i>
                 </button>
               </span>
@@ -68,8 +68,8 @@
           </div>
           <div>
             <ng-template #popTemplate style="width: calc(100vw - 50%);">
-              <button class="btn btn-block btn-danger btn-sm mb-2" (click)="filter('spent')"> Dépenses </button>
-              <button class="btn btn-block btn-gradiant btn-sm mb-2" (click)="filter('income')"> Revenus </button>
+              <button class="btn btn-block btn-danger btn-sm mb-2" (click)="filter('spent');pop.hide();"> Dépenses </button>
+              <button class="btn btn-block btn-gradiant btn-sm mb-2" (click)="filter('income');pop.hide();"> Revenus </button>
             </ng-template>
           </div>
           <div *ngIf="filterType != ''">
@@ -97,10 +97,11 @@
 
         </div>
 
-        <div class="dashboard-best-sellers" >
-          <ngx-datatable #table class="material mt-2" [messages]="my_messages" [rows]="finances" [loadingIndicator]="loadingIndicator"
-            [columns]="columns" [columnMode]="ColumnMode.force" [headerHeight]="75" [footerHeight]="100"
-            rowHeight="auto" [limit]="currentPageLimit" [reorderable]="reorderable">
+        <div class="dashboard-best-sellers">
+          <ngx-datatable #table class="material mt-2" [messages]="my_messages" [rows]="finances"
+            [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="ColumnMode.force"
+            [headerHeight]="75" [footerHeight]="100" rowHeight="auto" [limit]="currentPageLimit"
+            [reorderable]="reorderable">
 
             <ngx-datatable-column prop="label" name="Désignation" [flexGrow]="3">
               <ng-template let-row="row" class="fs-8" let-value="value" ngx-datatable-cell-template>

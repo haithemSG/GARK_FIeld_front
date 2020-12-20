@@ -19,7 +19,7 @@ export class MenuTypesComponent implements OnInit {
         this.sidebar = res;
       },
       err => {
-        console.error(`An error occurred: ${err.message}`);
+        //console.error(`An error occurred: ${err.message}`);
       }
     );
   }

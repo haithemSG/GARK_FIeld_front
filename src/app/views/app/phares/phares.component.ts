@@ -70,7 +70,7 @@ export class PharesComponent implements OnInit, OnChanges {
     public AddReservationDialog: MatDialog
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(this.resMobile);
+    // //console.log(this.resMobile);
     
   }
 

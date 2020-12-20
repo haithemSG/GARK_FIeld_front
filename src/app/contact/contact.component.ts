@@ -57,7 +57,7 @@ export class ContactComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    console.log("sending")
+    //console.log("sending")
     Email.send({
       Host: "smtp.gmail.com",
       Username: "gark.assistance@gmail.com",

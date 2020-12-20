@@ -1,13 +1,13 @@
-import { Component, HostListener, AfterViewInit,Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, AfterViewInit,Input, OnInit, ViewChild, ViewEncapsulation, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
-import productItems from 'src/app/data/products';
 import { Finance } from 'src/app/shared/models/finance.model';
 import { FinanceService } from 'src/app/shared/services/finance.service';
 import { CreateSpentIncomeDialog } from './create-spent-income-dialog/create-spent-income-dialog.component';
 import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-ecommerce',
@@ -17,33 +17,26 @@ import { map, debounceTime } from 'rxjs/operators';
 })
 export class EcommerceComponent implements OnInit , AfterViewInit{
 
-
   constructor(
     private titleService: Title,
     public dialog: MatDialog,
     private financeService: FinanceService
   ) { }
   
-
   my_messages = {
     'emptyMessage': 'Aucune donnée à afficher',
     'totalMessage': ''
   };
+
   public currentPageLimit: number = 5;
   public currentVisible: number = 3;
   loadingIndicator = true;
   reorderable = true;
+  isPopOpen = false;
   @Input() title = 'dashboards.best-sellers';
   @ViewChild('search', { static: false }) search: any;
   @ViewChild(DatatableComponent) public table: DatatableComponent;
   class = 'icon-cards-row';
-  rows = productItems.slice(0, 8);
-  // columns = [
-  //   { prop: 'title' },
-  //   { name: 'Sales' },
-  //   { name: 'Stock' },
-  //   { name: 'Category' }
-  // ];
 
   columns = [
     { name: 'Désignation', prop: 'label', sortable: false },
@@ -58,11 +51,11 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
     { prop: 'isSpent', name: 'Dépenses', amount: 0, icon: 'flaticon-money-1', color: "#77e773" },
     { prop: 'benifits', name: 'Bénifices', amount: 0, icon: 'flaticon-money-1', color : "#77e773" },
   ]
-
+  
   isMobile: boolean = false;
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-
     if (window.screen.width < 815) {
       this.isMobile = true;
     }
@@ -89,7 +82,7 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
 
   getStats() {
     this.financeService.getStats().subscribe((res) => {
-      // console.log(res);
+      // //console.log(res);
       if (res) {
         this.stats.forEach((el) => {
           if (el.prop == 'income') {
@@ -116,15 +109,13 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
 
     spentDialog.afterClosed().subscribe((res) => {
       if (res) {
-        // console.log(res);
+        // //console.log(res);
         this.getFinanceState();
         this.getStats();
       }
 
     })
   }
-
-
 
   clickCreateIncome() {
     const spentDialog = this.dialog.open(CreateSpentIncomeDialog,
@@ -135,7 +126,7 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
 
     spentDialog.afterClosed().subscribe((res) => {
       if (res) {
-        // console.log(res);
+        // //console.log(res);
         // this.finances.push(res as Finance)
         this.getFinanceState();
         this.getStats();
@@ -160,20 +151,21 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
           }
         });
         this.finances = this.finances.sort((el1 : Finance, el2 : Finance)=> {
-          // console.log( new Date(el2.date).getTime());
+          // //console.log( new Date(el2.date).getTime());
           return new Date(el2.date).getTime() - new Date(el1.date).getTime()
         });
         this.filtred = this.finances;
         this.loadingIndicator = false
       },
       (err) => {
-        // console.log(err);
+        // //console.log(err);
       }
     )
   }
 
-
-  filter(type: string, dateDebut?: Date, dateFin?: Date){
+ 
+  filter(type: string, dateDebut?: Date, dateFin?: Date){  
+    
     if(type === 'spent'){
       this.filterType = 'spent'
       this.finances = this.filtred;
@@ -198,6 +190,8 @@ export class EcommerceComponent implements OnInit , AfterViewInit{
       //type === 'date
     }
   }
+
+
 
   dismissFilter(){
     this.filterType = '';

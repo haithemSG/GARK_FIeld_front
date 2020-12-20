@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
+import { QuicklinkStrategy } from 'ngx-quicklink'
 
 const routes: Routes = [
   {
@@ -11,12 +12,16 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent }
     ]
   },
-  { path: 'football', loadChildren: () => import('./views/views.module').then(m => m.ViewsModule) },
+  { path: 'football', loadChildren: () => import('./views/views.module').then(m => m.ViewsModule), data: { preload : false, delay: true } },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled',
+    preloadingStrategy : QuicklinkStrategy
+}),
+],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

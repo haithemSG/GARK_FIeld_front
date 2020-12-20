@@ -47,7 +47,6 @@ export class BoutiqueComponent implements OnInit {
     this.isMobile = window.screen.width < 600 ? true : false;
   }
   OnError() {
-    console.log("error");
   }
 
   colors = ['#d50103', '#e77b73', '#f6bf25', '#32b679', '#098043', '#059be5', '#4050b5', '#7986cb', '#8e24aa', '#616161'];

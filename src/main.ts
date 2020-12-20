@@ -3,7 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { getThemeColor, setThemeColor } from './app/utils/util';
+import { setThemeColor } from './app/utils/util';
 
 if (environment.production) {
   enableProdMode();

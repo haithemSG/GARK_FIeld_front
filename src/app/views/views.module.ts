@@ -7,13 +7,11 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
-// import { ComponentsStateButtonModule } from '../components/state-button/components.state-button.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    // ComponentsStateButtonModule,
     ViewRoutingModule,
     SharedModule,
     ComponentsCarouselModule,

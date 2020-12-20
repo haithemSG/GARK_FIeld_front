@@ -116,11 +116,11 @@ export class RegisterComponent implements OnInit {
 
       },
       (err) => {
-        // console.log(err);
+        // //console.log(err);
 
         this.buttonComplexeDisabled = false;
         this.buttonComplexeState = '';
-        // console.log(err["error"]["Message"]);
+        // //console.log(err["error"]["Message"]);
 
         this.notifications.create('Erreur', err["error"]["Message"] || "Une erreur a survenue, veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
       }

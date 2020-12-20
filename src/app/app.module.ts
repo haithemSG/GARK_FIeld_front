@@ -16,12 +16,12 @@ import { ContactComponent } from './contact/contact.component';
 import { FooterAppComponent } from './layout/footer-app/footer-app.component';
 import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { QuicklinkModule , QuicklinkStrategy } from 'ngx-quicklink'
 
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ViewsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgxUiLoaderModule,
     ScrollToModule.forRoot(),
+    QuicklinkModule,
     ComponentsStateButtonModule,
   ],
   declarations: [

@@ -13,9 +13,9 @@ export class ResolutionDirective {
   ) { }
 
   show(){
-    console.log(this.el.nativeElement);
-    console.log('height---' + this.el.nativeElement.offsetHeight);
-    console.log('width---' + this.el.nativeElement.offsetWidth);
+    //console.log(this.el.nativeElement);
+    //console.log('height---' + this.el.nativeElement.offsetHeight);
+    //console.log('width---' + this.el.nativeElement.offsetWidth);
   }
 
 }

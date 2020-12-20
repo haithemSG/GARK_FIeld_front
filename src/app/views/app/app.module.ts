@@ -1,14 +1,11 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { BlankPageComponent } from './blank-page/blank-page.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutContainersModule } from 'src/app/containers/layout/layout.containers.module';
-import { AjoutCategorie } from './ajout-categorie/ajout-categorie';
 import { SortablejsModule } from 'ngx-sortablejs';
 import { FormsModule } from '@angular/forms';
-import { PagesContainersModule } from 'src/app/containers/pages/pages.containers.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PharesComponent } from './phares/phares.component';
 import { BoutiqueComponent } from './boutique/boutique.component';
@@ -64,9 +61,7 @@ import { MessagingService } from 'src/app/shared/services/messaging.service';
 
 @NgModule({
   declarations: [
-    BlankPageComponent,
     AppComponent,
-    AjoutCategorie,
     PharesComponent,
     BoutiqueComponent,
     CreateTerrainComponent,
@@ -110,7 +105,6 @@ import { MessagingService } from 'src/app/shared/services/messaging.service';
     ProgressbarModule.forRoot(),
     BootstrapModule,
     DropDownListAllModule,
-    PagesContainersModule,
     SimpleNotificationsModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -132,7 +126,11 @@ import { MessagingService } from 'src/app/shared/services/messaging.service';
     MonthAgendaService,
     TimelineViewsService,  //--> to be removed
     TimelineMonthService, //--> to be removed
-    MessagingService, AsyncPipe
+    MessagingService,
   ]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private ms: MessagingService){
+    ms.load();
+  }
+}

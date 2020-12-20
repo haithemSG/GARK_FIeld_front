@@ -68,6 +68,7 @@ export class ShowTerrainComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public dialog: MatDialog,
     private terrainService: TerrainService,
     private reservationService: ReservationService,
@@ -117,7 +118,11 @@ export class ShowTerrainComponent implements OnInit {
           this.isLoading = false;
           this.adjustImage();
           this.fetchReservationData();
-        })
+        },
+        (err)=>{
+          this.router.navigateByUrl(`${this.adminRoot}/terrains`);
+        }
+        )
       } else {
         this.terrain = this.terrainService.openedTerrain;
         this.terrainSelected = this.terrain.name;
@@ -204,12 +209,12 @@ export class ShowTerrainComponent implements OnInit {
     this.resMobile.Name = "";
     this.resMobile.num = "";
     this.resMobile.frais = 90;
-    // console.log("here", this.terrain);
+    // //console.log("here", this.terrain);
 
     this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1, 0, 0));
-    console.log(this.resMobile.StartTime);
+    ////console.log(this.resMobile.StartTime);
     this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
-    console.log(this.resMobile.EndTime);
+    ////console.log(this.resMobile.EndTime);
 
     window.scrollTo({
       top: 0,
@@ -478,7 +483,7 @@ export class ShowTerrainComponent implements OnInit {
 
   public format = 'dd/MM/yyyy HH:mm';
   addReservationDialog() {
-    console.log(this.terrainSelected);
+    //console.log(this.terrainSelected);
 
     const dialog = this.dialog.open(AddReservationComponent, {
       width: '500px',

@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-8" *ngIf="!isLoading && !isMobile"
                 [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }"
-                style="background-size: 100%; background-position: center; background-repeat: no-repeat;">
+                style="background-size: auto 100%; background-position: center; background-repeat: no-repeat;">
                 <div class="overlay">
 
                     <div class="data-overlay">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-8 mb-3" *ngIf="!isLoading && isMobile" id="background-image-mobile-view"
                 [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }"
-                style="background-size: 100%; background-position: center; background-repeat: no-repeat; height: 180px;">
+                style="background-size: auto 100%; background-position: center; background-repeat: no-repeat; height: 180px;">
                 <div class="overlay">
                     <div class="data-overlay">
                         <div style="display: flex;">

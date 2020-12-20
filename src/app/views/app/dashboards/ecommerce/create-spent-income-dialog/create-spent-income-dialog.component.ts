@@ -46,11 +46,11 @@ export class CreateSpentIncomeDialog implements OnInit {
         this.buttonDisabled = true;
         this.buttonState = 'show-spinner';
 
-        console.log(this.finance);
+        ////console.log(this.finance);
         if (!this.isSpent) {
             this.financeService.createIncome(this.finance).subscribe(
                 (res) => {
-                    //console.log( res );
+                    ////console.log( res );
                     this.notificationsService.create('Succès', 'Revenu ajouté avec succès', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
                     setTimeout(() => {
@@ -59,7 +59,7 @@ export class CreateSpentIncomeDialog implements OnInit {
                     }, 1500)
                 },
                 (err) => {
-                    console.log(err);
+                    ////console.log(err);
                     this.notificationsService.create('Erreur', 'Une erreur a survenue veuillez réessayer', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
                     this.buttonDisabled = false;
@@ -67,7 +67,7 @@ export class CreateSpentIncomeDialog implements OnInit {
         } else {
             this.financeService.createSpent(this.finance).subscribe(
                 (res) => {
-                    //console.log( res );
+                    ////console.log( res );
                     this.notificationsService.create('Succès', 'Dépense ajoutée  avec succès', NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false })
                     this.buttonState = '';
                     setTimeout(() => {

@@ -42,7 +42,7 @@ export class FilterType {
 export class ConversionRatesChartCardComponent implements OnInit {
   @Input() class = '';
   @Input() control = true;
-  type: string = "thisWeek";
+  type: string = "thisWeek"; 
 
   filterTypes: Array<FilterType> = [
     { key: "thisWeek", val: "Cette semaine" },
@@ -116,8 +116,7 @@ export class ConversionRatesChartCardComponent implements OnInit {
             })
   
           })
-        }     
-        
+        }             
         this.showStats(this.countPerDay);
       }
     )
