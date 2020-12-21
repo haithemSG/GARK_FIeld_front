@@ -11557,3 +11557,12 @@ textarea.input1 + .shadow-input1 {
     padding-top:4px;
   }
 }
+
+.e-quick-popup-wrapper 
+.e-event-popup 
+.e-popup-header 
+.e-header-icon-wrapper 
+.e-edit {
+    display: none !important;
+    // display: block;
+}

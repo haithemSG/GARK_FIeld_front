@@ -119,9 +119,9 @@ export class ShowTerrainComponent implements OnInit {
           this.adjustImage();
           this.fetchReservationData();
         },
-        (err)=>{
-          this.router.navigateByUrl(`${this.adminRoot}/terrains`);
-        }
+          (err) => {
+            this.router.navigateByUrl(`${this.adminRoot}/terrains`);
+          }
         )
       } else {
         this.terrain = this.terrainService.openedTerrain;
@@ -166,6 +166,26 @@ export class ShowTerrainComponent implements OnInit {
         (<HTMLElement>document.getElementById('_nav')).style.display = "none";
         (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
       }, 20)
+    }
+  }
+  onPopupOpen(event) {
+    //console.log(event);
+    if (event["type"] !== "QuickInfo") {
+      //console.log(event["type"])
+      if (event["type"] == "Editor") {
+        //console.log("edittt")
+        event["cancel"] = true;
+        return null;
+      } else if (event["type"] == "DeleteAlert") {
+        //console.log("delete")
+      }
+      // else{
+      // }
+    } else {
+      if (!event["data"]["Id"]) {
+        event["cancel"] = true;
+        return null;
+      }
     }
   }
 
@@ -405,6 +425,7 @@ export class ShowTerrainComponent implements OnInit {
     EndTime: new Date(new Date().setHours(new Date().getHours() + 2, 0))
   }
 
+  already: boolean = false;
   onSubmit() {
 
     if (this.buttonDisabled || this.resMobile.Name == "" || this.resMobile.num == "" || this.resMobile.StartTime == null || this.resMobile.EndTime == null) {
@@ -416,13 +437,19 @@ export class ShowTerrainComponent implements OnInit {
     this.buttonState = 'show-spinner';
     this.reservationService.create(this.resMobile).subscribe((res) => {
 
-      this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
-      this.fetchReservationData();
-      this.buttonDisabled = true;
-      this.buttonState = "",
-        (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
-      (<HTMLElement>document.querySelector('#main')).style.display = "block";
-      (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
+      console.log(res)
+      if (res["error"] == true) {
+        this.already = true;
+      } else {
+        this.already= false;
+        this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+        this.fetchReservationData();
+        this.buttonDisabled = true;
+        this.buttonState = "",
+          (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
+        (<HTMLElement>document.querySelector('#main')).style.display = "block";
+        (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
+      }
     })
   }
 
@@ -477,6 +504,7 @@ export class ShowTerrainComponent implements OnInit {
   }
 
   startTimeHasChanged(event) {
+    this.already=false;
     this.resMobile.StartTime = event as Date;
     this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrainSelected.duration);
   }

@@ -14,9 +14,17 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CookieModule, CookieService } from 'ngx-cookie';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ForgotPasswordComponent, UserComponent, ResetPasswordComponent, UserLayoutComponent],
+  declarations: [
+    LoginComponent, 
+    RegisterComponent, 
+    ForgotPasswordComponent, 
+    UserComponent, 
+    ResetPasswordComponent, 
+    UserLayoutComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -26,7 +34,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     SimpleNotificationsModule.forRoot(),
     TimepickerModule.forRoot(),
-    ComponentsStateButtonModule
-  ]
+    ComponentsStateButtonModule,
+    CookieModule.forRoot()
+  ],
+  providers: [CookieService]
 })
 export class UserModule { }

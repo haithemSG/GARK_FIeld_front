@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { environment } from 'src/environments/environment';
@@ -16,7 +16,8 @@ export class HomePageComponent implements OnInit {
     private titleService: Title,
     private scrollToService: ScrollToService,
     public auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private meta: Meta
   ) { }
 
   showMobileMenu = false;
@@ -25,7 +26,8 @@ export class HomePageComponent implements OnInit {
   adminRoot = environment.adminRoot;
 
   ngOnInit() {
-    this.titleService.setTitle('GARK')
+    this.titleService.setTitle('GARK');
+    this.meta.updateTag({name: 'desciption', content: ''})
     this.year = new Date().getFullYear();
     this.isMobile = window.screen.width < 527 ? true : false;
   }

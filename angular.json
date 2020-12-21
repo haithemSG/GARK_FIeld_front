@@ -20,6 +20,7 @@
             "allowedCommonJsDependencies": [
               "rxjs-compat",
               "lodash",
+              "crypto-js",
               "chart.js",
               "mousetrap",
               "nouislider",
@@ -41,6 +42,7 @@
             "styles": [
               "src/assets/css/vendor/bootstrap.min.css",
               "src/assets/fonts/font/flaticon.css",
+              "src/assets/fonts/simple-line-icons/css/simple-line-icons.css",
               "./node_modules/@glidejs/glide/dist/css/glide.core.min.css",
               "./node_modules/@syncfusion/ej2-material-theme/styles/material.css",
               "src/styles.scss",

@@ -16,7 +16,7 @@ export class AuthenticationService {
 
   constructor(
     private http : HttpClient,
-    private router : Router
+    private router : Router,
   ) { }
 
   public logIn(credentials : ICredentails){
@@ -59,6 +59,10 @@ export class AuthenticationService {
 
   public getNotificationToken() {
     return this.http.get(`${this.baseUrl}/assign-notif`, { headers :  new HttpHeaders({ 'Authorization' : this.Token  }) });
+  }
+
+  public rememberMe(email: string, password: string){
+
   }
  
   public signOut(){

@@ -17,6 +17,8 @@ export const environment = {
   defaultDirection: 'ltr',
   themeRadiusStorageKey: 'gark-themeradius',
   isAuthGuardActive: true,
+  remember: "SYS_SEC",
+  rememberSecret: "eedaipiichah1Ahv4ug0oiriel6oop6rae2vodopoohaiphoghu9quaengaedi6g",
   firebase: {
     apiKey: "AIzaSyAW5XI1xtyDSCwXqgJxKY_bzLTJEHISoxo",
     authDomain: "gark-b5d29.firebaseapp.com",

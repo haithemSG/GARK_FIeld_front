@@ -255,6 +255,26 @@ export class PharesComponent implements OnInit, OnChanges {
      }).color;
   }
 
+  onPopupOpen(event){
+    //console.log(event);
+    if(event["type"] !== "QuickInfo"){
+      //console.log(event["type"])
+      if(event["type"] == "Editor"){
+        //console.log("edittt")
+        event["cancel"] = true;
+        return null;
+      }else if(event["type"] == "DeleteAlert"){
+        //console.log("delete")
+      }
+      // else{
+      // }
+    }else{
+      if(!event["data"]["Id"]){
+        event["cancel"] = true;
+        return null;
+      }
+    }
+  }
   public onActionBegin(args: { [key: string]: Object }): void {
 
     if (args.requestType === 'eventCreate' || args.requestType === 'eventChange' || args.requestType === 'eventRemove') {
@@ -346,6 +366,7 @@ export class PharesComponent implements OnInit, OnChanges {
         )
       } else if (args.requestType === 'eventRemove') {
         let id = args.deletedRecords[0]["_id"];
+        console.log("id is", id)
         this.reservationService.deleteOne(id).subscribe((res) => {
           (this.eventSettings.dataSource as Array<any>) = (this.eventSettings.dataSource as Array<any>).filter((el) => {
             return el["_id"] != id;
@@ -359,9 +380,9 @@ export class PharesComponent implements OnInit, OnChanges {
         this.scheduleObj.refreshLayout;
         this.scheduleObj.refresh();
       }
-      if (!this.scheduleObj.isSlotAvailable(data.StartTime as Date, data.EndTime as Date) && args.requestType !== 'eventRemove') {
-        args.cancel = true;
-      }
+      // if (!this.scheduleObj.isSlotAvailable(data.StartTime as Date, data.EndTime as Date) && args.requestType !== 'eventRemove') {
+      //   args.cancel = true;
+      // }
     }
   }
 
@@ -390,7 +411,6 @@ export class PharesComponent implements OnInit, OnChanges {
     const regex = /\s/gi;
     let a = this.resMobile.num;
     a = a.replace(regex, '');
-    
     return !isNaN(+a) && a.length == 8;
   }
 

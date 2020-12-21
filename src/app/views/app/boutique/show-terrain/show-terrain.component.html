@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-8" *ngIf="!isLoading && !isMobile"
                 [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }"
-                style="background-size: auto 100%; background-position: center; background-repeat: no-repeat;">
+                style="background-size: 100%; background-position: center; background-repeat: no-repeat;">
                 <div class="overlay">
 
                     <div class="data-overlay">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-8 mb-3" *ngIf="!isLoading && isMobile" id="background-image-mobile-view"
                 [ngStyle]="{ 'background-image' : 'linear-gradient(90deg, rgba(51,50,50,0.5) 0%, rgba(121,119,119,0.5) 46%, rgba(255,255,255,0.3) 100%), url('+ image +')' }"
-                style="background-size: auto 100%; background-position: center; background-repeat: no-repeat; height: 180px;">
+                style="background-size: 100%; background-position: center; background-repeat: no-repeat; height: 180px;">
                 <div class="overlay">
                     <div class="data-overlay">
                         <div style="display: flex;">
@@ -119,13 +119,13 @@
                     <ejs-schedule #scheduleObj width='100%' [currentView]="currentViewMode" height='550px'
                         [selectedDate]="selectedDate" [eventSettings]="eventSettings"
                         (actionBegin)="onActionBegin($event)" (eventRendered)="onEventRendered($event)" locale='fr-CH'
-                        [timeScale]="timeScale" [showQuickInfo]="showQuickInfo">
+                        [timeScale]="timeScale" (popupOpen)="onPopupOpen($event)">
                         <e-views>
                             <e-view option="Day">Jour</e-view>
                             <e-view option="Week">Semaine</e-view>
                             <e-view option="Month">Mois</e-view>
                         </e-views>
-                        <ng-template #editorTemplate locale='fr-CH' let-data>
+                        <!-- <ng-template #editorTemplate locale='fr-CH' let-data>
                             <table *ngIf="data != undefined" class="custom-event-editor" width="100%" cellpadding="5">
                                 <tbody>
                                     <tr>
@@ -161,50 +161,26 @@
                                                 style="width: 100%" />
                                         </td>
                                     </tr>
-                                    <!-- <tr>
-                                        <td class="e-textlabel">A partir de</td>
-                                        <td colspan="4">
-                                            <ejs-datetimepicker class="e-field" data-name="StartTime"
-                                                [value]="(data.startTime || data.StartTime)">
-                                            </ejs-datetimepicker> 
-                                            <kendo-datetimepicker class="form-control" id="time-started"
-                                                [format]="format" (valueChange)="startTimeHasChanged($event)"  [ngModelOptions]="{standalone: true}"
-                                                [(ngModel)]="data.StartTime">
-                                                <app-timepicker-messages></app-timepicker-messages>
-                                            </kendo-datetimepicker>
-                                        </td>
-                                    </tr> -->
+                                  
                                     <tr>
                                         <td class="e-textlabel">A partir de</td>
                                         <td colspan="4">
-                                            <!-- <ejs-datetimepicker class="e-field" data-name="StartTime"
-                                                [value]="(data.startTime || data.StartTime)">
-                                            </ejs-datetimepicker> -->
-                                            <!-- <input class="form-control" [owlDateTime]="dt1">
-                                            <span class="trigger" [owlDateTimeTrigger]="dt1">
-                                                <i class="flaticon-calendar"></i>
-                                            </span>
-                                            <owl-date-time #dt1></owl-date-time> -->
+                                           
                                             <app-date-picker (valueChange)="startTimeHasChanged($event)" [timeChoosed]="data.StartTime" ></app-date-picker>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="e-textlabel">Jusqu'à</td>
                                         <td colspan="4">
-                                            <!-- <ejs-datetimepicker class="e-field" data-name="EndTime"
-                                                [value]='(data.endTime || data.EndTime)'></ejs-datetimepicker> -->
-                                            <!-- <kendo-datetimepicker class="form-control" id="time-ended" [format]="format"
-                                                [ngModelOptions]="{standalone: true}" [(ngModel)]="data.EndTime">
-                                                <app-timepicker-messages></app-timepicker-messages>
-                                            </kendo-datetimepicker> -->
+                                          
                                             <app-date-picker [timeChoosed]="data.EndTime" ></app-date-picker>
                                         </td>
                                     </tr>
 
 
                                 </tbody>
-                            </table>
-                        </ng-template>
+                            </table> 
+                        </ng-template>-->
                     </ejs-schedule>
                 </div>
             </div>
@@ -279,6 +255,9 @@
             <app-date-picker [timeChoosed]="resMobile.EndTime" ></app-date-picker>
         </div>
 
+        <div class="text-danger" *ngIf="already">
+            Terrain indisponible à telle heure
+        </div>
 
         <div class="mt-2" style="display: flex; width: 100%">
             <div style="margin: 0 auto;"></div>

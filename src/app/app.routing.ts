@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent }
     ]
   },
-  { path: 'football', loadChildren: () => import('./views/views.module').then(m => m.ViewsModule), data: { preload : false, delay: true } },
+  { path: 'football', loadChildren: () => import('./views/views.module').then(m => m.ViewsModule) },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 

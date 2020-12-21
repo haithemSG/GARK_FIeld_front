@@ -50,13 +50,13 @@
                 <ejs-schedule #scheduleObj width='100%' [currentView]="currentViewMode" height='550px'
                     [selectedDate]="selectedDate" [eventSettings]="eventSettings" (actionBegin)="onActionBegin($event)"
                     (eventRendered)="onEventRendered($event)" locale='fr-CH' [timeScale]="timeScale"
-                    [showQuickInfo]="showQuickInfo">
+                    (popupOpen)="onPopupOpen($event)">
                     <e-views>
                         <e-view option="Day">Jour</e-view>
                         <e-view option="Week">Semaine</e-view>
                         <e-view option="Month">Mois</e-view>
                     </e-views>
-                    <ng-template #editorTemplate locale='fr-CH' let-data>
+                    <!-- <ng-template #editorTemplate locale='fr-CH' let-data>
                         <table *ngIf="data != undefined" class="custom-event-editor" width="100%" cellpadding="5">
                             <tbody>
                                 <tr>
@@ -95,35 +95,18 @@
                                 <tr>
                                     <td class="e-textlabel">A partir de</td>
                                     <td colspan="4">
-                                        <!-- <ejs-datetimepicker class="e-field" data-name="StartTime"
-                                            [value]="(data.startTime || data.StartTime)">
-                                        </ejs-datetimepicker> -->
-                                        <!-- <kendo-datetimepicker class="form-control"  id="time-start"
-                                        [format]="format" [ngModelOptions]="{standalone: true}"
-                                        [(ngModel)]="data.StartTime">
-                                        <app-timepicker-messages></app-timepicker-messages>
-                                    </kendo-datetimepicker> -->
                                     <app-date-picker  [timeChoosed]="data.StartTime" ></app-date-picker>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="e-textlabel">Jusqu'à</td>
                                     <td colspan="4">
-                                        <!-- <ejs-datetimepicker class="e-field" data-name="EndTime"
-                                            [value]='(data.endTime || data.EndTime)'></ejs-datetimepicker> -->
-                                            <!-- <kendo-datetimepicker class="form-control"  id="time-start"
-                                            [format]="format" [ngModelOptions]="{standalone: true}"
-                                            [(ngModel)]="data.EndTime">
-                                            <app-timepicker-messages></app-timepicker-messages>
-                                        </kendo-datetimepicker> -->
                                         <app-date-picker [timeChoosed]="data.EndTime" ></app-date-picker>
                                     </td>
                                 </tr>
-
-
                             </tbody>
                         </table>
-                    </ng-template>
+                    </ng-template> -->
                 </ejs-schedule>
             </div>
         </div>
