@@ -171,6 +171,11 @@
             <app-date-picker [timeChoosed]="resMobile.EndTime" ></app-date-picker>
         </div>
 
+
+        <div class="text-danger" *ngIf="already">
+            Terrain indisponible à cette heure
+        </div>
+
         <div class="mt-3" style="display: flex; width: 100%">
             <div>
                 <button class="btn btn-lg btn-shadow btn-danger" (click)="closeModal()"> Annuler

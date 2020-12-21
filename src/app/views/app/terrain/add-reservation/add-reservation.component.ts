@@ -18,18 +18,18 @@ export class AddReservationComponent implements OnInit {
     private notificationsService: NotificationsService,
     private reservationService: ReservationService,
     @Inject(MAT_DIALOG_DATA) public data: Object
-  ) { 
-    
+  ) {
+
   }
 
   uniqueTerrain: boolean = false;
-  nomTerrain : Array<any> = new Array<any>();
-  listTerrain : Array<Terrain> = new Array<Terrain>();
+  nomTerrain: Array<any> = new Array<any>();
+  listTerrain: Array<Terrain> = new Array<Terrain>();
   buttonDisabled = false;
   buttonState = "";
   monTerrain: string = ""
-  terrain : Terrain;
-  
+  terrain: Terrain;
+
   resMobile = {
     Name: "",
     num: "",
@@ -40,16 +40,17 @@ export class AddReservationComponent implements OnInit {
   }
   public format = 'dd/MM/yyyy HH:mm';
   ngOnInit(): void {
-    if(!this.data["multiple"]){
+    if (!this.data["multiple"]) {
       this.uniqueTerrain = true;
       this.monTerrain = this.data["terrain"]
       this.resMobile.terrain = this.data["terrain"];
-    }else{
+    } else {
       this.nomTerrain = this.data["listTerrain"] as Array<any>;
       this.listTerrain = this.data["list"] as Array<Terrain>;
     }
   }
 
+  already: boolean = false;
   onSubmit() {
 
     if (this.buttonDisabled || this.resMobile.Name == "" || this.resMobile.num == "" || this.resMobile.StartTime == null || this.resMobile.EndTime == null) {
@@ -58,16 +59,22 @@ export class AddReservationComponent implements OnInit {
 
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
-    this.reservationService.create(this.resMobile).subscribe((res) => {      
-      this.notificationsService.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+    this.reservationService.create(this.resMobile).subscribe((res) => {
 
-      this.buttonDisabled = true;
-      this.buttonState = "";
-
-
-      setTimeout(()=>{ 
-        this.dialogRef.close("refresh")
-       }, 600)
+      console.log(res)
+      if (res["error"] == true) {
+        this.already = true;
+        this.buttonDisabled = false;
+        this.buttonState = "";
+      } else {
+        this.notificationsService.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+        this.already = false;
+        this.buttonDisabled = false;
+        this.buttonState = "";
+        setTimeout(() => {
+          this.dialogRef.close("refresh")
+        }, 600)
+      }
     })
   }
 
@@ -75,29 +82,31 @@ export class AddReservationComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  validateNumber(){
+  validateNumber() {
     const regex = /\s/gi;
     let a = this.resMobile.num;
     a = a.replace(regex, '');
-    
+
     return !isNaN(+a) && a.length == 8;
   }
 
-  selectedTerrain : Terrain;
-  terrainHasChanged(event){
+  selectedTerrain: Terrain;
+  terrainHasChanged(event) {
+    this.already = false;
     const selectedStaduim = event["value"];
-    this.selectedTerrain = this.listTerrain.find((t : Terrain)=>{
+    this.selectedTerrain = this.listTerrain.find((t: Terrain) => {
       return selectedStaduim == t.name;
     })
     this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.selectedTerrain.duration);
     this.resMobile.frais = "90";
   }
 
-  startTimeHasChanged(event){
+  startTimeHasChanged(event) {
+    this.already = false;
     this.resMobile.StartTime = event as Date;
-    if(this.selectedTerrain){
+    if (this.selectedTerrain) {
       this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.selectedTerrain.duration);
-    }else{
+    } else {
       this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(90);
     }
   }

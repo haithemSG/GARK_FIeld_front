@@ -413,7 +413,7 @@ export class PharesComponent implements OnInit, OnChanges {
     a = a.replace(regex, '');
     return !isNaN(+a) && a.length == 8;
   }
-
+  already: boolean = false;
   notSelected: boolean = false;
   onSubmit() {
     if(this.resMobile.terrain == ""){
@@ -428,14 +428,20 @@ export class PharesComponent implements OnInit, OnChanges {
     
     this.reservationService.create(this.resMobile).subscribe((res) => {
 
+      console.log(res)
+      if (res["error"] == true) {
+        this.already = true;
+        this.buttonDisabled = false;
+        this.buttonState = "";
+      } else {
       this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
       this.fetchData();
       this.buttonDisabled = false;
-      this.buttonState = "",
+      this.buttonState = "";
       
       (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
       (<HTMLElement>document.querySelector('#main')).style.display = "block";
-      (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
+      (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";}
     })
   }
 
@@ -443,6 +449,7 @@ export class PharesComponent implements OnInit, OnChanges {
 
   getStartTime(event){
     // const d = event as Date;
+    this.already = false;
     this.resMobile.StartTime = event as Date;   
     if(this.resMobile.terrain){
       this.resMobile.EndTime = this.resMobile.StartTime .addMinutes(this.terrain.duration);

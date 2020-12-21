@@ -33,15 +33,11 @@ export class MessagingService {
   }
 
   load() {    
-    console.log("entred")
     this.authenticationService.getNotificationToken().subscribe((res) => {
       if (res["token"] == "") {
-        console.log("there is no token in db ")
         this.managePushNotificationToken();
       } else {
         const myToken = res["token"];
-        console.log("token is present");
-        console.log("checking validity");     
         this.checkTokenisValid(myToken).subscribe(
           (res) => {
             if (res["failure"] == 1) {
@@ -54,13 +50,10 @@ export class MessagingService {
   }
 
   private managePushNotificationToken() {    
-    console.log("managing request permission")
     this.requestPermission().subscribe(res => {
       if (res) {
-        console.log("permission granted")
         this.authenticationService.assignNotificationToken(res as string).subscribe(
           (token) => {
-            console.log("token assigned for this user")
           });
       }
     },

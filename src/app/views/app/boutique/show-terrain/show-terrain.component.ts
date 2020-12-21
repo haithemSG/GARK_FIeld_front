@@ -440,13 +440,15 @@ export class ShowTerrainComponent implements OnInit {
       console.log(res)
       if (res["error"] == true) {
         this.already = true;
+        this.buttonDisabled = false;
+        this.buttonState = "";
       } else {
         this.already= false;
         this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
         this.fetchReservationData();
-        this.buttonDisabled = true;
-        this.buttonState = "",
-          (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
+        this.buttonDisabled = false;
+        this.buttonState = "";
+        (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
         (<HTMLElement>document.querySelector('#main')).style.display = "block";
         (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
       }
