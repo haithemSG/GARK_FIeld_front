@@ -1,7 +1,7 @@
 import { Component, HostListener, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { EventRenderedArgs, EventSettingsModel, ScheduleComponent, TimeScaleModel} from '@syncfusion/ej2-angular-schedule';
+import { EventRenderedArgs, EventSettingsModel, ScheduleComponent, TimeScaleModel } from '@syncfusion/ej2-angular-schedule';
 import { Terrain } from 'src/app/shared/models/terrain.model';
 import { Reservation } from 'src/app/shared/models/reservation.model';
 import { TerrainService } from 'src/app/shared/services/terrain.service';
@@ -71,7 +71,7 @@ export class PharesComponent implements OnInit, OnChanges {
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     // //console.log(this.resMobile);
-    
+
   }
 
   isMobile: boolean = false;
@@ -115,7 +115,7 @@ export class PharesComponent implements OnInit, OnChanges {
       this.terrainService.getAll().subscribe(
         (res) => {
           this.ListTerrain = res["terrain"] as Terrain[];
-          
+
           // this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
           this.nomTerrain = this.ListTerrain.map((el: Terrain) => {
             return el.name;
@@ -127,40 +127,40 @@ export class PharesComponent implements OnInit, OnChanges {
         }
       )
     })
-    
+
   }
 
   currentViewMode = "Week"
   fetchData() {
     this.reservationService.getAll().subscribe((res) => {
-      this.reservationList = res["reservations"] as Reservation[];      
+      this.reservationList = res["reservations"] as Reservation[];
       this.reservationList = this.reservationList.map((el: Reservation) => {
         el.Subject = el["name"] + "<br/>" + el["num"] || "";
         return el;
       })
-      
+
       this.isLoading = false
 
       if (window.screen.width < 815) {
         this.isMobile = true;
         this.currentViewMode = "Day";
-        try{
+        try {
           (<HTMLElement>document.getElementById('_nav')).style.display = "none";
           (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
-        }catch(e){
-          try{
+        } catch (e) {
+          try {
             (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
-            setTimeout(()=>{
+            setTimeout(() => {
               (<HTMLElement>document.getElementById('_nav')).style.display = "none";
             }, 200)
-          }catch(e){
-            setTimeout(()=>{
-             try{
-              (<HTMLElement>document.getElementById('_nav')).style.display = "none";
-             }catch(ec){}
-              try{
+          } catch (e) {
+            setTimeout(() => {
+              try {
+                (<HTMLElement>document.getElementById('_nav')).style.display = "none";
+              } catch (ec) { }
+              try {
                 (<HTMLElement>document.querySelector(".e-toolbar-right")).style.display = "none";
-              }catch(ee){}
+              } catch (ee) { }
             }, 200)
           }
         }
@@ -184,13 +184,13 @@ export class PharesComponent implements OnInit, OnChanges {
   }
 
   openAddReservationMobile(template?: TemplateRef<any>) {
-   
+
     (<HTMLElement>document.querySelector('#main')).style.display = "none";
     (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "none";
     (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "block";
     this.resMobile.Name = "";
     this.resMobile.num = "";
-    this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1 , 0));
+    this.resMobile.StartTime = new Date(new Date().setHours(new Date().getHours() + 1, 0));
     this.resMobile.EndTime = new Date(new Date().setHours(new Date().getHours() + 2, 0));
     window.scrollTo({
       top: 0,
@@ -201,9 +201,9 @@ export class PharesComponent implements OnInit, OnChanges {
 
   closeModal(template?: TemplateRef<any>) {
     //this.reservataionModal.hide()
-    (<HTMLElement>document.querySelector('#main')).style.display =  "block";
+    (<HTMLElement>document.querySelector('#main')).style.display = "block";
     (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
-    (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none" ;
+    (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
   }
 
 
@@ -231,14 +231,14 @@ export class PharesComponent implements OnInit, OnChanges {
     });
   }
 
-  addReservationDialog(){
+  addReservationDialog() {
     const dialog = this.dialog.open(AddReservationComponent, {
-      width : '500px',
-      data: { multiple : true, listTerrain : this.nomTerrain, list : this.ListTerrain}
+      width: '500px',
+      data: { multiple: true, listTerrain: this.nomTerrain, list: this.ListTerrain }
     });
 
-    dialog.afterClosed().subscribe((res)=>{
-      if(res){
+    dialog.afterClosed().subscribe((res) => {
+      if (res) {
         this.fetchData();
       }
     })
@@ -250,26 +250,26 @@ export class PharesComponent implements OnInit, OnChanges {
   }
 
   public onEventRendered(args: EventRenderedArgs): void {
-     (args.element as HTMLElement).style.backgroundColor = this.ListTerrain.find((el)=>{
+    (args.element as HTMLElement).style.backgroundColor = this.ListTerrain.find((el) => {
       return el["name"] == (args.data["terrain"]["name"] || args.data["terrain"])
-     }).color;
+    }).color;
   }
 
-  onPopupOpen(event){
+  onPopupOpen(event) {
     //console.log(event);
-    if(event["type"] !== "QuickInfo"){
+    if (event["type"] !== "QuickInfo") {
       //console.log(event["type"])
-      if(event["type"] == "Editor"){
+      if (event["type"] == "Editor") {
         //console.log("edittt")
         event["cancel"] = true;
         return null;
-      }else if(event["type"] == "DeleteAlert"){
+      } else if (event["type"] == "DeleteAlert") {
         //console.log("delete")
       }
       // else{
       // }
-    }else{
-      if(!event["data"]["Id"]){
+    } else {
+      if (!event["data"]["Id"]) {
         event["cancel"] = true;
         return null;
       }
@@ -366,19 +366,21 @@ export class PharesComponent implements OnInit, OnChanges {
         )
       } else if (args.requestType === 'eventRemove') {
         let id = args.deletedRecords[0]["_id"];
-        console.log("id is", id)
+
         this.reservationService.deleteOne(id).subscribe((res) => {
           (this.eventSettings.dataSource as Array<any>) = (this.eventSettings.dataSource as Array<any>).filter((el) => {
             return el["_id"] != id;
           })
           this.notifications.create('Succès', "Réservation suprimée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+          this.fetchData();
         },
           (err) => {
-            this.notifications.create('Erreur', "Une erreur a survenue lors de la suppression de la réseravtion", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+            this.notifications.error('Erreur', "Une erreur a survenue lors de la suppression de la réseravtion",  {  timeOut: 6000, showProgressBar: false });
           });
-        this.scheduleObj.eventSettings = this.eventSettings;
-        this.scheduleObj.refreshLayout;
-        this.scheduleObj.refresh();
+        // this.scheduleObj.eventSettings = this.eventSettings;
+        // this.scheduleObj.refreshLayout;
+        // this.scheduleObj.refresh();
+
       }
       // if (!this.scheduleObj.isSlotAvailable(data.StartTime as Date, data.EndTime as Date) && args.requestType !== 'eventRemove') {
       //   args.cancel = true;
@@ -397,17 +399,17 @@ export class PharesComponent implements OnInit, OnChanges {
     });
   }
 
-  TerrainChanged(event){
+  TerrainChanged(event) {
     let name = event["itemData"]["value"];
     this.notSelected = false;
-    this.terrain = this.ListTerrain.find((t : Terrain)=>{
+    this.terrain = this.ListTerrain.find((t: Terrain) => {
       return t.name === name;
     });
-    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration)    
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration)
   }
 
-  
-  validateNumber(){
+
+  validateNumber() {
     const regex = /\s/gi;
     let a = this.resMobile.num;
     a = a.replace(regex, '');
@@ -416,7 +418,7 @@ export class PharesComponent implements OnInit, OnChanges {
   already: boolean = false;
   notSelected: boolean = false;
   onSubmit() {
-    if(this.resMobile.terrain == ""){
+    if (this.resMobile.terrain == "") {
       this.notSelected = true;
     }
     if (this.buttonDisabled || this.resMobile.Name == "" || this.resMobile.num == "" || this.resMobile.StartTime == null || this.resMobile.EndTime == null) {
@@ -425,40 +427,43 @@ export class PharesComponent implements OnInit, OnChanges {
     this.notSelected = false;
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
-    
+
     this.reservationService.create(this.resMobile).subscribe((res) => {
 
-      console.log(res)
       if (res["error"] == true) {
         this.already = true;
         this.buttonDisabled = false;
         this.buttonState = "";
       } else {
-      this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
-      this.fetchData();
-      this.buttonDisabled = false;
-      this.buttonState = "";
-      
-      (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
-      (<HTMLElement>document.querySelector('#main')).style.display = "block";
-      (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";}
+        this.notifications.create('Succès', "Réservation ajoutée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false });
+        this.fetchData();
+        this.buttonDisabled = false;
+        this.buttonState = "";
+
+        (<HTMLElement>document.querySelector('#add-new-reservation')).style.display = "none";
+        (<HTMLElement>document.querySelector('#main')).style.display = "block";
+        (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
+      }
+    },
+    (err)=>{
+      this.notifications.error('Erreur', "Une erreur a survenue", { timeOut: 3000, showProgressBar: false });
     })
   }
 
   public format = 'dd/MM/yyyy HH:mm';
 
-  getStartTime(event){
+  getStartTime(event) {
     // const d = event as Date;
     this.already = false;
-    this.resMobile.StartTime = event as Date;   
-    if(this.resMobile.terrain){
-      this.resMobile.EndTime = this.resMobile.StartTime .addMinutes(this.terrain.duration);
-    }else{
-      this.resMobile.EndTime = this.resMobile.StartTime .addMinutes(90);
+    this.resMobile.StartTime = event as Date;
+    if (this.resMobile.terrain) {
+      this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
+    } else {
+      this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(90);
     }
   }
 
-  StartChangedTime(event){
+  StartChangedTime(event) {
     // const d = event as Date;   
     // if(this.resMobile.terrain){
     //   this.data.StartTime = d.addMinutes(this.terrain.duration);
@@ -467,27 +472,27 @@ export class PharesComponent implements OnInit, OnChanges {
     // }
   }
 
- 
+
 }
 
-declare global{
+declare global {
   interface Date {
-      addHours? :(hours : number) => Date;
-      addMinutes? :(minutes : number) => Date;
+    addHours?: (hours: number) => Date;
+    addMinutes?: (minutes: number) => Date;
   }
 }
 
-Date.prototype.addHours = function (hours : number) : Date{
-  if(!hours) return this;
+Date.prototype.addHours = function (hours: number): Date {
+  if (!hours) return this;
   let date = this;
   date = moment(date).add(hours, 'hours').toDate();
   return date;
 }
 
-Date.prototype.addMinutes = function (minutes : number) : Date{
-  if(!minutes) return this;
+Date.prototype.addMinutes = function (minutes: number): Date {
+  if (!minutes) return this;
   let date = this;
-  date = moment(date).add(minutes, 'minutes').toDate();  
+  date = moment(date).add(minutes, 'minutes').toDate();
   return date;
 }
 

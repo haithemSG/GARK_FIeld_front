@@ -18,6 +18,7 @@ import * as numbers from 'cldr-data/main/fr-CH/numbers.json';
 import * as timeZoneNames from 'cldr-data/main/fr-CH/timeZoneNames.json';
 import { CreateTerrainComponent } from '../create-terrain-dialog/create-terrain.component';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 // Angular CLI 8.0 and above versions
 loadCldr(numberingSystems['default'], gregorian['default'], numbers['default'], timeZoneNames['default']);
@@ -381,17 +382,18 @@ export class ShowTerrainComponent implements OnInit {
             return el["_id"] != id;
           })
           this.notifications.create('Succès', "Réservation suprimée avec succès", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+          this.fetchReservationData();
         },
           (err) => {
-            this.notifications.create('Erreur', "Une erreur a survenue lors de la suppression de la réseravtion", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });
+            this.notifications.error('Erreur', "Une erreur a survenue lors de la suppression de la réseravtion", {  timeOut: 6000, showProgressBar: false });
           });
-        this.scheduleObj.eventSettings = this.eventSettings;
-        this.scheduleObj.refreshLayout;
-        this.scheduleObj.refresh();
+        // this.scheduleObj.eventSettings = this.eventSettings;
+        // this.scheduleObj.refreshLayout;
+        // this.scheduleObj.refresh();
       }
-      if (!this.scheduleObj.isSlotAvailable(data.StartTime as Date, data.EndTime as Date) && args.requestType !== 'eventRemove') {
-        args.cancel = true;
-      }
+      // if (!this.scheduleObj.isSlotAvailable(data.StartTime as Date, data.EndTime as Date) && args.requestType !== 'eventRemove') {
+      //   args.cancel = true;
+      // }
     }
   }
 
@@ -437,7 +439,6 @@ export class ShowTerrainComponent implements OnInit {
     this.buttonState = 'show-spinner';
     this.reservationService.create(this.resMobile).subscribe((res) => {
 
-      console.log(res)
       if (res["error"] == true) {
         this.already = true;
         this.buttonDisabled = false;
@@ -452,6 +453,11 @@ export class ShowTerrainComponent implements OnInit {
         (<HTMLElement>document.querySelector('#main')).style.display = "block";
         (<HTMLElement>document.querySelector('#fixedbutton')).style.display = "block";
       }
+    },(err)=>{
+      this.buttonDisabled = false;
+      this.buttonState = "";
+      this.notifications.error('Erreur', "Une erreur a survenue veuillez réessayer", {  timeOut: 6000, showProgressBar: false })
+
     })
   }
 
@@ -491,7 +497,7 @@ export class ShowTerrainComponent implements OnInit {
       (err) => {
         this.buttonDisabled = false;
         this.buttonState = '';
-        this.notifications.create('Erreur', "Une erreur a survenue veuillez réessayer", NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false })
+        this.notifications.error('Erreur', "Une erreur a survenue veuillez réessayer", {  timeOut: 6000, showProgressBar: false })
       })
   }
 
@@ -508,7 +514,7 @@ export class ShowTerrainComponent implements OnInit {
   startTimeHasChanged(event) {
     this.already=false;
     this.resMobile.StartTime = event as Date;
-    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrainSelected.duration);
+    this.resMobile.EndTime = this.resMobile.StartTime.addMinutes(this.terrain.duration);
   }
 
   public format = 'dd/MM/yyyy HH:mm';
@@ -526,5 +532,27 @@ export class ShowTerrainComponent implements OnInit {
       }
     })
   }
+}
+
+
+declare global {
+  interface Date {
+    addHours?: (hours: number) => Date;
+    addMinutes?: (minutes: number) => Date;
+  }
+}
+
+Date.prototype.addHours = function (hours: number): Date {
+  if (!hours) return this;
+  let date = this;
+  date = moment(date).add(hours, 'hours').toDate();
+  return date;
+}
+
+Date.prototype.addMinutes = function (minutes: number): Date {
+  if (!minutes) return this;
+  let date = this;
+  date = moment(date).add(minutes, 'minutes').toDate();
+  return date;
 }
 
